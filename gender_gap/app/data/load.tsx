@@ -25,7 +25,7 @@ export type Levels = {
   selectable: string[]
 }
 export const DataContext = createContext<Resources | null>(null)
-const prefix = '/WorkInData/' + (process.env.NODE_ENV === 'development' ? 'gender_gap/' : '')
+const prefix = '/WorkInData/gender_gap/'
 
 export function Data({children}: Readonly<{children?: React.ReactNode}>) {
   const [genderGrowthGap, setGenderGrowthGap] = useState<ColumnTable | null>(null)
