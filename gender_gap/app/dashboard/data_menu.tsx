@@ -41,17 +41,21 @@ export function DataMenu() {
         {
           base: 'weight',
           percent: true,
-          subset: {variable: 'main_activity', level: 'Out of Workforce', adjust: '-'},
+          subset: {variable: 'main_activity', level: 'Agriculture', adjust: ''},
           summary: {variable: 'sex', level: 'Female', adjust: '-'},
         },
         full.variableLevels
       )
-    } else if (basicView.y.subset.adjust && basicView.y.subset.level !== 'Out of Workforce') {
-      isAdvanced = true
-      basicView.y.updateLevel('subset', {key: 'adjust', value: '-'})
-    } else if (!basicView.y.subset.adjust && basicView.y.subset.level === 'Out of Workforce') {
-      isAdvanced = true
-      basicView.y.updateLevel('subset', {key: 'adjust', value: '-'})
+    } else if (basicView.y.subset.adjust || basicView.y.subset.level === 'Out of Workforce') {
+      basicView.y = new Variable(
+        {
+          base: 'weight',
+          percent: true,
+          subset: {variable: 'main_activity', level: 'Agriculture', adjust: ''},
+          summary: {variable: 'sex', level: 'Female', adjust: '-'},
+        },
+        full.variableLevels
+      )
     }
     if (basicView.x.base !== 'year' && !basicView.x.base.startsWith('gdp')) {
       isAdvanced = true

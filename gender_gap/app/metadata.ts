@@ -35,7 +35,6 @@ export const variableInfo: {
 }
 
 export const activityLabels = {
-  'Out of Workforce': 'Labor Force Participation',
   Agriculture: 'Employment Sector: Agriculture',
   Industry: 'Employment Sector: Industry',
   'Services - Market': 'Employment Sector: Services - Market',

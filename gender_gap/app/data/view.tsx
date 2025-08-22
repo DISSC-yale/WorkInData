@@ -56,7 +56,7 @@ const defaultView: ViewDef = {
   y: new Variable({
     base: 'weight',
     percent: true,
-    subset: {variable: 'main_activity', level: 'Out of Workforce', levelIndex: 2, adjust: '-'},
+    subset: {variable: 'main_activity', level: 'Agriculture', levelIndex: 0, adjust: ''},
     summary: {variable: 'sex', level: 'Female', levelIndex: 0, adjust: '-'},
     index: 6,
   }),
@@ -87,7 +87,7 @@ export type URLParams = ViewDef & {
 const defaultParams: URLParams = {
   ...{...defaultView},
   countries: '',
-  sectors: 'Agriculture,Industry,Out of Workforce,Services - Market,Services - Non-Market,Unemployed',
+  sectors: 'Agriculture,Industry,Services - Market,Services - Non-Market,Unemployed',
   sexes: 'Female,Male',
   demo_seg: 'total',
   min_year: '1998',
@@ -142,12 +142,12 @@ export function DataView({children}: Readonly<{children?: React.ReactNode}>) {
         {
           base: 'weight',
           percent: true,
-          subset: {variable: 'main_activity', level: 'Out of Workforce', adjust: '-'},
+          subset: {variable: 'main_activity', level: 'Agriculture', adjust: ''},
         },
         {
           base: 'weight',
           percent: true,
-          subset: {variable: 'main_activity', level: 'Out of Workforce', adjust: '-'},
+          subset: {variable: 'main_activity', level: 'Agriculture', adjust: ''},
           summary: {variable: 'sex', level: 'Female', adjust: '-'},
         },
       ] as Partial<Variable>[]
