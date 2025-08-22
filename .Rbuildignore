@@ -1,0 +1,16 @@
+^renv$
+^renv\.lock$
+^.*\.Rproj$
+^\.Rproj\.user$
+^data$
+^LICENSE\.md$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+build\.r
+build_data\.r
+^test_data$
+^vignettes/articles$
+^resources$
+^explore$
+^gender_gap$

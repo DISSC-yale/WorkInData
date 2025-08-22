@@ -1,0 +1,59 @@
+---
+title: 'Get Started'
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(WorkInData)
+data <- wid_open("../../../gender_growth_gap")
+```
+
+# Cluster setup
+
+The microdata are stored on Yale's Grace HPC cluster.
+
+Assuming you have a Yale identity, see the [YCRC guide](https://docs.ycrc.yale.edu/clusters-at-yale/) to get started on the cluster.
+
+The package requires Arrow, which is available on the cluster in modules (e.g., `Arrow/16`).
+
+# Using the data
+
+Start by installing the package if needed:
+
+```R
+# install.packages("remotes")
+remotes::install_github("dissc-yale/WorkInData")
+```
+
+Then load the library and connect to the data:
+
+```r
+library(WorkInData)
+
+data <- wid_open("/gpfs/gibbs/pi/dissc/work-in-data/gender_growth_gap")
+```
+
+Here, `data` is a regular [Arrow Dataset](https://arrow.apache.org/docs/r/reference/open_dataset.html),
+so you can use `dplyr` to interact with it, but the `wid_subset` function can be used to filter more efficiently.
+
+For instance, we might look at working status among those with a graduate degree in 2018 by age and sex:
+
+```{r}
+data_small <- data |>
+  wid_subset(year == 2018, education == "Graduate") |>
+  dplyr::select(age, sex, work) |>
+  dplyr::collect()
+
+data_small
+```
+
+```{r, fig.height=5, fig.width=10}
+with(data_small, table(
+  c("Yonger", "Older")[(age > mean(age, na.rm = TRUE)) + 1L],
+  c("Male", "Female")[sex + 1L],
+  work
+))
+```

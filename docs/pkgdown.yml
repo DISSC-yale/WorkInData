@@ -1,0 +1,10 @@
+pandoc: '3.4'
+pkgdown: 2.1.3
+pkgdown_sha: ~
+articles:
+  articles/variables: variables.html
+  articles/WorkInData: WorkInData.html
+last_built: 2025-08-22T13:35Z
+urls:
+  reference: https://dissc-yale.github.io/WorkInData/reference
+  article: https://dissc-yale.github.io/WorkInData/articles

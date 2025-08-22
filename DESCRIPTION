@@ -1,0 +1,26 @@
+Package: WorkInData
+Type: Package
+Title: Work in Data
+Version: 0.1.0
+Authors@R: c(
+    person("Yale Economic Growth Center", role = c("fnd", "cph")),
+    person("Micah", "Iserman", role = c("cre", "aut"), email = "micah.iserman@gmail.com")
+  )
+Description: Reformat and work with the Work in Data dataset.
+License: MIT + file LICENSE
+Depends: R (>= 4.1)
+Imports: jsonlite, arrow (>= 9.0.0), dplyr
+Suggests: 
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown,
+    readxl,
+    sf,
+    rmapshaper,
+    WDI
+Encoding: UTF-8
+Config/testthat/edition: 3
+RoxygenNote: 7.3.2
+Roxygen: list(old_usage = TRUE)
+URL: https://dissc-yale.github.io/WorkInData, https://github.com/dissc-yale/WorkInData
+BugReports: https://github.com/dissc-yale/WorkInData/issues

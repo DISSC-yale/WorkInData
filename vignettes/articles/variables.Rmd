@@ -1,0 +1,333 @@
+---
+title: "Variables"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, echo = FALSE)
+summaries <- WorkInData::wid_variables()
+```
+Reformatted into parquet files partitioned by `survey` and `year` in 344 parts:
+
+**Variables**: 16
+
+**Observations**: 177,103,943
+
+**Size**: 1.24 GB
+
+
+# Sample
+
+## Survey
+
+Initials of the source survey.
+
+**ID**: survey
+
+**Type**: string
+
+**Missing**: 0
+
+**Value Summary**:
+
+```{r}
+s <- summaries[["survey"]]
+knitr::kable(data.frame(
+  Level = names(s$summary$value_summary), Count = unname(unlist(s$summary$value_summary))
+), row.names = FALSE, digits = 4, format.args = list(big.mark = ",", scientific = FALSE))
+```
+
+## Year
+
+Year in which the survey was conducted.
+
+**ID**: year
+
+**Type**: int32
+
+**Missing**: 0
+
+**Value Summary**:
+
+```{r}
+s <- summaries[["year"]]
+knitr::kable(data.frame(
+  Level = names(s$summary$value_summary), Count = unname(unlist(s$summary$value_summary))
+), row.names = FALSE, digits = 4, format.args = list(big.mark = ",", scientific = FALSE))
+```
+
+## Survey Year
+
+Survey year for panel construction.
+
+**ID**: survey_year
+
+**Type**: int16
+
+**Missing**: 98,329,438
+
+**Value Summary**:
+
+```{r}
+s <- summaries[["survey_year"]]
+knitr::kable(data.frame(
+  Level = names(s$summary$value_summary), Count = unname(unlist(s$summary$value_summary))
+), row.names = FALSE, digits = 4, format.args = list(big.mark = ",", scientific = FALSE))
+```
+
+## Sampling Weight
+
+Weight provided in the source survey; either cross-sectional or panel.
+
+**ID**: wgt
+
+**Type**: float
+
+**Missing**: 1,050,596
+
+**Value Summary**:
+
+```{r}
+s <- summaries[["wgt"]]
+knitr::kable(data.frame(
+  Feature = names(s$summary$value_summary), Value = unname(unlist(s$summary$value_summary))
+), row.names = FALSE, digits = 4, format.args = list(big.mark = ",", scientific = FALSE))
+```
+
+# Location
+
+## Country
+
+Country in which the survey was conducted.
+
+**ID**: country
+
+**Type**: string
+
+**Missing**: 0
+
+**Value Summary**:
+
+```{r}
+s <- summaries[["country"]]
+knitr::kable(data.frame(
+  Level = names(s$summary$value_summary), Count = unname(unlist(s$summary$value_summary))
+), row.names = FALSE, digits = 4, format.args = list(big.mark = ",", scientific = FALSE))
+```
+
+## Rural
+
+Whether the respondent's location is classified as rural.
+
+**ID**: rural
+
+**Type**: bool
+
+**Missing**: 35,126,418
+
+**Value Summary**:
+
+```{r}
+s <- summaries[["rural"]]
+knitr::kable(data.frame(
+  Level = names(s$summary$value_summary), Count = unname(unlist(s$summary$value_summary))
+), row.names = FALSE, digits = 4, format.args = list(big.mark = ",", scientific = FALSE))
+```
+
+# Individual
+
+## Individual ID
+
+Individual identifier.
+
+**ID**: id_ind
+
+**Type**: string
+
+**Missing**: 0
+
+**Value Summary**:
+
+```{r}
+s <- summaries[["id_ind"]]
+knitr::kable(data.frame(
+  Feature = names(s$summary$value_summary), Value = unname(unlist(s$summary$value_summary))
+), row.names = FALSE, digits = 4, format.args = list(big.mark = ",", scientific = FALSE))
+```
+
+## Age
+
+Respondents age.
+
+**ID**: age
+
+**Type**: int32
+
+**Missing**: 538,814
+
+**Value Summary**:
+
+```{r}
+s <- summaries[["age"]]
+knitr::kable(data.frame(
+  Feature = names(s$summary$value_summary), Value = unname(unlist(s$summary$value_summary))
+), row.names = FALSE, digits = 4, format.args = list(big.mark = ",", scientific = FALSE))
+```
+
+## Sex
+
+Whether the respondent reported being female.
+
+**ID**: sex
+
+**Type**: bool
+
+**Missing**: 515,002
+
+**Value Summary**:
+
+```{r}
+s <- summaries[["sex"]]
+knitr::kable(data.frame(
+  Level = names(s$summary$value_summary), Count = unname(unlist(s$summary$value_summary))
+), row.names = FALSE, digits = 4, format.args = list(big.mark = ",", scientific = FALSE))
+```
+
+## Marital Status
+
+Marital status of the respondent.
+
+**ID**: marital_status
+
+**Type**: string
+
+**Missing**: 13,535,608
+
+**Value Summary**:
+
+```{r}
+s <- summaries[["marital_status"]]
+knitr::kable(data.frame(
+  Level = names(s$summary$value_summary), Count = unname(unlist(s$summary$value_summary))
+), row.names = FALSE, digits = 4, format.args = list(big.mark = ",", scientific = FALSE))
+```
+
+## Education
+
+Highest level of education completed.
+
+**ID**: education
+
+**Type**: string
+
+**Missing**: 17,361,702
+
+**Value Summary**:
+
+```{r}
+s <- summaries[["education"]]
+knitr::kable(data.frame(
+  Level = names(s$summary$value_summary), Count = unname(unlist(s$summary$value_summary))
+), row.names = FALSE, digits = 4, format.args = list(big.mark = ",", scientific = FALSE))
+```
+
+# Household
+
+## Children Under 5
+
+Number of children under 5 within the household.
+
+**ID**: n_child_5
+
+**Type**: int16
+
+**Missing**: 42,006,283
+
+**Value Summary**:
+
+```{r}
+s <- summaries[["n_child_5"]]
+knitr::kable(data.frame(
+  Feature = names(s$summary$value_summary), Value = unname(unlist(s$summary$value_summary))
+), row.names = FALSE, digits = 4, format.args = list(big.mark = ",", scientific = FALSE))
+```
+
+# Work
+
+## Working
+
+Whether the respondent worked in the reference period.
+
+**ID**: work
+
+**Type**: bool
+
+**Missing**: 26,892,766
+
+**Value Summary**:
+
+```{r}
+s <- summaries[["work"]]
+knitr::kable(data.frame(
+  Level = names(s$summary$value_summary), Count = unname(unlist(s$summary$value_summary))
+), row.names = FALSE, digits = 4, format.args = list(big.mark = ",", scientific = FALSE))
+```
+
+## Looking for Work
+
+Whether the respondent is looking for work, given that they are not currently working.
+
+**ID**: work_search
+
+**Type**: bool
+
+**Missing**: 110,306,572
+
+**Value Summary**:
+
+```{r}
+s <- summaries[["work_search"]]
+knitr::kable(data.frame(
+  Level = names(s$summary$value_summary), Count = unname(unlist(s$summary$value_summary))
+), row.names = FALSE, digits = 4, format.args = list(big.mark = ",", scientific = FALSE))
+```
+
+# Job
+
+## Industry Classification
+
+Industry classification (International Standard Industrial Classification; ISIC).
+
+**ID**: main_job_ind
+
+**Type**: string
+
+**Missing**: 97,650,979
+
+**Value Summary**:
+
+```{r}
+s <- summaries[["main_job_ind"]]
+knitr::kable(data.frame(
+  Feature = names(s$summary$value_summary), Value = unname(unlist(s$summary$value_summary))
+), row.names = FALSE, digits = 4, format.args = list(big.mark = ",", scientific = FALSE))
+```
+
+## Job Activity Category
+
+If working, the industry sector of the job; otherwise, either unemployed or out of workforce.
+
+**ID**: main_activity
+
+**Type**: string
+
+**Missing**: 36,250,584
+
+**Value Summary**:
+
+```{r}
+s <- summaries[["main_activity"]]
+knitr::kable(data.frame(
+  Level = names(s$summary$value_summary), Count = unname(unlist(s$summary$value_summary))
+), row.names = FALSE, digits = 4, format.args = list(big.mark = ",", scientific = FALSE))
+```
+

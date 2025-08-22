@@ -1,0 +1,718 @@
+{
+  "survey": {
+    "name": "Survey",
+    "description": "Initials of the source survey.",
+    "type": "string",
+    "summary_type": "table",
+    "category": "Sample"
+  },
+  "year": {
+    "name": "Year",
+    "description": "Year in which the survey was conducted.",
+    "type": "int32",
+    "summary_type": "table",
+    "category": "Sample"
+  },
+  "country": {
+    "name": "Country",
+    "description": "Country in which the survey was conducted.",
+    "type": "string",
+    "summary_type": "table",
+    "category": "Location"
+  },
+  "survey_year": {
+    "name": "Survey Year",
+    "description": "Survey year for panel construction.",
+    "type": "int16",
+    "summary_type": "table",
+    "category": "Sample"
+  },
+  "survey_period": {
+    "name": "Survey Period",
+    "description": "Survey period for panel construction.",
+    "type": "string",
+    "summary_type": "table",
+    "category": "Sample"
+  },
+  "wgt": {
+    "name": "Sampling Weight",
+    "description": "Weight provided in the source survey; either cross-sectional or panel.",
+    "type": "float",
+    "summary_type": "continuous",
+    "category": "Sample"
+  },
+  "panel_wgt": {
+    "name": "Panel Sampling Weight",
+    "description": "Weight provided in the source survey for panels.",
+    "type": "float",
+    "summary_type": "continuous",
+    "category": "Sample"
+  },
+  "gadm_1": {
+    "name": "Administrative Unit 1",
+    "description": "Level 1 administrative unit.",
+    "type": "string",
+    "summary_type": "unique",
+    "category": "Location"
+  },
+  "gadm_2": {
+    "name": "Administrative Unit 2",
+    "description": "Level 2 administrative unit.",
+    "type": "string",
+    "summary_type": "unique",
+    "category": "Location"
+  },
+  "ea": {
+    "name": "Enumeration Area",
+    "description": "Enumeration Area or Primary Sampling Unit",
+    "type": "string",
+    "summary_type": "unique",
+    "category": "Location"
+  },
+  "density": {
+    "name": "Population Density",
+    "description": "Population density of the enumeration area.",
+    "type": "float",
+    "summary_type": "continuous",
+    "category": "Location"
+  },
+  "rural": {
+    "name": "Rural",
+    "description": "Whether the respondent's location is classified as rural.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 2
+    },
+    "summary_type": "table",
+    "category": "Location"
+  },
+  "id_hh": {
+    "name": "Household ID",
+    "description": "Household identifier.",
+    "type": "string",
+    "summary_type": "unique",
+    "category": "Household"
+  },
+  "id_hh_panel": {
+    "name": "Household Panel ID",
+    "description": "Household panel identifier.",
+    "type": "string",
+    "summary_type": "unique",
+    "category": "Household"
+  },
+  "id_ind": {
+    "name": "Individual ID",
+    "description": "Individual identifier.",
+    "type": "string",
+    "summary_type": "unique",
+    "category": "Individual"
+  },
+  "id_ind_panel": {
+    "name": "Individual Panel ID",
+    "description": "Individual panel identifier.",
+    "type": "string",
+    "summary_type": "unique",
+    "category": "Individual"
+  },
+  "n_interview": {
+    "name": "Interview Number",
+    "description": "Interview number for panels.",
+    "type": "int32",
+    "summary_type": "continuous",
+    "category": "Sample"
+  },
+  "n_ind_household": {
+    "name": "Household Size",
+    "description": "Number of individuals within the household.",
+    "type": "int16",
+    "summary_type": "continuous",
+    "category": "Household"
+  },
+  "position": {
+    "name": "Household Position",
+    "description": "Relationship to head of household.",
+    "type": "int8",
+    "conversion": {
+      "type": "string",
+      "levels": ["Head", "Spouse", "Child", "Grand Child", "Other"]
+    },
+    "summary_type": "table",
+    "category": "Individual"
+  },
+  "age": {
+    "name": "Age",
+    "description": "Respondents age.",
+    "type": "int32",
+    "summary_type": "continuous",
+    "category": "Individual"
+  },
+  "birth_day": {
+    "name": "Birth Day",
+    "description": "Day of the month the respondent was born.",
+    "type": "int8",
+    "summary_type": "unique",
+    "category": "Individual"
+  },
+  "birth_month": {
+    "name": "Birth Month",
+    "description": "Month the respondent was born.",
+    "type": "int8",
+    "summary_type": "unique",
+    "category": "Individual"
+  },
+  "birth_year": {
+    "name": "Birth Year",
+    "description": "Year the respondent was born.",
+    "type": "int16",
+    "summary_type": "unique",
+    "category": "Individual"
+  },
+  "sex": {
+    "name": "Sex",
+    "description": "Whether the respondent reported being female.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 2
+    },
+    "summary_type": "table",
+    "category": "Individual"
+  },
+  "marital_status": {
+    "name": "Marital Status",
+    "description": "Marital status of the respondent.",
+    "type": "int8",
+    "conversion": {
+      "type": "string",
+      "levels": ["Married / In-Union / Co-Habiting", "Divorced / Separated / Widowed", "Never Married"]
+    },
+    "summary_type": "table",
+    "category": "Individual"
+  },
+  "n_child_15": {
+    "name": "Children Under 15",
+    "description": "Number of children under 15 within the household.",
+    "type": "int16",
+    "summary_type": "continuous",
+    "category": "Household"
+  },
+  "n_child_5": {
+    "name": "Children Under 5",
+    "description": "Number of children under 5 within the household.",
+    "type": "int16",
+    "summary_type": "continuous",
+    "category": "Household"
+  },
+  "religion": {
+    "name": "Religion",
+    "description": "Religion of the respondent.",
+    "type": "int8",
+    "conversion": {
+      "type": "string",
+      "levels": [
+        "Christian",
+        "Muslim",
+        "Secular / Non-Religious / Agnostic / Atheist",
+        "Hindu",
+        "Buddhist",
+        "Traditional / Ethnic",
+        "Jewish",
+        "Other"
+      ]
+    },
+    "summary_type": "table",
+    "category": "Individual"
+  },
+  "permanent": {
+    "name": "Resident Status",
+    "description": "Is a permanent resident of the household.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Individual"
+  },
+  "any_schooling": {
+    "name": "Any School",
+    "description": "The respondent has any schooling.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Individual"
+  },
+  "education": {
+    "name": "Education",
+    "description": "Highest level of education completed.",
+    "type": "int8",
+    "conversion": {
+      "type": "string",
+      "zero_level": true,
+      "levels": ["None", "Primary", "Secondary", "High School", "Vocational", "Undergraduate", "Graduate"]
+    },
+    "summary_type": "table",
+    "category": "Individual"
+  },
+  "education_years": {
+    "name": "Years of Schooling",
+    "description": "Year of education completed.",
+    "type": "float",
+    "summary_type": "continuous",
+    "category": "Individual"
+  },
+  "school": {
+    "name": "In School",
+    "description": "The respondent is currently in school.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Individual"
+  },
+  "read": {
+    "name": "Can Read",
+    "description": "Whether the respondent can read any language.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Individual"
+  },
+  "write": {
+    "name": "Can Write",
+    "description": "Whether the respondent can write in any language.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Individual"
+  },
+  "literacy": {
+    "name": "Can Read and Write",
+    "description": "Whether the respondent can both read and write.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Individual"
+  },
+  "work": {
+    "name": "Working",
+    "description": "Whether the respondent worked in the reference period.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Work"
+  },
+  "work_type": {
+    "name": "Work Type in Period",
+    "description": "Employment type within the reference period.",
+    "type": "int8",
+    "conversion": {
+      "type": "string",
+      "levels": ["Employee", "Self-Employed", "Unpaid"]
+    },
+    "summary_type": "table",
+    "category": "Job"
+  },
+  "nowork_available": {
+    "name": "Available to Work",
+    "description": "Whether the respondent is available to work, given that they are not currently working.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Work"
+  },
+  "nowork_temporary": {
+    "name": "Work Fallback",
+    "description": "Whether the respondent has a job to fall back on, given that they are not currently working.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Work"
+  },
+  "hours_total": {
+    "name": "Hours Worked",
+    "description": "Total number of hours worked within the reference period across jobs.",
+    "type": "float",
+    "summary_type": "continuous",
+    "category": "Work"
+  },
+  "jobs_n": {
+    "name": "Jobs Pursued",
+    "description": "Number of jobs pursued within the reference period.",
+    "type": "int8",
+    "summary_type": "continuous",
+    "category": "Job"
+  },
+  "labor_income_total": {
+    "name": "Labor Income",
+    "description": "Total labor income per hour from work across all jobs.",
+    "type": "float",
+    "conversion": {
+      "reference": "labor_income_total_freq",
+      "factors": [1, 0.125, 0.025, 0.0125, 0.0057692307692307696, 0.0004807692307692308]
+    },
+    "summary_type": "continuous",
+    "category": "Work"
+  },
+  "home_hours_water": {
+    "name": "Hours Spent: Water",
+    "description": "Hours per day spent fetching water.",
+    "type": "float",
+    "summary_type": "continuous",
+    "category": "Work"
+  },
+  "home_hours_fuel": {
+    "name": "Hours Spent: Fuel",
+    "description": "Hours per day spent fetching wood/fuel.",
+    "type": "float",
+    "summary_type": "continuous",
+    "category": "Work"
+  },
+  "home_hours_domestic": {
+    "name": "Hours Spent: Domestic",
+    "description": "Hours per day spend on housework (taking care of children, cooking, washing, cleaning, etc.).",
+    "type": "float",
+    "summary_type": "continuous",
+    "category": "Work"
+  },
+  "work_search": {
+    "name": "Looking for Work",
+    "description": "Whether the respondent is looking for work, given that they are not currently working.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Work"
+  },
+  "work_search_duration": {
+    "name": "Work Search Duration",
+    "description": "How many months the respondent has been looking for work.",
+    "type": "float",
+    "conversion": {
+      "reference": "work_search_duration_unit",
+      "factors": [0.03287671232876712, 0.23013698630136983, 1, 12]
+    },
+    "summary_type": "continuous",
+    "category": "Work"
+  },
+  "work_search_mean": {
+    "name": "Work Search Means",
+    "description": "How the respondent searched for work",
+    "type": "int8",
+    "conversion": {
+      "type": "string",
+      "levels": ["Recruitment Agency", "Job Listing", "Direct Application", "Network", "Other"]
+    },
+    "summary_type": "table",
+    "category": "Work"
+  },
+  "nlf_reason": {
+    "name": "Reason Not Looking for Work",
+    "description": "Main reason the respondent is not looking for work.",
+    "type": "int8",
+    "conversion": {
+      "type": "string",
+      "levels": ["Education", "Housework", "Health", "Retirement", "Waiting for Response", "Other"]
+    },
+    "summary_type": "table",
+    "category": "Time Use"
+  },
+  "main_job_ind": {
+    "name": "Industry Classification",
+    "description": "Industry classification (International Standard Industrial Classification; ISIC).",
+    "type": "string",
+    "summary_type": "unique",
+    "category": "Job"
+  },
+  "main_activity": {
+    "name": "Job Activity Category",
+    "description": "If working, the industry sector of the job; otherwise, either unemployed or out of workforce.",
+    "type": "string",
+    "summary_type": "table",
+    "category": "Job"
+  },
+  "main_job_occ": {
+    "name": "Occupation Classification",
+    "description": "Occupational classification (International Standard Classification of Occupations; ISCO)",
+    "type": "int32",
+    "summary_type": "unique",
+    "category": "Job"
+  },
+  "main_job_type": {
+    "name": "Main Job Type",
+    "description": "Employment type of main job.",
+    "type": "int8",
+    "conversion": {
+      "type": "string",
+      "levels": ["Employee", "Self-Employed", "Unpaid"]
+    },
+    "summary_type": "table",
+    "category": "Job"
+  },
+  "main_job_usual_hours": {
+    "name": "Hours Worked (Usual)",
+    "description": "Usual number of hours worked per week.",
+    "type": "float",
+    "summary_type": "continuous",
+    "category": "Work"
+  },
+  "main_job_actual_hours": {
+    "name": "Hours Worked (Actual)",
+    "description": "Actual number of hours worked per week within the reference period.",
+    "type": "float",
+    "summary_type": "continuous",
+    "category": "Work"
+  },
+  "main_se_bookkeeping": {
+    "name": "Does Bookkeeping",
+    "description": "Whether the respondent does book keeping.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Job"
+  },
+  "main_se_license": {
+    "name": "Is Licensed / Registered",
+    "description": "Whether the respondent has a license or is registered.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Job"
+  },
+  "main_se_vat_tax": {
+    "name": "Business Taxes",
+    "description": "Whether the respondent pays any kind of business tax.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Job"
+  },
+  "main_se_employees": {
+    "name": "Employees",
+    "description": "Number of employees the respondent has.",
+    "type": "int32",
+    "summary_type": "continuous",
+    "category": "Job"
+  },
+  "main_we_benefits": {
+    "name": "Benefits",
+    "description": "Whether the main job has benefits.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Job"
+  },
+  "main_we_contract": {
+    "name": "Contract Work",
+    "description": "Whether the main job has a written contract.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Job"
+  },
+  "main_job_duration": {
+    "name": "Employment Duration",
+    "description": "Number of months at current job.",
+    "note": "Created from `main_we_duration` and `main_se_duration`.",
+    "type": "float",
+    "conversion": {
+      "reference": "main_we_duration_unit",
+      "factors": [0.03287671232876712, 0.23013698630136983, 1, 12]
+    },
+    "summary_type": "continuous",
+    "category": "Work"
+  },
+  "main_we_employer": {
+    "name": "Private Employer",
+    "description": "Employer for main job is a private employer.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Job"
+  },
+  "main_we_firm_size": {
+    "name": "Employer Size",
+    "description": "Size of the main job employer, by number of employees.",
+    "type": "int8",
+    "conversion": {
+      "type": "string",
+      "levels": ["<10", "10-50", ">50"]
+    },
+    "summary_type": "table",
+    "category": "Job"
+  },
+  "main_we_home": {
+    "name": "Work from Home",
+    "description": "Whether the respondent works from home more than 1 day per week.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Job"
+  },
+  "main_we_inkind": {
+    "name": "In-Kind Payment",
+    "description": "Hourly in-kind payment received from main job, in local currency.",
+    "type": "float",
+    "conversion": {
+      "reference": "main_we_inkind_freq",
+      "factors": [1, 0.125, 0.025, 0.0125, 0.0057692307692307696, 0.0004807692307692308]
+    },
+    "summary_type": "continuous",
+    "category": "Work"
+  },
+  "main_we_insurance": {
+    "name": "Social Insurance",
+    "description": "Whether the main job has social insurance.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Job"
+  },
+  "main_job_loc": {
+    "name": "Work Location",
+    "description": "Where the respondent usually worked from.",
+    "note": "Created from `main_we_loc` and `main_se_loc`.",
+    "type": "int8",
+    "conversion": {
+      "type": "string",
+      "levels": ["Home", "Job Location", "Public", "Agricultural / Maritime Area", "Client Home", "Other"]
+    },
+    "summary_type": "table",
+    "category": "Job"
+  },
+  "main_job_pay": {
+    "name": "Pay",
+    "description": "Hourly pay for main job, in local currency.",
+    "note": "Created from `main_we_wage` and `main_se_earnings`.",
+    "type": "float",
+    "conversion": {
+      "reference": "main_job_pay_freq",
+      "factors": [1, 0.125, 0.025, 0.0125, 0.0057692307692307696, 0.0004807692307692308]
+    },
+    "summary_type": "continuous",
+    "category": "Work"
+  },
+  "sec_job_pay": {
+    "name": "Pay (Secondary)",
+    "description": "Hourly pay for secondary job, in local currency.",
+    "note": "Created from `sec_we_wage` and `sec_se_earnings`.",
+    "type": "float",
+    "conversion": {
+      "reference": "main_job_pay_freq",
+      "factors": [1, 0.125, 0.025, 0.0125, 0.0057692307692307696, 0.0004807692307692308]
+    },
+    "summary_type": "continuous",
+    "category": "Secondary"
+  },
+  "sec_job_ind": {
+    "name": "Industry Classification (Secondary)",
+    "description": "Industry classification (International Standard Industrial Classification; ISIC) of secondary job.",
+    "type": "string",
+    "summary_type": "unique",
+    "category": "Secondary"
+  },
+  "sec_job_occ": {
+    "name": "Occupation Classification (Secondary)",
+    "description": "Occupational classification (International Standard Classification of Occupations; ISCO) of secondary job.",
+    "type": "int32",
+    "summary_type": "unique",
+    "category": "Secondary"
+  },
+  "sec_job_type": {
+    "name": "Secondary Job Type",
+    "description": "Employment type of secondary job.",
+    "type": "int8",
+    "conversion": {
+      "type": "string",
+      "levels": ["Employee", "Self-Employed", "Unpaid"]
+    },
+    "summary_type": "table",
+    "category": "Secondary"
+  },
+  "sec_job_usual_hours": {
+    "name": "Hours Worked (Usual; Secondary)",
+    "description": "Usual number of hours worked per week for the secondary job.",
+    "type": "float",
+    "summary_type": "continuous",
+    "category": "Secondary"
+  },
+  "sec_job_actual_hours": {
+    "name": "Hours Worked (Actual; Secondary)",
+    "description": "Actual number of hours worked per week within the reference period for the secondary job.",
+    "type": "float",
+    "summary_type": "continuous",
+    "category": "Secondary"
+  },
+  "sec_se_type": {
+    "name": "Has Employees (Secondary)",
+    "description": "Whether the respondent has employees for their second job.",
+    "type": "int8",
+    "conversion": {
+      "type": "bool",
+      "true_value": 1
+    },
+    "summary_type": "table",
+    "category": "Secondary"
+  },
+  "sec_we_inkind": {
+    "name": "In-Kind Payment (Secondary)",
+    "description": "Hourly in-kind payment received from main job, in local currency.",
+    "type": "float",
+    "conversion": {
+      "reference": "sec_we_inkind_freq",
+      "factors": [1, 0.125, 0.025, 0.0125, 0.0057692307692307696, 0.0004807692307692308]
+    },
+    "summary_type": "continuous",
+    "category": "Secondary"
+  }
+}
