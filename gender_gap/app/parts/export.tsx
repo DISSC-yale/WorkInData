@@ -61,7 +61,7 @@ export function Export() {
         Export
       </Button>
       {open && (
-        <Dialog open={open} onClose={close}>
+        <Dialog open={open} onClose={close} hideBackdrop>
           <DialogTitle>Data Export</DialogTitle>
           <IconButton
             aria-label="close export menu"
