@@ -45,7 +45,7 @@ export default function Home() {
   return (
     <ThemeProvider theme={theme} defaultMode="light" noSsr>
       <CssBaseline enableColorScheme />
-      <Box sx={{p: 1}}>
+      <Box>
         <Stack spacing={2} sx={{mb: 3}}>
           <Typography>
             How are gender gaps in labor force participation, sectoral employment, and unemployment, affected by Gross
