@@ -1,21 +1,44 @@
-import {Autocomplete, Box, Button, Checkbox, Stack, TextField, Typography} from '@mui/material'
-import {useCallback, useContext} from 'react'
+import {Autocomplete, Box, Button, Checkbox, createFilterOptions, Stack, TextField, Typography} from '@mui/material'
+import {useCallback, useContext, useMemo} from 'react'
 import {DataContext, type Resources} from '../data/load'
 import {FilterActionContext, FilterContext, FilterDef} from '../data/view'
+
+type countryOption = {key: string; searchString: string; name: string; region: string}
+const filterOptions = createFilterOptions({stringify: (option: countryOption) => option.searchString})
+const countryOptions: {[index: string]: countryOption} = {}
 
 export function FilterCountry({backgroundColor}: {backgroundColor: string}) {
   const filter = useContext(FilterContext) as FilterDef
   const filterAction = useContext(FilterActionContext)
   const full = useContext(DataContext) as Resources
+  const makeCountryOption = useCallback(
+    (country: string) => {
+      if (!(country in countryOptions)) {
+        const info = full.countryInfo[country]
+        countryOptions[country] = info
+          ? {key: country, searchString: JSON.stringify(info), name: info.name, region: info.region}
+          : {key: country, searchString: country, name: country, region: 'unknown'}
+      }
+      return countryOptions[country]
+    },
+    [full.countryInfo]
+  )
+  const allCountries: countryOption[] = useMemo(
+    () => Object.keys(full.levels.countries).map(makeCountryOption),
+    [full.levels.countries]
+  )
+  const filteredCountries = useMemo(
+    () => Object.keys(filter.countries).map(makeCountryOption),
+    [allCountries, filter.countries]
+  )
 
   const countryGroupSelected = useCallback(
     (group: string) => {
-      const {countryInfo} = full
       const selected = filter.countries
       let checked = true
-      Object.keys(full.levels.countries).forEach(country => {
-        if (checked && country in countryInfo && countryInfo[country].region === group) {
-          checked = country in selected
+      allCountries.forEach(country => {
+        if (checked && country.region === group) {
+          checked = country.key in selected
         }
       })
       return checked
@@ -25,8 +48,8 @@ export function FilterCountry({backgroundColor}: {backgroundColor: string}) {
   return (
     <Stack direction="row">
       <Autocomplete
-        options={Object.keys(full.levels.countries)}
-        groupBy={option => (option in full.countryInfo ? full.countryInfo[option].region : 'unknown')}
+        options={allCountries}
+        groupBy={option => option.region}
         sx={{'& li': {p: 0}}}
         renderGroup={params => {
           return (
@@ -44,14 +67,13 @@ export function FilterCountry({backgroundColor}: {backgroundColor: string}) {
                 <Checkbox
                   key={params.group}
                   onChange={(_, checked) => {
-                    const {countryInfo} = full
                     const value = {...filter.countries}
-                    Object.keys(full.levels.countries).forEach(country => {
-                      if (countryInfo[country].region === params.group) {
+                    allCountries.forEach(country => {
+                      if (country.region === params.group) {
                         if (checked) {
-                          value[country] = true
+                          value[country.key] = true
                         } else {
-                          delete value[country]
+                          delete value[country.key]
                         }
                       }
                     })
@@ -70,15 +92,19 @@ export function FilterCountry({backgroundColor}: {backgroundColor: string}) {
           return (
             <li key={key} {...optionProps} style={{paddingTop: 0, paddingBottom: 0}}>
               <Checkbox checked={selected} size="small" />
-              <Typography fontSize="small">{full.countryInfo[option].name + ' (' + option + ')'}</Typography>
+              <Typography fontSize="small">
+                {option.name + (option.name === option.key ? '' : ' (' + option.key + ')')}
+              </Typography>
             </li>
           )
         }}
+        getOptionLabel={option => option.key}
         renderInput={params => <TextField {...params} label="Countries" />}
-        value={Object.keys(filter.countries)}
+        filterOptions={filterOptions}
+        value={filteredCountries}
         renderValue={() => (
           <Typography sx={{p: 1, pt: 0, pb: 0, whiteSpace: 'nowrap'}}>
-            {Object.keys(filter.countries).length} / {Object.keys(full.levels.countries).length}
+            {filteredCountries.length} / {allCountries.length}
           </Typography>
         )}
         multiple
@@ -87,7 +113,7 @@ export function FilterCountry({backgroundColor}: {backgroundColor: string}) {
         size="small"
         onChange={(_, selection) => {
           const value: {[index: string]: boolean} = {}
-          selection.forEach(country => (value[country] = true))
+          selection.forEach(country => (value[country.key] = true))
           filterAction({key: 'countries', value})
         }}
       ></Autocomplete>
