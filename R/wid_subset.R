@@ -10,6 +10,9 @@
 #' @param surveys A character vector of survey abbreviations to include.
 #' @param min_year Earliest year to include.
 #' @param max_year Latest year to include.
+#' @param selection A character vector with country_year_survey IDs to be selected,
+#' or a matrix-like object consisting of 3 columns containing country, year, and survey IDs
+#' in that order.
 #' @return A filtered version of \code{db} if it is provided, or a list with entries
 #' for remaining \code{variables}, \code{surveys}, and \code{years}.
 #' @example man/examples/wid_subset.R
@@ -21,9 +24,10 @@ wid_subset <- function(
   variables = NULL,
   surveys = NULL,
   min_year = -Inf,
-  max_year = Inf
+  max_year = Inf,
+  selection = NULL
 ) {
-  survey <- year <- NULL
+  survey <- year <- .data <- NULL
   conditions <- list()
   for (rule in lapply(as.list(substitute(...())), as.list)) {
     negate <- FALSE
@@ -51,7 +55,8 @@ wid_subset <- function(
       missing(variables) &&
       missing(surveys) &&
       missing(min_year) &&
-      missing(max_year)
+      missing(max_year) &&
+      is.null(selection)
   ) {
     return(db)
   }
@@ -222,6 +227,24 @@ wid_subset <- function(
     if (!all(all_years %in% res$years))
       db <- dplyr::filter(db, year %in% res$years)
     if (length(conditions)) db <- dplyr::filter(db, ...)
+    if (!is.null(selection)) {
+      if (NCOL(selection) != 1L) {
+        selection <- do.call(
+          paste,
+          c(as.list(as.data.frame(selection)), sep = "_")
+        )
+      }
+      db <- dplyr::filter(
+        db,
+        paste(
+          .data[["country"]],
+          .data[["year"]],
+          .data[["survey"]],
+          sep = "_"
+        ) %in%
+          selection
+      )
+    }
     db
   } else {
     res

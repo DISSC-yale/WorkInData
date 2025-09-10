@@ -48,7 +48,7 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wid_aggregate</span><span class="op">(</span><span class="va">data_dir</span>, <span class="va">...</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>, cell_cutoff <span class="op">=</span> <span class="fl">30</span>,</span>
-<span>  cores <span class="op">=</span> <span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<span>  selection <span class="op">=</span> <span class="cn">NULL</span>, cores <span class="op">=</span> <span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -75,6 +75,12 @@ defining each <code>level</code> (e.g., <code>list(age = c(`Under 20` = "age &lt
 will be removed.</p></dd>
 
 
+<dt id="arg-selection">selection<a class="anchor" aria-label="anchor" href="#arg-selection"></a></dt>
+<dd><p>A character vector of country_year_survey IDs to be selected,
+or a matrix-like object consisting of 3 columns containing country, year, and survey IDs
+in that order.</p></dd>
+
+
 <dt id="arg-cores">cores<a class="anchor" aria-label="anchor" href="#arg-cores"></a></dt>
 <dd><p>Number of CPU cores to use.</p></dd>
 
@@ -86,12 +92,32 @@ will be removed.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># aggregate a subset of the full dataset</span></span></span>
-<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="wid_open.html">wid_open</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">country</span> <span class="op">==</span> <span class="st">"AGO"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">aggregated_ago</span> <span class="op">&lt;-</span> <span class="fu">wid_aggregate</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># aggregate a subset of the full dataset</span></span></span>
+<span class="r-in"><span><span class="va">db_dir</span> <span class="op">&lt;-</span> <span class="st">"../../../gender_growth_gap"</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists</a></span><span class="op">(</span><span class="va">db_dir</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">selection</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"IND"</span>, <span class="st">"IND"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2004</span>, <span class="fl">2005</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    survey <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NSS"</span>, <span class="st">"NSS"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">wid_aggregate</span><span class="op">(</span><span class="va">db_dir</span>, selection <span class="op">=</span> <span class="va">selection</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> cell cutoff removed 1 of 264 rows, which excludes 23 of 5348590 people.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 263 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   country, year, sex, main_activity [24]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    country  year sex    main_activity         variable level  count      weight</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> IND      <span style="text-decoration: underline;">2</span>004 Male   Agriculture           total    all    <span style="text-decoration: underline;">34</span>942 <span style="text-decoration: underline;">23</span>626<span style="text-decoration: underline;">406</span>539</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> IND      <span style="text-decoration: underline;">2</span>004 Male   Industry              total    all    <span style="text-decoration: underline;">10</span>992  <span style="text-decoration: underline;">7</span>169<span style="text-decoration: underline;">138</span>951</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> IND      <span style="text-decoration: underline;">2</span>004 Male   Out of Workforce      total    all    <span style="text-decoration: underline;">71</span>458 <span style="text-decoration: underline;">44</span>921<span style="text-decoration: underline;">362</span>764</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> IND      <span style="text-decoration: underline;">2</span>004 Male   Services - Market     total    all    <span style="text-decoration: underline;">31</span>819 <span style="text-decoration: underline;">17</span>580<span style="text-decoration: underline;">381</span>594</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> IND      <span style="text-decoration: underline;">2</span>004 Male   Services - Non-Market total    all     <span style="text-decoration: underline;">2</span>090  <span style="text-decoration: underline;">1</span>213<span style="text-decoration: underline;">388</span>628</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> IND      <span style="text-decoration: underline;">2</span>004 Male   Unemployed            total    all     <span style="text-decoration: underline;">3</span>358  <span style="text-decoration: underline;">1</span>410<span style="text-decoration: underline;">530</span>988</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> IND      <span style="text-decoration: underline;">2</span>004 Female Agriculture           total    all    <span style="text-decoration: underline;">14</span>886 <span style="text-decoration: underline;">10</span>872<span style="text-decoration: underline;">332</span>572</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> IND      <span style="text-decoration: underline;">2</span>004 Female Industry              total    all     <span style="text-decoration: underline;">2</span>969  <span style="text-decoration: underline;">2</span>018<span style="text-decoration: underline;">753</span>456</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> IND      <span style="text-decoration: underline;">2</span>004 Female Out of Workforce      total    all   <span style="text-decoration: underline;">118</span>035 <span style="text-decoration: underline;">73</span>812<span style="text-decoration: underline;">218</span>107</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> IND      <span style="text-decoration: underline;">2</span>004 Female Services - Market     total    all     <span style="text-decoration: underline;">4</span>839  <span style="text-decoration: underline;">2</span>550<span style="text-decoration: underline;">226</span>703</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 253 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

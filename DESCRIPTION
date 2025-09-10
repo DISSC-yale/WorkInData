@@ -20,7 +20,7 @@ Suggests:
     WDI
 Encoding: UTF-8
 Config/testthat/edition: 3
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Roxygen: list(old_usage = TRUE)
 URL: https://dissc-yale.github.io/WorkInData, https://github.com/dissc-yale/WorkInData
 BugReports: https://github.com/dissc-yale/WorkInData/issues

@@ -5,7 +5,7 @@
 \title{Subset Dataset}
 \usage{
 wid_subset(db = NULL, ..., variables = NULL, surveys = NULL,
-  min_year = -Inf, max_year = Inf)
+  min_year = -Inf, max_year = Inf, selection = NULL)
 }
 \arguments{
 \item{db}{The dataset to subset; an \code{\link[arrow]{Dataset}}
@@ -21,6 +21,10 @@ That is, only observations with values for these variables will be included.}
 \item{min_year}{Earliest year to include.}
 
 \item{max_year}{Latest year to include.}
+
+\item{selection}{A character vector with country_year_survey IDs to be selected,
+or a matrix-like object consisting of 3 columns containing country, year, and survey IDs
+in that order.}
 }
 \value{
 A filtered version of \code{db} if it is provided, or a list with entries
@@ -40,9 +44,8 @@ wid_subset(surveys = "CASEN")
 wid_subset(variables = "work_search")[-1]
 
 # filter to a subset of data
-if (dir.exists("../../../gender_growth_gap")) {
-  wid_open("../../../gender_growth_gap") |>
-    wid_subset(age > 200) |>
-    dplyr::collect()
+db_dir <- "../../../gender_growth_gap"
+if (dir.exists(db_dir)) {
+  wid_open(db_dir) |> wid_subset(age > 200) |> dplyr::collect()
 }
 }

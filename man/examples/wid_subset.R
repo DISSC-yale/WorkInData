@@ -8,8 +8,7 @@ wid_subset(surveys = "CASEN")
 wid_subset(variables = "work_search")[-1]
 
 # filter to a subset of data
-if (dir.exists("../../../gender_growth_gap")) {
-  wid_open("../../../gender_growth_gap") |>
-    wid_subset(age > 200) |>
-    dplyr::collect()
+db_dir <- "../../../gender_growth_gap"
+if (dir.exists(db_dir)) {
+  wid_open(db_dir) |> wid_subset(age > 200) |> dplyr::collect()
 }

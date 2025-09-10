@@ -5,7 +5,7 @@
 \title{Aggregate Dataset}
 \usage{
 wid_aggregate(data_dir, ..., levels = list(), cell_cutoff = 30,
-  cores = parallel::detectCores() - 2)
+  selection = NULL, cores = parallel::detectCores() - 2)
 }
 \arguments{
 \item{data_dir}{Path to the dataset, to be opened by \code{\link{wid_open}}.}
@@ -20,6 +20,10 @@ defining each \code{level} (e.g., \code{list(age = c(`Under 20` = "age < 20",
 \item{cell_cutoff}{Minimal cell size to retain; cells with \code{count < cell_cutoff}
 will be removed.}
 
+\item{selection}{A character vector of country_year_survey IDs to be selected,
+or a matrix-like object consisting of 3 columns containing country, year, and survey IDs
+in that order.}
+
 \item{cores}{Number of CPU cores to use.}
 }
 \value{
@@ -29,10 +33,14 @@ An aggregated version of \code{db}.
 Create aggregates from the dataset.
 }
 \examples{
-\dontrun{
-
 # aggregate a subset of the full dataset
-data <- wid_open() |> dplyr::filter(country == "AGO")
-aggregated_ago <- wid_aggregate(data)
+db_dir <- "../../../gender_growth_gap"
+if (dir.exists(db_dir)) {
+  selection <- data.frame(
+    country = c("IND", "IND"),
+    year = c(2004, 2005),
+    survey = c("NSS", "NSS")
+  )
+  wid_aggregate(db_dir, selection = selection)
 }
 }

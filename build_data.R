@@ -2,43 +2,23 @@ library(WorkInData)
 
 # rebuild dataset
 subset <- readxl::read_excel("../gender_gap_paper_variable_survey_info.xlsx", 2)
-selection <- sub(
-  "-",
-  "\\-",
-  gsub(" ", "_", do.call(paste, subset)),
-  fixed = TRUE
-)
-subset_usability <- readxl::read_excel(
-  "../EGC - Gender & Growth Gaps - HWLFS Data Sharing Agreements.xlsx",
-  6
-)
-selection <- selection[
-  selection %in%
-    sub(
-      "-",
-      "\\-",
-      gsub(
-        " ",
-        "_",
-        do.call(
-          paste,
-          subset_usability[
-            !is.na(subset_usability$`Useable for portal?`) &
-              (tolower(subset_usability$`Useable for portal?`) == "yes"),
-            c("Country", "Year", "Survey")
-          ]
-        )
-      ),
-      fixed = TRUE
-    )
-]
+selection <- do.call(paste, c(as.list(subset), sep = "_"))
 wid_reformat("../data_cleaned", "../gender_growth_gap", selection)
 
 # gender gap site resources
 out_dir <- "gender_gap/public/"
 
 ## aggregate dataset
-agg <- wid_aggregate("../gender_growth_gap", age > 15, age < 66)
+subset_usability <- readxl::read_excel(
+  "../EGC - Gender & Growth Gaps - HWLFS Data Sharing Agreements.xlsx",
+  6
+)[, c("Country", "Year", "Survey")]
+agg <- wid_aggregate(
+  "../gender_growth_gap",
+  age > 15,
+  age < 66,
+  selection = subset_usability
+)
 vroom::vroom_write(agg, "../wid_gender_growth_gap_agg.csv.xz", ",")
 jsonlite::write_json(
   agg,

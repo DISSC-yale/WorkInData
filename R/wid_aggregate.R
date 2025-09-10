@@ -10,14 +10,21 @@
 #'   `Over 60` = "age > 60"))}).
 #' @param cell_cutoff Minimal cell size to retain; cells with \code{count < cell_cutoff}
 #'   will be removed.
+#' @param selection A character vector of country_year_survey IDs to be selected,
+#' or a matrix-like object consisting of 3 columns containing country, year, and survey IDs
+#' in that order.
 #' @param cores Number of CPU cores to use.
 #' @return An aggregated version of \code{db}.
 #' @examples
-#' \dontrun{
-#'
 #' # aggregate a subset of the full dataset
-#' data <- wid_open() |> dplyr::filter(country == "AGO")
-#' aggregated_ago <- wid_aggregate(data)
+#' db_dir <- "../../../gender_growth_gap"
+#' if (dir.exists(db_dir)) {
+#'   selection <- data.frame(
+#'     country = c("IND", "IND"),
+#'     year = c(2004, 2005),
+#'     survey = c("NSS", "NSS")
+#'   )
+#'   wid_aggregate(db_dir, selection = selection)
 #' }
 #' @export
 
@@ -26,6 +33,7 @@ wid_aggregate <- function(
   ...,
   levels = list(),
   cell_cutoff = 30,
+  selection = NULL,
   cores = parallel::detectCores() - 2
 ) {
   country <- year <- sex <- wgt <- .data <- main_activity <- level <- NULL
@@ -124,6 +132,7 @@ wid_aggregate <- function(
     rbind,
     if (cores > 1) {
       data_args <- as.list(substitute(...()))
+      data_args$selection <- selection
       call_env <- new.env(parent = globalenv())
       call_env$cores <- cores
       call_env$split_levels <- split_levels
@@ -143,7 +152,8 @@ wid_aggregate <- function(
           !is.na(wgt),
           !is.na(sex),
           !is.na(main_activity),
-          ...
+          ...,
+          selection = selection
         ),
         country,
         year,
