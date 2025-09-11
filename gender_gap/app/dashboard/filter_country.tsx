@@ -25,11 +25,11 @@ export function FilterCountry({backgroundColor}: {backgroundColor: string}) {
   )
   const allCountries: countryOption[] = useMemo(
     () => Object.keys(full.levels.countries).map(makeCountryOption),
-    [full.levels.countries]
+    [full.levels.countries, makeCountryOption]
   )
   const filteredCountries = useMemo(
     () => Object.keys(filter.countries).map(makeCountryOption),
-    [allCountries, filter.countries]
+    [filter.countries, makeCountryOption]
   )
 
   const countryGroupSelected = useCallback(
@@ -43,7 +43,7 @@ export function FilterCountry({backgroundColor}: {backgroundColor: string}) {
       })
       return checked
     },
-    [full, filter.countries]
+    [filter.countries, allCountries]
   )
   return (
     <Stack direction="row">

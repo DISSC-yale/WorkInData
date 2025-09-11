@@ -1,4 +1,3 @@
-export const DATA_VERSION = '2025-04-15'
 export const variableInfo: {
   [index: string]: {label: string; label_long?: string; fullName?: string; source?: string; source_url?: string}
 } = {

@@ -1,8 +1,8 @@
 import {Box, Button, CardContent, Link, Typography, useColorScheme} from '@mui/material'
-import {DATA_VERSION} from '../metadata'
 import {FilterActionContext, urlParamsToString, ViewActionContext, type URLParams} from '../data/view'
 import {Variable} from '../data/variable'
 import {useContext} from 'react'
+import {DataContext, type Resources} from '../data/load'
 
 const exampleParams: {title: string; comment: string; view: URLParams}[] = [
   {
@@ -174,6 +174,7 @@ export function About() {
   const {mode} = useColorScheme()
   const filterAction = useContext(FilterActionContext)
   const viewAction = useContext(ViewActionContext)
+  const {meta} = useContext(DataContext) as Resources
   const baseUrl = window.location.origin + window.location.pathname
   return (
     <CardContent
@@ -209,7 +210,7 @@ export function About() {
           </Link>{' '}
           dataset on{' '}
           <Typography component="code" sx={{fontFamily: 'monospace', whiteSpace: 'nowrap'}}>
-            {DATA_VERSION}
+            {meta.updated}
           </Typography>
           .
         </Typography>

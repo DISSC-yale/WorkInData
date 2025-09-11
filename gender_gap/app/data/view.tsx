@@ -57,7 +57,7 @@ const defaultView: ViewDef = {
     base: 'weight',
     percent: true,
     subset: {variable: 'main_activity', level: 'Agriculture', levelIndex: 0, adjust: ''},
-    summary: {variable: 'sex', level: 'Female', levelIndex: 0, adjust: '-'},
+    summary: {variable: 'sex', level: 'Male', levelIndex: 1, adjust: '-'},
     index: 6,
   }),
   color: 'country',

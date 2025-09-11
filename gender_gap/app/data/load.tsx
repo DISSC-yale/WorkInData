@@ -8,7 +8,9 @@ import {unique} from '../utils'
 import {Backdrop, LinearProgress, Stack, Typography} from '@mui/material'
 
 export type Info = {[index: string]: {[index: string]: string}}
+type Metadata = {updated: string; md5: string}
 export type Resources = {
+  meta: Metadata
   data: ColumnTable
   map: GeoJSON
   countryInfo: Info
@@ -28,15 +30,17 @@ export const DataContext = createContext<Resources | null>(null)
 const prefix = '/WorkInData/gender_gap/'
 
 export function Data({children}: Readonly<{children?: React.ReactNode}>) {
+  const [meta, setMeta] = useState<Metadata | null>(null)
   const [genderGrowthGap, setGenderGrowthGap] = useState<ColumnTable | null>(null)
   const [worldBank, setWorldBank] = useState<ColumnTable | null>(null)
   const [map, setMap] = useState<GeoJSON | null>(null)
   useEffect(() => {
     loadJSON(prefix + 'data.json.gz').then(res => setGenderGrowthGap(res))
     loadJSON(prefix + 'world_bank.json.gz').then(res => setWorldBank(res))
+    fetch(prefix + 'metadata.json').then(async res => setMeta(await res.json()))
     fetch(prefix + 'countries.geojson').then(async res => setMap(await res.json()))
   }, [])
-  if (genderGrowthGap && worldBank && map) {
+  if (genderGrowthGap && worldBank && meta && map) {
     const countryInfo: Info = {}
     map.features.forEach(f => (countryInfo[f.properties.ISO_A3] = f.properties))
     const baseData = genderGrowthGap
@@ -78,7 +82,7 @@ export function Data({children}: Readonly<{children?: React.ReactNode}>) {
         selectable: [...selectableVariables, ...Object.keys(demo_segments)],
       }
     })()
-    const full = {data, map, countryInfo, variableLevels, levels}
+    const full = {meta, data, map, countryInfo, variableLevels, levels}
     return <DataContext.Provider value={full}>{children}</DataContext.Provider>
   }
   return (

@@ -21,11 +21,10 @@ import {
 import {ColumnTable} from 'arquero'
 import {useContext, useMemo, useState} from 'react'
 import {DataContext, Resources} from '../data/load'
-import {DATA_VERSION} from '../metadata'
 import {FilteredContext, ViewContext, ViewDef} from '../data/view'
 
-function makePartialName(filtered: ColumnTable, view: ViewDef) {
-  return `wid_ggg_${DATA_VERSION}${
+function makePartialName(filtered: ColumnTable, view: ViewDef, version: string) {
+  return `wid_ggg_${version}${
     view.time_agg === 'all' ? '' : '_' + (view.time_agg === 'specified' ? view.select_year : view.time_agg + '-time')
   }_${filtered.get('variable', 0)}_${filtered.numRows()}`
 }
@@ -41,18 +40,18 @@ export function Export() {
   const [columns, setColumns] = useState(allColumns)
   const [filename, setFilename] = useState('')
   const defaultNames = useMemo(() => {
-    const partial = makePartialName(filtered, view)
+    const partial = makePartialName(filtered, view, full.meta.updated)
     setFilename(partial)
     setColumns(allColumns.filter(col => (view.time_agg === 'mean' ? col !== 'year' : true)))
     return {
       partial,
-      full: `wid_ggg_${DATA_VERSION}${
+      full: `wid_ggg_${full.meta.updated}${
         view.time_agg === 'all'
           ? ''
           : '_' + (view.time_agg === 'specified' ? view.select_year : view.time_agg + '-time')
       }`,
     }
-  }, [filtered, view, allColumns])
+  }, [filtered, view, allColumns, full.meta.updated])
   const close = () => setOpen(!open)
   const data = fullExport ? full.data : filtered
   return (
@@ -129,7 +128,7 @@ export function Export() {
                     checked={fullExport}
                     onChange={() => {
                       if (filename === defaultNames[fullExport ? 'full' : 'partial']) {
-                        defaultNames.partial = makePartialName(filtered, view)
+                        defaultNames.partial = makePartialName(filtered, view, full.meta.updated)
                         setFilename(defaultNames[fullExport ? 'partial' : 'full'])
                       }
                       setFullExport(!fullExport)

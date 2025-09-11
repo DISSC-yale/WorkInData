@@ -3,7 +3,6 @@
 import {Box, createTheme, CssBaseline, Link, Stack, ThemeProvider, Typography} from '@mui/material'
 import Splits from './splits'
 import {DataView} from '../data/view'
-import {DATA_VERSION} from '../metadata'
 
 const FONT_URL = 'https://egc.yale.edu/themes/custom/economics/assets/dist/fonts/'
 
@@ -58,11 +57,7 @@ export default function Home() {
             <Link href="https://sites.google.com/site/gottliebcharles/work-in-data" rel="noreferrer" target="_blank">
               Harmonized World Labor Force Surveys
             </Link>{' '}
-            (HWLFS; aggregated{' '}
-            <Typography component="code" sx={{fontFamily: 'monospace', whiteSpace: 'nowrap'}}>
-              {DATA_VERSION}
-            </Typography>
-            ) which were originally compiled by{' '}
+            (HWLFS) which were originally compiled by{' '}
             <Link
               href="https://sites.google.com/site/gottliebcharles/Charles-Gottlieb"
               rel="noreferrer"

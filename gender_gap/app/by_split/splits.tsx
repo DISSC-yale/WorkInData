@@ -110,9 +110,15 @@ export default function Splits() {
           <FilterCountry backgroundColor="#ffffff" />
           <Divider sx={{pt: 1.5}} />
           <Export />
+          <Typography
+            component="code"
+            sx={{fontFamily: 'monospace', whiteSpace: 'nowrap', fontSize: '.6em', textAlign: 'right', p: 1}}
+          >
+            Data updated {full.meta.updated}
+          </Typography>
         </Stack>
       </Stack>
-      <Stack direction="row" spacing={1} sx={{justifyContent: 'space-between'}}>
+      <Stack direction="row" spacing={1} sx={{justifyContent: 'space-between', pr: 1, pl: 1}}>
         <Stack direction="row">
           <Typography sx={{alignSelf: 'center', fontWeight: 700, pr: 2}}>Year: </Typography>
           <ToggleButtonGroup
@@ -160,6 +166,7 @@ export default function Splits() {
           href="https://dissc-yale.github.io/WorkInData/gender_gap"
           rel="noreferrer"
           target="_blank"
+          variant="contained"
         >
           Full Dashboard
         </Button>
