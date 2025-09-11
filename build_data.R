@@ -128,7 +128,7 @@ if (meta$md5 != hash) {
   for (file in files) {
     file.copy(
       paste0(out_dir, file),
-      paste0("docs/gender_gap", file),
+      paste0("docs/gender_gap/", file),
       overwrite = TRUE
     )
   }
