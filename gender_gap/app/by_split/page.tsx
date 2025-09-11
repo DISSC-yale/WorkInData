@@ -48,10 +48,10 @@ export default function Home() {
       <Box>
         <Stack spacing={2} sx={{mb: 3}}>
           <Typography>
-            How are gender gaps in labor force participation, sectoral employment, and unemployment, affected by Gross
-            Domestic Product (GDP) per capita? How do these patterns differ across global regions? Do gender gaps in
-            these labor market indicators hold for higher ages or education levels, or when controlling for marital or
-            urban/rural status?
+            How are gender gaps in employment in agriculture, industry, and services, as well as provision of non-market
+            services and unemployment, affected by Gross Domestic Product (GDP) per capita? How do these patterns differ
+            across global regions? Do gender gaps in these labor market indicators hold for higher ages or education
+            levels, or when controlling for marital or urban/rural status?
           </Typography>
           <Typography>
             This project sheds light on these questions, by visualizing data from the{' '}
@@ -75,8 +75,8 @@ export default function Home() {
           </Typography>
           <Typography>
             The HWLFS database contains demographic, educational, and employment information at the individual level,
-            from 110 countries across 20 years, drawn from a combination of IPUMS, household surveys and labour force
-            surveys from national statistical offices and the World Bank.
+            drawn from a combination of IPUMS, household surveys and labour force surveys from national statistical
+            offices and the World Bank.
           </Typography>
         </Stack>
         <DataView>

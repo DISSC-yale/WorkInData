@@ -1,7 +1,10 @@
 library(WorkInData)
 
 # rebuild dataset
-subset <- readxl::read_excel("../gender_gap_paper_variable_survey_info.xlsx", 2)
+subset <- vroom::vroom(
+  "../validated_surveys.csv",
+  col_select = c("country", "year", "survey")
+)
 selection <- do.call(paste, c(as.list(subset), sep = "_"))
 wid_reformat("../data_cleaned", "../gender_growth_gap", selection)
 
@@ -9,10 +12,14 @@ wid_reformat("../data_cleaned", "../gender_growth_gap", selection)
 out_dir <- "gender_gap/public/"
 
 ## aggregate dataset
-subset_usability <- readxl::read_excel(
-  "../EGC - Gender & Growth Gaps - HWLFS Data Sharing Agreements.xlsx",
-  6
-)[, c("Country", "Year", "Survey")]
+subset_usability <- vroom::vroom(
+  "../publishable_surveys.csv",
+  col_select = c("Country", "Year", "Survey", "Useable for portal?")
+)
+subset_usability <- subset_usability[
+  tolower(subset_usability$`Useable for portal?`) == "yes",
+  1:3
+]
 agg <- wid_aggregate(
   "../gender_growth_gap",
   age > 15,
@@ -39,6 +46,7 @@ jsonlite::write_json(
 ## prepare external data
 
 ### country-level data
+if (!requireNamespace("WDI")) install.packages("WDI")
 gdp <- wid_update_world_bank("../resources")
 gdp <- gdp[, c(
   "iso3c",
@@ -56,7 +64,7 @@ jsonlite::write_json(
 )
 
 ### country map
-country_info_file <- paste0("../CLASS.xlsx")
+country_info_file <- paste0("../resources/CLASS.xlsx")
 if (!file.exists(country_info_file)) {
   download.file(
     "https://datacatalogfiles.worldbank.org/ddh-published/0037712/DR0090755/CLASS.xlsx",
@@ -102,3 +110,27 @@ map$region_color[is.na(map$region_color)] <- "#9c9c9c"
 
 unlink(paste0(out_dir, "countries.geojson"))
 sf::st_write(map, paste0(out_dir, "countries.geojson"))
+
+## copy updated files to site distribution
+files <- c("data.json.gz", "work_bank.json.gz", "countries.geojson")
+for (file in files) {
+  file.copy(
+    paste0(out_dir, file),
+    paste0("docs/gender_gap", file),
+    overwrite = TRUE
+  )
+}
+
+## update package summaries
+
+### rebuild sysdata
+load("R/sysdata.rda")
+
+wid_summaries <- wid_make_summaries("../gender_growth_gap")
+isic_to_section <- wid_update_isic("../resources")
+save(wid_summaries, isic_to_section, file = "R/sysdata.rda", compress = "xz")
+
+### rebuild report
+devtools::install(".", upgrade = "never")
+wid_make_report("../gender_growth_gap")
+pkgdown::build_site()

@@ -94,14 +94,13 @@ export default function Splits() {
       </Stack>
 
       <Typography>
-        The pair of scatter plots below show the relationship between the gender gap in labor force participation and
-        GDP per capita
+        The figure below shows the relationship between the gender gap in {view.y.subset.level} and GDP per capita
         {view.y_panels in splitDescriptions
           ? ', comparing individuals ' + splitDescriptions[view.y_panels as 'rural']
           : ''}
         . The menu options allow you to change the labor market outcome shown, change the way GDP per capita is
-        displayed, introduce a different color for each global region, and change the set of years from which data are
-        drawn.
+        displayed, introduce a different color for each global region, change the set of countries which are shown, and
+        change the set of years from which data are drawn (below the figure).
       </Typography>
       <Stack sx={{height: 600}} direction="row" spacing={2}>
         <DataDisplay mode="light" />
