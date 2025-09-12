@@ -145,7 +145,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
   },
   {
     title: '',
-    comment: 'But a positive relationship within the non-market services sector:',
+    comment: 'But a positive relationship within the services sector:',
     view: {
       as_plot: true,
       lock_range: true,
@@ -153,7 +153,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
       y: new Variable({
         base: 'weight',
         percent: true,
-        subset: {variable: 'main_activity', level: 'Services - Non-Market', levelIndex: 4, adjust: ''},
+        subset: {variable: 'main_activity', level: 'Services', levelIndex: 3, adjust: ''},
         summary: {variable: 'sex', level: 'Female', levelIndex: 0, adjust: '-'},
       }),
       color: 'country',

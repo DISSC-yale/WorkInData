@@ -1,15 +1,26 @@
 library(WorkInData)
 
 # rebuild dataset
+out_dir <- "gender_gap/public/"
 validated <- vroom::vroom("../validated_surveys.csv")
 selection <- do.call(
   paste,
   c(as.list(validated[, c("country", "year", "survey")]), sep = "_")
 )
-wid_reformat("../data_cleaned", "../gender_growth_gap", selection)
+unlink("../gender_growth_gap_temp", recursive = TRUE)
+wid_reformat("../data_cleaned", "../gender_growth_gap_temp", selection)
+
+meta_file <- paste0(out_dir, "metadata.json.gz")
+meta <- jsonlite::read_json(meta_file)
+current_archive <- paste0("../versions/", meta$updated)
+if (!dir.exists(current_archive)) {
+  file.rename("../gender_growth_gap", current_archive)
+} else {
+  unlink("../gender_growth_gap")
+}
+file.rename("../gender_growth_gap_temp", "../gender_growth_gap")
 
 # gender gap site resources
-out_dir <- "gender_gap/public/"
 
 ## aggregate dataset
 publishable <- vroom::vroom("../publishable_surveys.csv")
@@ -59,8 +70,6 @@ jsonlite::write_json(
 )
 
 ## prepare external data if aggregate has changed
-meta_file <- paste0(out_dir, "metadata.json.gz")
-meta <- jsonlite::read_json(meta_file)
 hash <- tools::md5sum(paste0(out_dir, "data.json.gz"))[[1]]
 if (meta$md5 != hash) {
   meta$updated <- Sys.Date()
@@ -82,7 +91,9 @@ if (meta$md5 != hash) {
   )
 
   ### country-level data
-  if (!requireNamespace("WDI")) install.packages("WDI")
+  if (!requireNamespace("WDI")) {
+    install.packages("WDI")
+  }
   gdp <- wid_update_world_bank("../resources")
   gdp <- gdp[, c(
     "iso3c",

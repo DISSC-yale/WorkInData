@@ -36,8 +36,8 @@ export const variableInfo: {
 export const activityLabels = {
   Agriculture: 'Employment Sector: Agriculture',
   Industry: 'Employment Sector: Industry',
-  'Services - Market': 'Employment Sector: Services - Market',
-  'Services - Non-Market': 'Employment Sector: Services - Non-Market',
+  Services: 'Employment Sector: Services',
   Unemployed: 'Unemployed',
+  'Out of Workforce': 'Out of Workforce',
 }
 export const selectableVariables = ['country', 'year', 'main_activity', 'sex']

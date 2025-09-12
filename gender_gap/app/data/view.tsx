@@ -87,7 +87,7 @@ export type URLParams = ViewDef & {
 const defaultParams: URLParams = {
   ...{...defaultView},
   countries: '',
-  sectors: 'Agriculture,Industry,Services - Market,Services - Non-Market,Unemployed',
+  sectors: 'Agriculture,Industry,Out of Workforce,Services,Unemployed',
   sexes: 'Female,Male',
   demo_seg: 'total',
   min_year: '1998',

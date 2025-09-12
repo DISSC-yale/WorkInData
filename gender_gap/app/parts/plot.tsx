@@ -308,7 +308,7 @@ export default function Plot({
                     (nCountries === 1 && data[varIndices.country] in countryInfo
                       ? `Data from ${countryInfo[data[varIndices.country]].name}`
                       : `Observations from ${nCountries} ${nCountries === 1 ? 'country' : 'countries'}`) +
-                    (filter && filter.sectors.length < 6 ? ', sector = ' + filter.sectors.join(', ') : '') +
+                    (filter && filter.sectors.length < 5 ? ', sector = ' + filter.sectors.join(', ') : '') +
                     (filter && filter.sexes.length === 1 ? ', sex = ' + filter.sexes[0] : ''),
                   top,
                   left,
