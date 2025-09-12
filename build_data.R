@@ -21,7 +21,7 @@ publishable <- publishable[, c(
   "Survey",
   "publishable",
   "Survey Name",
-  "Data sharing agreement - link"
+  "Link"
 )]
 colnames(publishable) <- c(
   "country",
