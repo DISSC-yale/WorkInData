@@ -3,6 +3,7 @@ import {FilterActionContext, urlParamsToString, ViewActionContext, type URLParam
 import {Variable} from '../data/variable'
 import {useContext} from 'react'
 import {DataContext, type Resources} from '../data/load'
+import {Sources} from '../parts/sources'
 
 const exampleParams: {title: string; comment: string; view: URLParams}[] = [
   {
@@ -214,6 +215,7 @@ export function About() {
           </Typography>
           .
         </Typography>
+        <Sources sources={meta.sources} />
         <Typography variant="h5" sx={{pt: 1, pb: 1}}>
           Examples
         </Typography>

@@ -208,8 +208,7 @@ wid_reformat <- function(
         su <- (su & data$work & !is.na(data$main_job_ind))$as_vector()
         main_activity[su] <- wid_convert_isic(
           isic_to_section[as.character(data$main_job_ind[su])],
-          3,
-          TRUE
+          full_label = TRUE
         )
         data$main_activity <- main_activity
         arrow::write_parquet(data, out_file, compression = "gzip")

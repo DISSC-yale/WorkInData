@@ -1,6 +1,6 @@
 'use client'
 
-import {type ColumnTable, loadJSON, not} from 'arquero'
+import {ColumnTable, loadJSON, not} from 'arquero'
 import type {GeoJSON} from 'echarts/types/src/coord/geo/geoTypes.js'
 import {createContext, useEffect, useState} from 'react'
 import {selectableVariables} from '../metadata'
@@ -8,7 +8,7 @@ import {unique} from '../utils'
 import {Backdrop, LinearProgress, Stack, Typography} from '@mui/material'
 
 export type Info = {[index: string]: {[index: string]: string}}
-type Metadata = {updated: string; md5: string}
+type Metadata = {updated: string; md5: string; sources: ColumnTable}
 export type Resources = {
   meta: Metadata
   data: ColumnTable
@@ -37,8 +37,13 @@ export function Data({children}: Readonly<{children?: React.ReactNode}>) {
   useEffect(() => {
     loadJSON(prefix + 'data.json.gz').then(res => setGenderGrowthGap(res))
     loadJSON(prefix + 'world_bank.json.gz').then(res => setWorldBank(res))
-    fetch(prefix + 'metadata.json').then(async res => setMeta(await res.json()))
     fetch(prefix + 'countries.geojson').then(async res => setMap(await res.json()))
+    fetch(prefix + 'metadata.json.gz').then(async res => {
+      const blob = await res.blob()
+      const metadata = await new Response(await blob.stream().pipeThrough(new DecompressionStream('gzip'))).json()
+      metadata.sources = new ColumnTable(metadata.sources)
+      setMeta(metadata)
+    })
   }, [])
   if (genderGrowthGap && worldBank && meta && map) {
     const countryInfo: Info = {}

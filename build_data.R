@@ -1,28 +1,43 @@
 library(WorkInData)
 
 # rebuild dataset
-subset <- vroom::vroom(
-  "../validated_surveys.csv",
-  col_select = c("country", "year", "survey")
+validated <- vroom::vroom("../validated_surveys.csv")
+selection <- do.call(
+  paste,
+  c(as.list(validated[, c("country", "year", "survey")]), sep = "_")
 )
-selection <- do.call(paste, c(as.list(subset), sep = "_"))
 wid_reformat("../data_cleaned", "../gender_growth_gap", selection)
 
 # gender gap site resources
 out_dir <- "gender_gap/public/"
 
 ## aggregate dataset
-subset_usability <- vroom::vroom(
-  "../publishable_surveys.csv",
-  col_select = c("Country", "Year", "Survey", "Useable for portal?")
+publishable <- vroom::vroom("../publishable_surveys.csv")
+publishable <- publishable[!is.na(publishable[[1L]]), ]
+publishable$publishable <- tolower(publishable$`Useable for portal?`) == "yes"
+publishable <- publishable[, c(
+  "Country",
+  "Year",
+  "Survey",
+  "publishable",
+  "Survey Name",
+  "Data sharing agreement - link"
+)]
+colnames(publishable) <- c(
+  "country",
+  "year",
+  "survey",
+  "publishable",
+  "survey_name",
+  "survey_link"
 )
-subset_usability <- subset_usability[
-  tolower(subset_usability$`Useable for portal?`) == "yes",
-  1:3
+subset_usability <- publishable[
+  publishable$publishable,
+  c("country", "year", "survey")
 ]
 agg <- wid_aggregate(
   "../gender_growth_gap",
-  age > 15,
+  age > 14,
   age < 66,
   selection = subset_usability
 )
@@ -44,13 +59,27 @@ jsonlite::write_json(
 )
 
 ## prepare external data if aggregate has changed
-meta_file <- paste0(out_dir, "metadata.json")
+meta_file <- paste0(out_dir, "metadata.json.gz")
 meta <- jsonlite::read_json(meta_file)
 hash <- tools::md5sum(paste0(out_dir, "data.json.gz"))[[1]]
 if (meta$md5 != hash) {
   meta$updated <- Sys.Date()
   meta$md5 <- hash
-  jsonlite::write_json(meta, meta_file, auto_unbox = TRUE, pretty = TRUE)
+  validated$validated <- TRUE
+  sources <- merge(
+    validated[, c("country", "year", "survey", "validated")],
+    publishable,
+    all = TRUE
+  )
+  sources$validated[is.na(sources$validated)] <- FALSE
+  sources$publishable[is.na(sources$publishable)] <- FALSE
+  meta$sources <- sources
+  jsonlite::write_json(
+    meta,
+    gzfile(meta_file),
+    dataframe = "column",
+    auto_unbox = TRUE
+  )
 
   ### country-level data
   if (!requireNamespace("WDI")) install.packages("WDI")
@@ -124,7 +153,12 @@ if (meta$md5 != hash) {
   sf::st_write(map, paste0(out_dir, "countries.geojson"))
 
   ## copy updated files to site distribution
-  files <- c("data.json.gz", "work_bank.json.gz", "countries.geojson")
+  files <- c(
+    "metadata.json.gz",
+    "data.json.gz",
+    "work_bank.json.gz",
+    "countries.geojson"
+  )
   for (file in files) {
     file.copy(
       paste0(out_dir, file),
