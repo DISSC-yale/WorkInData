@@ -30,8 +30,6 @@ const cols = [
       )
     },
   },
-  {field: 'validated', headerName: 'Validated'},
-  {field: 'publishable', headerName: 'Publishable'},
   {field: 'survey_name', headerName: 'Name'},
   {field: 'survey_link', headerName: 'Link'},
 ]

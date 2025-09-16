@@ -24,28 +24,25 @@ file.rename("../gender_growth_gap_temp", "../gender_growth_gap")
 
 ## aggregate dataset
 publishable <- vroom::vroom("../publishable_surveys.csv")
-publishable <- publishable[!is.na(publishable[[1L]]), ]
-publishable$publishable <- tolower(publishable$`Useable for portal?`) == "yes"
-publishable <- publishable[, c(
-  "Country",
-  "Year",
-  "Survey",
-  "publishable",
-  "Survey Name",
-  "Link"
-)]
+publishable <- publishable[
+  !is.na(publishable[[1L]]) &
+    tolower(publishable$`Useable for portal?`) == "yes",
+  c(
+    "Country",
+    "Year",
+    "Survey",
+    "Survey Name",
+    "Link"
+  )
+]
 colnames(publishable) <- c(
   "country",
   "year",
   "survey",
-  "publishable",
   "survey_name",
   "survey_link"
 )
-subset_usability <- publishable[
-  publishable$publishable,
-  c("country", "year", "survey")
-]
+subset_usability <- publishable[, c("country", "year", "survey")]
 agg <- wid_aggregate(
   "../gender_growth_gap",
   age > 14,
@@ -74,14 +71,11 @@ hash <- tools::md5sum(paste0(out_dir, "data.json.gz"))[[1]]
 if (meta$md5 != hash) {
   meta$updated <- Sys.Date()
   meta$md5 <- hash
-  validated$validated <- TRUE
   sources <- merge(
-    validated[, c("country", "year", "survey", "validated")],
+    validated[, c("country", "year", "survey")],
     publishable,
     all = TRUE
   )
-  sources$validated[is.na(sources$validated)] <- FALSE
-  sources$publishable[is.na(sources$publishable)] <- FALSE
   meta$sources <- sources
   jsonlite::write_json(
     meta,
