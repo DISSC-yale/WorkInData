@@ -76,7 +76,8 @@ export function Sources({sources}: {sources: ColumnTable}) {
                 density="compact"
                 slotProps={{
                   toolbar: {
-                    csvOptions: {fileName: 'wid_gender_gap_sources.csv'},
+                    printOptions: {disableToolbarButton: true},
+                    csvOptions: {allColumns: true, fileName: 'wid_gender_gap_sources'},
                   },
                 }}
                 initialState={{
