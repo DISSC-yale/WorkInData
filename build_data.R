@@ -42,12 +42,11 @@ colnames(publishable) <- c(
   "survey_name",
   "survey_link"
 )
-subset_usability <- publishable[, c("country", "year", "survey")]
 agg <- wid_aggregate(
   "../gender_growth_gap",
   age > 14,
   age < 66,
-  selection = subset_usability
+  selection = publishable[, c("country", "year", "survey")]
 )
 vroom::vroom_write(agg, "../wid_gender_growth_gap_agg.csv.xz", ",")
 jsonlite::write_json(
@@ -76,6 +75,9 @@ if (meta$md5 != hash) {
     publishable,
     all = TRUE
   )
+  sources$country_year_present <- do.call(
+    paste, sources[, c("country", "year")]
+  ) %in% do.call(paste, agg[, c("country", "year")])
   meta$sources <- sources
   jsonlite::write_json(
     meta,
@@ -182,7 +184,12 @@ if (meta$md5 != hash) {
   save(wid_summaries, isic_to_section, file = "R/sysdata.rda", compress = "xz")
 
   ### rebuild report
+  rstudioapi::restartSession(clean = TRUE)
   devtools::install(".", upgrade = "never")
+  library(WorkInData)
   wid_make_report("../gender_growth_gap")
-  pkgdown::build_site()
+  if (!requireNamespace("curl")) {
+    install.packages("curl")
+  }
+  pkgdown::build_site(preview = FALSE)
 }

@@ -8,8 +8,8 @@
 <title>Variables • WorkInData</title>
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Variables">
 </head>
 <body>
@@ -70,10 +70,10 @@
     
     
 <p>Reformatted into parquet files partitioned by <code>survey</code> and
-<code>year</code> in 344 parts:</p>
+<code>year</code> in 415 parts:</p>
 <p><strong>Variables</strong>: 16</p>
-<p><strong>Observations</strong>: 177,103,943</p>
-<p><strong>Size</strong>: 1.24 GB</p>
+<p><strong>Observations</strong>: 223,347,489</p>
+<p><strong>Size</strong>: 1.54 GB</p>
 <div class="section level2">
 <h2 id="sample">Sample<a class="anchor" aria-label="anchor" href="#sample"></a>
 </h2>
@@ -92,28 +92,36 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">CASEN</td>
-<td align="right">2,210,672</td>
+<td align="left">BHPS</td>
+<td align="right">111,202</td>
 </tr>
 <tr class="even">
+<td align="left">CASEN</td>
+<td align="right">2,771,639</td>
+</tr>
+<tr class="odd">
 <td align="left">CFPS</td>
 <td align="right">135,421</td>
 </tr>
-<tr class="odd">
-<td align="left">CPS-IPUMS</td>
-<td align="right">4,120,344</td>
-</tr>
 <tr class="even">
+<td align="left">CPS-IPUMS</td>
+<td align="right">6,232,854</td>
+</tr>
+<tr class="odd">
 <td align="left">ECAM</td>
 <td align="right">46,090</td>
 </tr>
-<tr class="odd">
-<td align="left">ECE</td>
-<td align="right">424,214</td>
-</tr>
 <tr class="even">
+<td align="left">ECE</td>
+<td align="right">1,452,238</td>
+</tr>
+<tr class="odd">
 <td align="left">ECH</td>
 <td align="right">1,678,605</td>
+</tr>
+<tr class="even">
+<td align="left">ECV</td>
+<td align="right">55,666</td>
 </tr>
 <tr class="odd">
 <td align="left">ECVMA</td>
@@ -121,15 +129,15 @@
 </tr>
 <tr class="even">
 <td align="left">EH</td>
-<td align="right">370,603</td>
+<td align="right">263,734</td>
 </tr>
 <tr class="odd">
 <td align="left">EHCVM</td>
-<td align="right">243,166</td>
+<td align="right">366,929</td>
 </tr>
 <tr class="even">
 <td align="left">EICV</td>
-<td align="right">265,731</td>
+<td align="right">197,333</td>
 </tr>
 <tr class="odd">
 <td align="left">EMICOV</td>
@@ -137,19 +145,27 @@
 </tr>
 <tr class="even">
 <td align="left">ENAHO</td>
-<td align="right">1,337,317</td>
+<td align="right">1,453,907</td>
 </tr>
 <tr class="odd">
 <td align="left">ENEMDU</td>
 <td align="right">2,774,243</td>
 </tr>
 <tr class="even">
+<td align="left">ENES</td>
+<td align="right">106,936</td>
+</tr>
+<tr class="odd">
 <td align="left">ENOE</td>
-<td align="right">22,681,721</td>
+<td align="right">24,303,173</td>
+</tr>
+<tr class="even">
+<td align="left">ENPE</td>
+<td align="right">3,705,280</td>
 </tr>
 <tr class="odd">
 <td align="left">ESS</td>
-<td align="right">2,235,374</td>
+<td align="right">3,031,307</td>
 </tr>
 <tr class="even">
 <td align="left">EULFS</td>
@@ -157,39 +173,47 @@
 </tr>
 <tr class="odd">
 <td align="left">GEIH</td>
-<td align="right">9,104,063</td>
+<td align="right">9,860,126</td>
 </tr>
 <tr class="even">
 <td align="left">GLSS</td>
-<td align="right">161,884</td>
+<td align="right">182,287</td>
 </tr>
 <tr class="odd">
+<td align="left">HIES</td>
+<td align="right">54,397</td>
+</tr>
+<tr class="even">
 <td align="left">HILDA</td>
 <td align="right">341,170</td>
 </tr>
-<tr class="even">
-<td align="left">HLFS</td>
-<td align="right">9,675,900</td>
-</tr>
 <tr class="odd">
+<td align="left">HLFS</td>
+<td align="right">8,706,630</td>
+</tr>
+<tr class="even">
 <td align="left">IBEP</td>
 <td align="right">58,953</td>
 </tr>
-<tr class="even">
-<td align="left">IHS</td>
-<td align="right">40,608</td>
-</tr>
 <tr class="odd">
-<td align="left">IHSES</td>
-<td align="right">302,494</td>
+<td align="left">IHS</td>
+<td align="right">441,634</td>
 </tr>
 <tr class="even">
 <td align="left">ILCS</td>
-<td align="right">288,499</td>
+<td align="right">166,270</td>
 </tr>
 <tr class="odd">
+<td align="left">ILFS</td>
+<td align="right">171,391</td>
+</tr>
+<tr class="even">
 <td align="left">IPUMS</td>
-<td align="right">14,791,023</td>
+<td align="right">29,566,667</td>
+</tr>
+<tr class="odd">
+<td align="left">KCHSP</td>
+<td align="right">240,183</td>
 </tr>
 <tr class="even">
 <td align="left">KLIPS</td>
@@ -197,51 +221,55 @@
 </tr>
 <tr class="odd">
 <td align="left">LFCLS</td>
-<td align="right">40,527</td>
+<td align="right">79,653</td>
 </tr>
 <tr class="even">
 <td align="left">LFS</td>
-<td align="right">42,206,396</td>
+<td align="right">56,421,532</td>
 </tr>
 <tr class="odd">
-<td align="left">LMD</td>
-<td align="right">2,818,616</td>
+<td align="left">LSMS</td>
+<td align="right">512,019</td>
 </tr>
 <tr class="even">
-<td align="left">LSMS</td>
-<td align="right">704,093</td>
-</tr>
-<tr class="odd">
 <td align="left">NBHS</td>
 <td align="right">48,845</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">NLFS</td>
 <td align="right">471,306</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NSS</td>
-<td align="right">3,592,086</td>
+<td align="right">4,259,890</td>
+</tr>
+<tr class="odd">
+<td align="left">PANEL</td>
+<td align="right">7,973</td>
 </tr>
 <tr class="even">
+<td align="left">PLFS</td>
+<td align="right">5,392,638</td>
+</tr>
+<tr class="odd">
 <td align="left">PNAD</td>
 <td align="right">2,202,843</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">PSLM</td>
 <td align="right">3,395,474</td>
+</tr>
+<tr class="odd">
+<td align="left">QLFS</td>
+<td align="right">4,431,677</td>
 </tr>
 <tr class="even">
 <td align="left">RLMS</td>
 <td align="right">244,223</td>
 </tr>
 <tr class="odd">
-<td align="left">SILC</td>
-<td align="right">108,342</td>
-</tr>
-<tr class="even">
 <td align="left">SOEP</td>
-<td align="right">641,156</td>
+<td align="right">61,210</td>
 </tr>
 </tbody>
 </table>
@@ -261,88 +289,160 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="left">1970</td>
+<td align="right">146,783</td>
+</tr>
+<tr class="even">
+<td align="left">1980</td>
+<td align="right">181,358</td>
+</tr>
+<tr class="odd">
+<td align="left">1981</td>
+<td align="right">99,975</td>
+</tr>
+<tr class="even">
+<td align="left">1983</td>
+<td align="right">623,494</td>
+</tr>
+<tr class="odd">
+<td align="left">1987</td>
+<td align="right">667,804</td>
+</tr>
+<tr class="even">
+<td align="left">1990</td>
+<td align="right">717,812</td>
+</tr>
+<tr class="odd">
+<td align="left">1991</td>
+<td align="right">2,569,945</td>
+</tr>
+<tr class="even">
+<td align="left">1992</td>
+<td align="right">2,682,424</td>
+</tr>
+<tr class="odd">
+<td align="left">1993</td>
+<td align="right">2,946,486</td>
+</tr>
+<tr class="even">
+<td align="left">1994</td>
+<td align="right">2,290,725</td>
+</tr>
+<tr class="odd">
+<td align="left">1995</td>
+<td align="right">2,525,712</td>
+</tr>
+<tr class="even">
+<td align="left">1996</td>
+<td align="right">3,284,742</td>
+</tr>
+<tr class="odd">
+<td align="left">1997</td>
+<td align="right">2,943,395</td>
+</tr>
+<tr class="even">
 <td align="left">1998</td>
-<td align="right">2,110,665</td>
+<td align="right">3,180,493</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">1999</td>
-<td align="right">3,071,704</td>
+<td align="right">2,658,202</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2000</td>
-<td align="right">3,969,628</td>
+<td align="right">5,938,277</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2001</td>
-<td align="right">4,181,220</td>
+<td align="right">4,755,621</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2002</td>
-<td align="right">4,792,255</td>
+<td align="right">5,864,262</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2003</td>
-<td align="right">3,415,393</td>
+<td align="right">3,432,259</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2004</td>
-<td align="right">4,099,475</td>
+<td align="right">4,633,758</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2005</td>
-<td align="right">10,192,549</td>
+<td align="right">10,386,076</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2006</td>
-<td align="right">10,515,549</td>
+<td align="right">10,665,757</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2007</td>
-<td align="right">11,829,150</td>
+<td align="right">11,565,341</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2008</td>
-<td align="right">11,861,874</td>
+<td align="right">12,366,635</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2009</td>
-<td align="right">11,773,550</td>
+<td align="right">12,166,414</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2010</td>
-<td align="right">12,542,286</td>
+<td align="right">13,804,112</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2011</td>
-<td align="right">11,589,553</td>
+<td align="right">11,221,425</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2012</td>
-<td align="right">11,728,387</td>
+<td align="right">12,484,503</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2013</td>
-<td align="right">11,682,480</td>
+<td align="right">12,449,634</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2014</td>
-<td align="right">12,421,677</td>
+<td align="right">12,464,735</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2015</td>
-<td align="right">10,433,497</td>
-</tr>
-<tr class="odd">
-<td align="left">2016</td>
-<td align="right">8,379,862</td>
+<td align="right">10,418,255</td>
 </tr>
 <tr class="even">
-<td align="left">2017</td>
-<td align="right">10,301,495</td>
+<td align="left">2016</td>
+<td align="right">9,087,576</td>
 </tr>
 <tr class="odd">
+<td align="left">2017</td>
+<td align="right">11,242,997</td>
+</tr>
+<tr class="even">
 <td align="left">2018</td>
-<td align="right">6,211,694</td>
+<td align="right">7,453,068</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="right">6,710,113</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="right">2,698,877</td>
+</tr>
+<tr class="odd">
+<td align="left">2021</td>
+<td align="right">1,644,443</td>
+</tr>
+<tr class="even">
+<td align="left">2022</td>
+<td align="right">1,610,456</td>
+</tr>
+<tr class="odd">
+<td align="left">2023</td>
+<td align="right">763,545</td>
 </tr>
 </tbody>
 </table>
@@ -353,7 +453,7 @@
 <p>Survey year for panel construction.</p>
 <p><strong>ID</strong>: survey_year</p>
 <p><strong>Type</strong>: int16</p>
-<p><strong>Missing</strong>: 98,329,438</p>
+<p><strong>Missing</strong>: 128,076,563</p>
 <p><strong>Value Summary</strong>:</p>
 <table class="table">
 <thead><tr class="header">
@@ -362,92 +462,144 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="left">1971</td>
+<td align="right">146,783</td>
+</tr>
+<tr class="even">
+<td align="left">1981</td>
+<td align="right">181,358</td>
+</tr>
+<tr class="odd">
+<td align="left">1991</td>
+<td align="right">168,741</td>
+</tr>
+<tr class="even">
+<td align="left">1992</td>
+<td align="right">190,791</td>
+</tr>
+<tr class="odd">
+<td align="left">1993</td>
+<td align="right">174,859</td>
+</tr>
+<tr class="even">
+<td align="left">1994</td>
+<td align="right">170,243</td>
+</tr>
+<tr class="odd">
+<td align="left">1995</td>
+<td align="right">169,231</td>
+</tr>
+<tr class="even">
+<td align="left">1996</td>
+<td align="right">157,386</td>
+</tr>
+<tr class="odd">
+<td align="left">1997</td>
+<td align="right">163,477</td>
+</tr>
+<tr class="even">
 <td align="left">1998</td>
-<td align="right">13,321</td>
+<td align="right">171,053</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">1999</td>
-<td align="right">144,361</td>
+<td align="right">174,880</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2000</td>
-<td align="right">144,915</td>
+<td align="right">219,114</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2001</td>
-<td align="right">608,755</td>
+<td align="right">619,801</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2002</td>
-<td align="right">561,766</td>
+<td align="right">576,509</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2003</td>
-<td align="right">722,826</td>
+<td align="right">739,692</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2004</td>
-<td align="right">805,427</td>
-</tr>
-<tr class="even">
-<td align="left">2005</td>
-<td align="right">6,227,286</td>
+<td align="right">829,064</td>
 </tr>
 <tr class="odd">
-<td align="left">2006</td>
-<td align="right">4,960,888</td>
+<td align="left">2005</td>
+<td align="right">6,515,872</td>
 </tr>
 <tr class="even">
+<td align="left">2006</td>
+<td align="right">5,218,863</td>
+</tr>
+<tr class="odd">
 <td align="left">2007</td>
 <td align="right">5,461,739</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2008</td>
-<td align="right">5,403,901</td>
+<td align="right">5,750,878</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2009</td>
-<td align="right">5,356,517</td>
+<td align="right">5,685,485</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2010</td>
-<td align="right">5,996,426</td>
+<td align="right">6,499,040</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2011</td>
-<td align="right">5,706,505</td>
+<td align="right">5,834,099</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2012</td>
-<td align="right">5,681,976</td>
+<td align="right">6,144,634</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2013</td>
-<td align="right">5,616,907</td>
+<td align="right">6,053,614</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2014</td>
-<td align="right">5,775,518</td>
+<td align="right">5,744,170</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2015</td>
-<td align="right">5,618,933</td>
+<td align="right">5,658,780</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2016</td>
-<td align="right">5,484,725</td>
-</tr>
-<tr class="even">
-<td align="left">2017</td>
-<td align="right">5,369,585</td>
+<td align="right">6,181,475</td>
 </tr>
 <tr class="odd">
-<td align="left">2018</td>
-<td align="right">2,932,127</td>
+<td align="left">2017</td>
+<td align="right">6,315,488</td>
 </tr>
 <tr class="even">
+<td align="left">2018</td>
+<td align="right">4,092,540</td>
+</tr>
+<tr class="odd">
 <td align="left">2019</td>
-<td align="right">180,101</td>
+<td align="right">3,733,313</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="right">1,466,395</td>
+</tr>
+<tr class="odd">
+<td align="left">2021</td>
+<td align="right">1,534,826</td>
+</tr>
+<tr class="even">
+<td align="left">2022</td>
+<td align="right">1,617,055</td>
+</tr>
+<tr class="odd">
+<td align="left">2023</td>
+<td align="right">909,678</td>
 </tr>
 </tbody>
 </table>
@@ -459,7 +611,7 @@
 panel.</p>
 <p><strong>ID</strong>: wgt</p>
 <p><strong>Type</strong>: float</p>
-<p><strong>Missing</strong>: 1,050,596</p>
+<p><strong>Missing</strong>: 1,247,690</p>
 <p><strong>Value Summary</strong>:</p>
 <table class="table">
 <thead><tr class="header">
@@ -473,15 +625,15 @@ panel.</p>
 </tr>
 <tr class="even">
 <td align="left">mean</td>
-<td align="right">19,616,883,630,372.6719</td>
+<td align="right">16,610,657,909,856.1250</td>
 </tr>
 <tr class="odd">
 <td align="left">sd</td>
-<td align="right">102,323,077,681,265.1094</td>
+<td align="right">94,191,998,210,580.1875</td>
 </tr>
 <tr class="even">
 <td align="left">median</td>
-<td align="right">109.1173</td>
+<td align="right">121.6457</td>
 </tr>
 <tr class="odd">
 <td align="left">max</td>
@@ -514,11 +666,11 @@ panel.</p>
 </tr>
 <tr class="even">
 <td align="left">ALB</td>
-<td align="right">168,445</td>
+<td align="right">176,418</td>
 </tr>
 <tr class="odd">
 <td align="left">ARM</td>
-<td align="right">288,499</td>
+<td align="right">334,331</td>
 </tr>
 <tr class="even">
 <td align="left">AUS</td>
@@ -534,11 +686,11 @@ panel.</p>
 </tr>
 <tr class="odd">
 <td align="left">BEN</td>
-<td align="right">17,043</td>
+<td align="right">1,124,375</td>
 </tr>
 <tr class="even">
 <td align="left">BFA</td>
-<td align="right">45,612</td>
+<td align="right">709,273</td>
 </tr>
 <tr class="odd">
 <td align="left">BGR</td>
@@ -550,51 +702,51 @@ panel.</p>
 </tr>
 <tr class="odd">
 <td align="left">BOL</td>
-<td align="right">370,603</td>
+<td align="right">1,793,727</td>
 </tr>
 <tr class="even">
 <td align="left">BRA</td>
-<td align="right">2,202,843</td>
+<td align="right">3,342,338</td>
 </tr>
 <tr class="odd">
-<td align="left">BWA</td>
-<td align="right">370,428</td>
+<td align="left">BTN</td>
+<td align="right">108,414</td>
 </tr>
 <tr class="even">
-<td align="left">CAN</td>
-<td align="right">24,687,251</td>
+<td align="left">BWA</td>
+<td align="right">533,257</td>
 </tr>
 <tr class="odd">
+<td align="left">CAN</td>
+<td align="right">36,568,549</td>
+</tr>
+<tr class="even">
 <td align="left">CHE</td>
 <td align="right">964,321</td>
 </tr>
-<tr class="even">
-<td align="left">CHL</td>
-<td align="right">2,210,672</td>
-</tr>
 <tr class="odd">
+<td align="left">CHL</td>
+<td align="right">3,083,407</td>
+</tr>
+<tr class="even">
 <td align="left">CHN</td>
 <td align="right">135,421</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">CIV</td>
 <td align="right">61,116</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">CMR</td>
 <td align="right">46,090</td>
 </tr>
-<tr class="even">
-<td align="left">COL</td>
-<td align="right">9,104,063</td>
-</tr>
 <tr class="odd">
-<td align="left">CRI</td>
-<td align="right">424,214</td>
+<td align="left">COL</td>
+<td align="right">10,654,542</td>
 </tr>
 <tr class="even">
-<td align="left">CUB</td>
-<td align="right">300,209</td>
+<td align="left">CRI</td>
+<td align="right">986,580</td>
 </tr>
 <tr class="odd">
 <td align="left">CYP</td>
@@ -606,7 +758,7 @@ panel.</p>
 </tr>
 <tr class="odd">
 <td align="left">DEU</td>
-<td align="right">641,156</td>
+<td align="right">61,210</td>
 </tr>
 <tr class="even">
 <td align="left">DNK</td>
@@ -618,11 +770,11 @@ panel.</p>
 </tr>
 <tr class="even">
 <td align="left">ECU</td>
-<td align="right">2,774,243</td>
+<td align="right">3,172,751</td>
 </tr>
 <tr class="odd">
 <td align="left">EGY</td>
-<td align="right">4,162,305</td>
+<td align="right">4,627,065</td>
 </tr>
 <tr class="even">
 <td align="left">ESP</td>
@@ -646,19 +798,19 @@ panel.</p>
 </tr>
 <tr class="odd">
 <td align="left">FRA</td>
-<td align="right">5,865,111</td>
+<td align="right">6,281,409</td>
 </tr>
 <tr class="even">
 <td align="left">GBR</td>
-<td align="right">1,863,179</td>
+<td align="right">1,974,381</td>
 </tr>
 <tr class="odd">
 <td align="left">GEO</td>
-<td align="right">148,119</td>
+<td align="right">701,974</td>
 </tr>
 <tr class="even">
 <td align="left">GHA</td>
-<td align="right">161,884</td>
+<td align="right">1,091,827</td>
 </tr>
 <tr class="odd">
 <td align="left">GIN</td>
@@ -682,11 +834,11 @@ panel.</p>
 </tr>
 <tr class="even">
 <td align="left">IDN</td>
-<td align="right">383,598</td>
+<td align="right">1,271,146</td>
 </tr>
 <tr class="odd">
 <td align="left">IND</td>
-<td align="right">3,592,086</td>
+<td align="right">10,840,762</td>
 </tr>
 <tr class="even">
 <td align="left">IRL</td>
@@ -698,7 +850,7 @@ panel.</p>
 </tr>
 <tr class="even">
 <td align="left">IRQ</td>
-<td align="right">302,494</td>
+<td align="right">735,497</td>
 </tr>
 <tr class="odd">
 <td align="left">ISL</td>
@@ -706,7 +858,7 @@ panel.</p>
 </tr>
 <tr class="even">
 <td align="left">ISR</td>
-<td align="right">300,774</td>
+<td align="right">615,123</td>
 </tr>
 <tr class="odd">
 <td align="left">JAM</td>
@@ -714,83 +866,75 @@ panel.</p>
 </tr>
 <tr class="even">
 <td align="left">JOR</td>
-<td align="right">2,584,948</td>
+<td align="right">3,095,594</td>
 </tr>
 <tr class="odd">
 <td align="left">JPN</td>
-<td align="right">2,235,374</td>
+<td align="right">3,031,307</td>
 </tr>
 <tr class="even">
+<td align="left">KEN</td>
+<td align="right">240,183</td>
+</tr>
+<tr class="odd">
 <td align="left">KGZ</td>
 <td align="right">885,871</td>
 </tr>
-<tr class="odd">
-<td align="left">KHM</td>
-<td align="right">1,208,527</td>
-</tr>
 <tr class="even">
+<td align="left">KHM</td>
+<td align="right">1,297,314</td>
+</tr>
+<tr class="odd">
 <td align="left">KOR</td>
 <td align="right">269,397</td>
 </tr>
-<tr class="odd">
-<td align="left">LAO</td>
-<td align="right">560,480</td>
-</tr>
 <tr class="even">
 <td align="left">LBR</td>
-<td align="right">348,057</td>
+<td align="right">54,397</td>
 </tr>
 <tr class="odd">
 <td align="left">LKA</td>
-<td align="right">83,818</td>
+<td align="right">542,400</td>
 </tr>
 <tr class="even">
-<td align="left">LSO</td>
-<td align="right">180,208</td>
-</tr>
-<tr class="odd">
 <td align="left">LTU</td>
 <td align="right">817,087</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">LUX</td>
 <td align="right">476,069</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">LVA</td>
 <td align="right">484,579</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">MAR</td>
-<td align="right">914,085</td>
-</tr>
-<tr class="odd">
-<td align="left">MEX</td>
-<td align="right">22,681,721</td>
+<td align="right">1,497,440</td>
 </tr>
 <tr class="even">
-<td align="left">MLI</td>
-<td align="right">131,246</td>
+<td align="left">MEX</td>
+<td align="right">25,071,647</td>
 </tr>
 <tr class="odd">
+<td align="left">MLI</td>
+<td align="right">788,926</td>
+</tr>
+<tr class="even">
 <td align="left">MLT</td>
 <td align="right">228,059</td>
 </tr>
-<tr class="even">
-<td align="left">MNG</td>
-<td align="right">537,892</td>
-</tr>
 <tr class="odd">
-<td align="left">MOZ</td>
-<td align="right">441,546</td>
+<td align="left">MNG</td>
+<td align="right">919,987</td>
 </tr>
 <tr class="even">
 <td align="left">MWI</td>
-<td align="right">163,001</td>
+<td align="right">645,524</td>
 </tr>
 <tr class="odd">
 <td align="left">MYS</td>
-<td align="right">435,300</td>
+<td align="right">783,192</td>
 </tr>
 <tr class="even">
 <td align="left">NAM</td>
@@ -798,11 +942,11 @@ panel.</p>
 </tr>
 <tr class="odd">
 <td align="left">NER</td>
-<td align="right">47,796</td>
+<td align="right">83,202</td>
 </tr>
 <tr class="even">
 <td align="left">NGA</td>
-<td align="right">215,513</td>
+<td align="right">113,152</td>
 </tr>
 <tr class="odd">
 <td align="left">NLD</td>
@@ -813,72 +957,64 @@ panel.</p>
 <td align="right">411,954</td>
 </tr>
 <tr class="odd">
-<td align="left">NPL</td>
-<td align="right">985,728</td>
-</tr>
-<tr class="even">
 <td align="left">PAK</td>
 <td align="right">3,395,474</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">PAN</td>
 <td align="right">625,199</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">PER</td>
-<td align="right">1,337,317</td>
+<td align="right">1,844,764</td>
+</tr>
+<tr class="even">
+<td align="left">PHL</td>
+<td align="right">11,050,526</td>
 </tr>
 <tr class="odd">
-<td align="left">PHL</td>
-<td align="right">10,518,942</td>
-</tr>
-<tr class="even">
 <td align="left">PNG</td>
 <td align="right">499,203</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">POL</td>
 <td align="right">4,281,030</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">PRT</td>
 <td align="right">2,358,287</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">PRY</td>
 <td align="right">457,068</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">PSE</td>
 <td align="right">1,873,527</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">ROU</td>
 <td align="right">3,314,669</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">RUS</td>
 <td align="right">244,223</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">RWA</td>
-<td align="right">265,731</td>
-</tr>
-<tr class="even">
-<td align="left">SDN</td>
-<td align="right">48,845</td>
+<td align="right">911,834</td>
 </tr>
 <tr class="odd">
-<td align="left">SEN</td>
-<td align="right">66,119</td>
+<td align="left">SDN</td>
+<td align="right">596,863</td>
 </tr>
 <tr class="even">
+<td align="left">SEN</td>
+<td align="right">973,133</td>
+</tr>
+<tr class="odd">
 <td align="left">SLE</td>
 <td align="right">40,608</td>
-</tr>
-<tr class="odd">
-<td align="left">SRB</td>
-<td align="right">108,342</td>
 </tr>
 <tr class="even">
 <td align="left">SSD</td>
@@ -902,7 +1038,7 @@ panel.</p>
 </tr>
 <tr class="odd">
 <td align="left">TUN</td>
-<td align="right">969,270</td>
+<td align="right">3,705,280</td>
 </tr>
 <tr class="even">
 <td align="left">TUR</td>
@@ -910,19 +1046,19 @@ panel.</p>
 </tr>
 <tr class="odd">
 <td align="left">TZA</td>
-<td align="right">63,068</td>
+<td align="right">645,694</td>
 </tr>
 <tr class="even">
 <td align="left">UGA</td>
-<td align="right">131,265</td>
+<td align="right">579,452</td>
 </tr>
 <tr class="odd">
 <td align="left">URY</td>
-<td align="right">1,678,605</td>
+<td align="right">1,945,968</td>
 </tr>
 <tr class="even">
 <td align="left">USA</td>
-<td align="right">4,120,344</td>
+<td align="right">6,232,854</td>
 </tr>
 <tr class="odd">
 <td align="left">VEN</td>
@@ -930,7 +1066,7 @@ panel.</p>
 </tr>
 <tr class="even">
 <td align="left">VNM</td>
-<td align="right">828,803</td>
+<td align="right">384,782</td>
 </tr>
 <tr class="odd">
 <td align="left">YEM</td>
@@ -938,7 +1074,7 @@ panel.</p>
 </tr>
 <tr class="even">
 <td align="left">ZAF</td>
-<td align="right">2,818,616</td>
+<td align="right">5,475,987</td>
 </tr>
 <tr class="odd">
 <td align="left">ZMB</td>
@@ -946,7 +1082,7 @@ panel.</p>
 </tr>
 <tr class="even">
 <td align="left">ZWE</td>
-<td align="right">40,527</td>
+<td align="right">79,653</td>
 </tr>
 </tbody>
 </table>
@@ -957,7 +1093,7 @@ panel.</p>
 <p>Whether the respondent’s location is classified as rural.</p>
 <p><strong>ID</strong>: rural</p>
 <p><strong>Type</strong>: bool</p>
-<p><strong>Missing</strong>: 35,126,418</p>
+<p><strong>Missing</strong>: 48,280,985</p>
 <p><strong>Value Summary</strong>:</p>
 <table class="table">
 <thead><tr class="header">
@@ -967,11 +1103,11 @@ panel.</p>
 <tbody>
 <tr class="odd">
 <td align="left">FALSE</td>
-<td align="right">89,856,921</td>
+<td align="right">109,846,779</td>
 </tr>
 <tr class="even">
 <td align="left">TRUE</td>
-<td align="right">52,120,604</td>
+<td align="right">65,219,725</td>
 </tr>
 </tbody>
 </table>
@@ -986,7 +1122,7 @@ panel.</p>
 <p>Individual identifier.</p>
 <p><strong>ID</strong>: id_ind</p>
 <p><strong>Type</strong>: string</p>
-<p><strong>Missing</strong>: 0</p>
+<p><strong>Missing</strong>: 8</p>
 <p><strong>Value Summary</strong>:</p>
 <table class="table">
 <thead><tr class="header">
@@ -1000,11 +1136,11 @@ panel.</p>
 </tr>
 <tr class="even">
 <td align="left">last</td>
-<td align="left">ffe756a5b2544583941f06fae0d2ecf8_6</td>
+<td align="left">ffec87c6ae87498f956723afe69266b9_4</td>
 </tr>
 <tr class="odd">
 <td align="left">unique</td>
-<td align="left">91.52% in first 10,000,000</td>
+<td align="left">97.1% in first 10,000,000</td>
 </tr>
 </tbody>
 </table>
@@ -1015,7 +1151,7 @@ panel.</p>
 <p>Respondents age.</p>
 <p><strong>ID</strong>: age</p>
 <p><strong>Type</strong>: int32</p>
-<p><strong>Missing</strong>: 538,814</p>
+<p><strong>Missing</strong>: 688,558</p>
 <p><strong>Value Summary</strong>:</p>
 <table class="table">
 <thead><tr class="header">
@@ -1025,19 +1161,19 @@ panel.</p>
 <tbody>
 <tr class="odd">
 <td align="left">min</td>
-<td align="right">-1.0000</td>
+<td align="right">0.0000</td>
 </tr>
 <tr class="even">
 <td align="left">mean</td>
-<td align="right">35.7046</td>
+<td align="right">35.1024</td>
 </tr>
 <tr class="odd">
 <td align="left">sd</td>
-<td align="right">21.8928</td>
+<td align="right">21.7328</td>
 </tr>
 <tr class="even">
 <td align="left">median</td>
-<td align="right">33.8708</td>
+<td align="right">33.0284</td>
 </tr>
 <tr class="odd">
 <td align="left">max</td>
@@ -1052,7 +1188,7 @@ panel.</p>
 <p>Whether the respondent reported being female.</p>
 <p><strong>ID</strong>: sex</p>
 <p><strong>Type</strong>: bool</p>
-<p><strong>Missing</strong>: 515,002</p>
+<p><strong>Missing</strong>: 972,678</p>
 <p><strong>Value Summary</strong>:</p>
 <table class="table">
 <thead><tr class="header">
@@ -1062,11 +1198,11 @@ panel.</p>
 <tbody>
 <tr class="odd">
 <td align="left">FALSE</td>
-<td align="right">86,031,525</td>
+<td align="right">108,535,508</td>
 </tr>
 <tr class="even">
 <td align="left">TRUE</td>
-<td align="right">90,557,416</td>
+<td align="right">113,839,303</td>
 </tr>
 </tbody>
 </table>
@@ -1077,7 +1213,7 @@ panel.</p>
 <p>Marital status of the respondent.</p>
 <p><strong>ID</strong>: marital_status</p>
 <p><strong>Type</strong>: string</p>
-<p><strong>Missing</strong>: 13,535,608</p>
+<p><strong>Missing</strong>: 14,917,845</p>
 <p><strong>Value Summary</strong>:</p>
 <table class="table">
 <thead><tr class="header">
@@ -1087,15 +1223,15 @@ panel.</p>
 <tbody>
 <tr class="odd">
 <td align="left">Divorced / Separated / Widowed</td>
-<td align="right">17,691,845</td>
+<td align="right">21,479,985</td>
 </tr>
 <tr class="even">
 <td align="left">Married / In-Union / Co-Habiting</td>
-<td align="right">79,506,122</td>
+<td align="right">100,412,971</td>
 </tr>
 <tr class="odd">
 <td align="left">Never Married</td>
-<td align="right">66,370,368</td>
+<td align="right">86,536,688</td>
 </tr>
 </tbody>
 </table>
@@ -1106,7 +1242,7 @@ panel.</p>
 <p>Highest level of education completed.</p>
 <p><strong>ID</strong>: education</p>
 <p><strong>Type</strong>: string</p>
-<p><strong>Missing</strong>: 17,361,702</p>
+<p><strong>Missing</strong>: 22,539,661</p>
 <p><strong>Value Summary</strong>:</p>
 <table class="table">
 <thead><tr class="header">
@@ -1116,31 +1252,31 @@ panel.</p>
 <tbody>
 <tr class="odd">
 <td align="left">Graduate</td>
-<td align="right">3,572,061</td>
+<td align="right">4,450,019</td>
 </tr>
 <tr class="even">
 <td align="left">High School</td>
-<td align="right">33,951,587</td>
+<td align="right">41,436,170</td>
 </tr>
 <tr class="odd">
 <td align="left">None</td>
-<td align="right">27,929,695</td>
+<td align="right">39,060,559</td>
 </tr>
 <tr class="even">
 <td align="left">Primary</td>
-<td align="right">27,388,781</td>
+<td align="right">32,944,582</td>
 </tr>
 <tr class="odd">
 <td align="left">Secondary</td>
-<td align="right">29,096,925</td>
+<td align="right">38,377,877</td>
 </tr>
 <tr class="even">
 <td align="left">Undergraduate</td>
-<td align="right">15,943,391</td>
+<td align="right">18,902,290</td>
 </tr>
 <tr class="odd">
 <td align="left">Vocational</td>
-<td align="right">21,859,801</td>
+<td align="right">25,636,331</td>
 </tr>
 </tbody>
 </table>
@@ -1155,7 +1291,7 @@ panel.</p>
 <p>Number of children under 5 within the household.</p>
 <p><strong>ID</strong>: n_child_5</p>
 <p><strong>Type</strong>: int16</p>
-<p><strong>Missing</strong>: 42,006,283</p>
+<p><strong>Missing</strong>: 55,234,728</p>
 <p><strong>Value Summary</strong>:</p>
 <table class="table">
 <thead><tr class="header">
@@ -1169,11 +1305,11 @@ panel.</p>
 </tr>
 <tr class="even">
 <td align="left">mean</td>
-<td align="right">0.3921</td>
+<td align="right">0.3799</td>
 </tr>
 <tr class="odd">
 <td align="left">sd</td>
-<td align="right">0.7289</td>
+<td align="right">0.7178</td>
 </tr>
 <tr class="even">
 <td align="left">median</td>
@@ -1196,7 +1332,7 @@ panel.</p>
 <p>Whether the respondent worked in the reference period.</p>
 <p><strong>ID</strong>: work</p>
 <p><strong>Type</strong>: bool</p>
-<p><strong>Missing</strong>: 26,892,766</p>
+<p><strong>Missing</strong>: 32,544,305</p>
 <p><strong>Value Summary</strong>:</p>
 <table class="table">
 <thead><tr class="header">
@@ -1206,11 +1342,11 @@ panel.</p>
 <tbody>
 <tr class="odd">
 <td align="left">FALSE</td>
-<td align="right">75,042,662</td>
+<td align="right">96,445,728</td>
 </tr>
 <tr class="even">
 <td align="left">TRUE</td>
-<td align="right">75,168,515</td>
+<td align="right">94,357,443</td>
 </tr>
 </tbody>
 </table>
@@ -1222,7 +1358,7 @@ panel.</p>
 currently working.</p>
 <p><strong>ID</strong>: work_search</p>
 <p><strong>Type</strong>: bool</p>
-<p><strong>Missing</strong>: 110,306,572</p>
+<p><strong>Missing</strong>: 137,474,761</p>
 <p><strong>Value Summary</strong>:</p>
 <table class="table">
 <thead><tr class="header">
@@ -1232,11 +1368,11 @@ currently working.</p>
 <tbody>
 <tr class="odd">
 <td align="left">FALSE</td>
-<td align="right">60,362,815</td>
+<td align="right">77,470,004</td>
 </tr>
 <tr class="even">
 <td align="left">TRUE</td>
-<td align="right">6,434,556</td>
+<td align="right">8,418,414</td>
 </tr>
 </tbody>
 </table>
@@ -1252,7 +1388,7 @@ currently working.</p>
 Classification; ISIC).</p>
 <p><strong>ID</strong>: main_job_ind</p>
 <p><strong>Type</strong>: string</p>
-<p><strong>Missing</strong>: 97,650,979</p>
+<p><strong>Missing</strong>: 123,579,145</p>
 <p><strong>Value Summary</strong>:</p>
 <table class="table">
 <thead><tr class="header">
@@ -1270,7 +1406,7 @@ Classification; ISIC).</p>
 </tr>
 <tr class="odd">
 <td align="left">unique</td>
-<td align="left">1031</td>
+<td align="left">1030</td>
 </tr>
 </tbody>
 </table>
@@ -1282,7 +1418,7 @@ Classification; ISIC).</p>
 unemployed or out of workforce.</p>
 <p><strong>ID</strong>: main_activity</p>
 <p><strong>Type</strong>: string</p>
-<p><strong>Missing</strong>: 36,250,584</p>
+<p><strong>Missing</strong>: 44,937,861</p>
 <p><strong>Value Summary</strong>:</p>
 <table class="table">
 <thead><tr class="header">
@@ -1292,27 +1428,23 @@ unemployed or out of workforce.</p>
 <tbody>
 <tr class="odd">
 <td align="left">Agriculture</td>
-<td align="right">12,850,796</td>
+<td align="right">16,925,386</td>
 </tr>
 <tr class="even">
 <td align="left">Industry</td>
-<td align="right">16,387,574</td>
+<td align="right">20,179,524</td>
 </tr>
 <tr class="odd">
 <td align="left">Out of Workforce</td>
-<td align="right">60,362,815</td>
+<td align="right">77,470,004</td>
 </tr>
 <tr class="even">
-<td align="left">Services - Market</td>
-<td align="right">29,906,467</td>
+<td align="left">Services</td>
+<td align="right">55,445,753</td>
 </tr>
 <tr class="odd">
-<td align="left">Services - Non-Market</td>
-<td align="right">14,911,151</td>
-</tr>
-<tr class="even">
 <td align="left">Unemployed</td>
-<td align="right">6,434,556</td>
+<td align="right">8,418,414</td>
 </tr>
 </tbody>
 </table>
@@ -1329,7 +1461,7 @@ unemployed or out of workforce.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

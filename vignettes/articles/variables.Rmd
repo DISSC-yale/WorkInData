@@ -6,13 +6,13 @@ title: "Variables"
 knitr::opts_chunk$set(collapse = TRUE, echo = FALSE)
 summaries <- WorkInData::wid_variables()
 ```
-Reformatted into parquet files partitioned by `survey` and `year` in 344 parts:
+Reformatted into parquet files partitioned by `survey` and `year` in 415 parts:
 
 **Variables**: 16
 
-**Observations**: 177,103,943
+**Observations**: 223,347,489
 
-**Size**: 1.24 GB
+**Size**: 1.54 GB
 
 
 # Sample
@@ -63,7 +63,7 @@ Survey year for panel construction.
 
 **Type**: int16
 
-**Missing**: 98,329,438
+**Missing**: 128,076,563
 
 **Value Summary**:
 
@@ -82,7 +82,7 @@ Weight provided in the source survey; either cross-sectional or panel.
 
 **Type**: float
 
-**Missing**: 1,050,596
+**Missing**: 1,247,690
 
 **Value Summary**:
 
@@ -122,7 +122,7 @@ Whether the respondent's location is classified as rural.
 
 **Type**: bool
 
-**Missing**: 35,126,418
+**Missing**: 48,280,985
 
 **Value Summary**:
 
@@ -143,7 +143,7 @@ Individual identifier.
 
 **Type**: string
 
-**Missing**: 0
+**Missing**: 8
 
 **Value Summary**:
 
@@ -162,7 +162,7 @@ Respondents age.
 
 **Type**: int32
 
-**Missing**: 538,814
+**Missing**: 688,558
 
 **Value Summary**:
 
@@ -181,7 +181,7 @@ Whether the respondent reported being female.
 
 **Type**: bool
 
-**Missing**: 515,002
+**Missing**: 972,678
 
 **Value Summary**:
 
@@ -200,7 +200,7 @@ Marital status of the respondent.
 
 **Type**: string
 
-**Missing**: 13,535,608
+**Missing**: 14,917,845
 
 **Value Summary**:
 
@@ -219,7 +219,7 @@ Highest level of education completed.
 
 **Type**: string
 
-**Missing**: 17,361,702
+**Missing**: 22,539,661
 
 **Value Summary**:
 
@@ -240,7 +240,7 @@ Number of children under 5 within the household.
 
 **Type**: int16
 
-**Missing**: 42,006,283
+**Missing**: 55,234,728
 
 **Value Summary**:
 
@@ -261,7 +261,7 @@ Whether the respondent worked in the reference period.
 
 **Type**: bool
 
-**Missing**: 26,892,766
+**Missing**: 32,544,318
 
 **Value Summary**:
 
@@ -280,7 +280,7 @@ Whether the respondent is looking for work, given that they are not currently wo
 
 **Type**: bool
 
-**Missing**: 110,306,572
+**Missing**: 137,459,071
 
 **Value Summary**:
 
@@ -301,7 +301,7 @@ Industry classification (International Standard Industrial Classification; ISIC)
 
 **Type**: string
 
-**Missing**: 97,650,979
+**Missing**: 123,579,145
 
 **Value Summary**:
 
@@ -320,7 +320,7 @@ If working, the industry sector of the job; otherwise, either unemployed or out 
 
 **Type**: string
 
-**Missing**: 36,250,584
+**Missing**: 44,908,408
 
 **Value Summary**:
 
