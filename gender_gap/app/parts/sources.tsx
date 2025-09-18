@@ -1,5 +1,5 @@
 import {Close} from '@mui/icons-material'
-import {Box, Button, Dialog, DialogContent, DialogTitle, IconButton, Link} from '@mui/material'
+import {Box, Button, Dialog, DialogContent, DialogTitle, IconButton, Link, Typography} from '@mui/material'
 import {DataGrid, type GridRenderCellParams} from '@mui/x-data-grid'
 import type {ColumnTable} from 'arquero'
 import {useState} from 'react'
@@ -36,14 +36,20 @@ const cols = [
   {field: 'sector_presence', headerName: 'Percent Sector Present', width: 200},
 ]
 
-export function Sources({sources}: {sources: ColumnTable}) {
+export function Sources({sources, inText}: {sources: ColumnTable; inText?: boolean}) {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(!open)
   return (
     <>
-      <Button color="inherit" onClick={close} variant="outlined" size="small">
-        Sources
-      </Button>
+      {inText ? (
+        <Link onClick={close} sx={{display: 'inline', cursor: 'pointer'}} component="a">
+          sources
+        </Link>
+      ) : (
+        <Button color="inherit" onClick={close} variant="outlined" size="small">
+          <Typography>sources</Typography>
+        </Button>
+      )}
       {open && (
         <Dialog open={open} onClose={close} fullScreen>
           <DialogTitle>Data Sources</DialogTitle>

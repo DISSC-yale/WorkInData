@@ -1,15 +1,23 @@
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Button,
   Divider,
   IconButton,
   LinearProgress,
+  Link,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
   Stack,
   ToggleButton,
   ToggleButtonGroup,
   Typography,
 } from '@mui/material'
 import {useContext, useMemo} from 'react'
-import {ChevronLeft, ChevronRight} from '@mui/icons-material'
+import {ChevronLeft, ChevronRight, ExpandMore} from '@mui/icons-material'
 import {DataContext} from '../data/load'
 import {ViewActionContext, ViewContext} from '../data/view'
 import {variableInfo} from '../metadata'
@@ -81,6 +89,105 @@ export default function Splits() {
   }
   return (
     <Stack spacing={2}>
+      <Typography>
+        This project draws on the{' '}
+        <Link href="https://sites.google.com/site/gottliebcharles/work-in-data" rel="noreferrer" target="_blank">
+          Harmonized World Labor Force Surveys
+        </Link>{' '}
+        (HWLFS; work-in-data), an initiative that harmonizes labor market and time use microdata across countries. HWLFS
+        draws from a combination of IPUMS, household surveys, and labour force surveys from national statistical
+        offices, regional statistical hubs, and the World Bank. See the table of data{' '}
+        <Sources sources={full.meta.sources} inText={true} /> for specific citations.
+      </Typography>
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMore />} aria-controls="howto-split" id="howto-split_header">
+          <Typography>How To Use</Typography>
+        </AccordionSummary>
+        <AccordionDetails id="howto-split">
+          <Typography>
+            This demonstration version has a demographic lens, showing how shares of working-age women and men in five
+            labor market outcomes vary across age, education, marital status, rural/urban location, and the presence of
+            young children in the household. A{' '}
+            <Link href="https://dissc-yale.github.io/WorkInData/gender_gap/" rel="noreferrer">
+              full version
+            </Link>{' '}
+            of the portal is also available, which begins with labor market outcomes and later has an option to drill
+            down into demographic splits.
+          </Typography>
+          <List>
+            <ListItem>
+              <ListItemAvatar>
+                <Typography>1.</Typography>
+              </ListItemAvatar>
+              <ListItemText
+                primary={<Typography>Choose a demographic split</Typography>}
+                secondary={
+                  <Typography>
+                    Choose how you would like to split the labor market outcome by age, education, marital status,
+                    rural/urban location, or whether these individuals live in a household with children under 5.
+                  </Typography>
+                }
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemAvatar>
+                <Typography>2.</Typography>
+              </ListItemAvatar>
+              <ListItemText
+                primary={<Typography>Choose a labor market outcome</Typography>}
+                secondary={
+                  <Typography>
+                    Select a labor market outcome: work in agriculture, industry, or services, unemployment, or out of
+                    the labor force. Outcomes are expressed as shares of the working-age population age 15-65.
+                  </Typography>
+                }
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemAvatar>
+                <Typography>3.</Typography>
+              </ListItemAvatar>
+              <ListItemText
+                primary={<Typography>Choose a gender gap</Typography>}
+                secondary={
+                  <Typography>
+                    Compare the outcome by year, GDP per capita (PPP), GDP per capita (current USD), or by log versions
+                    of these.
+                  </Typography>
+                }
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemAvatar>
+                <Typography>4.</Typography>
+              </ListItemAvatar>
+              <ListItemText
+                primary={<Typography>Set the x-axis</Typography>}
+                secondary={
+                  <Typography>
+                    Compare the outcome by GDP per capita (PPP), GDP per capita (current USD), or by log versions of
+                    these.
+                  </Typography>
+                }
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemAvatar>
+                <Typography>5.</Typography>
+              </ListItemAvatar>
+              <ListItemText
+                primary={<Typography>Set the country filter and year (optional)</Typography>}
+                secondary={
+                  <Typography>
+                    Use the country filter to include or exclude specific countries and regions. By default, the latest
+                    available year is selected, but you can choose a specific year, the earliest year, or all years.
+                  </Typography>
+                }
+              />
+            </ListItem>
+          </List>
+        </AccordionDetails>
+      </Accordion>
       <Stack direction="row" spacing={1}>
         <Typography sx={{alignSelf: 'center', fontWeight: 700}}>Demographic Splits: </Typography>
         <ToggleButtonGroup
