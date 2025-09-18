@@ -16,7 +16,7 @@ current_archive <- paste0("../versions/", meta$updated)
 if (!dir.exists(current_archive)) {
   file.rename("../gender_growth_gap", current_archive)
 } else {
-  unlink("../gender_growth_gap")
+  unlink("../gender_growth_gap", recursive = TRUE)
 }
 file.rename("../gender_growth_gap_temp", "../gender_growth_gap")
 
@@ -42,11 +42,26 @@ colnames(publishable) <- c(
   "survey_name",
   "survey_link"
 )
+
+### additional employment share cutoff
+employment_shares <- wid_open("../gender_growth_gap") |>
+  wid_subset(!is.na(work), work) |>
+  dplyr::group_by(country, year, survey) |>
+  dplyr::summarize(
+    sector_presence = sum(as.numeric(!is.na(main_activity))) / n() * 100
+  ) |>
+  dplyr::collect()
+publishable <- merge(publishable, employment_shares, all.x = TRUE)
+
 agg <- wid_aggregate(
   "../gender_growth_gap",
   age > 14,
   age < 66,
-  selection = publishable[, c("country", "year", "survey")]
+  selection = publishable[
+    !is.na(publishable$sector_presence) &
+      publishable$sector_presence >= 80,
+    c("country", "year", "survey")
+  ]
 )
 vroom::vroom_write(agg, "../wid_gender_growth_gap_agg.csv.xz", ",")
 jsonlite::write_json(
@@ -72,12 +87,13 @@ if (meta$md5 != hash) {
   meta$md5 <- hash
   sources <- merge(
     validated[, c("country", "year", "survey")],
-    publishable,
-    all = TRUE
+    publishable
   )
   sources$country_year_present <- do.call(
-    paste, sources[, c("country", "year")]
-  ) %in% do.call(paste, agg[, c("country", "year")])
+    paste,
+    sources[, c("country", "year")]
+  ) %in%
+    do.call(paste, agg[, c("country", "year")])
   meta$sources <- sources
   jsonlite::write_json(
     meta,
@@ -85,7 +101,7 @@ if (meta$md5 != hash) {
     dataframe = "column",
     auto_unbox = TRUE
   )
-
+  
   ### country-level data
   if (!requireNamespace("WDI")) {
     install.packages("WDI")
@@ -105,7 +121,7 @@ if (meta$md5 != hash) {
     gzfile(paste0(out_dir, "world_bank.json.gz")),
     dataframe = "columns"
   )
-
+  
   ### country map
   country_info_file <- paste0("../resources/CLASS.xlsx")
   if (!file.exists(country_info_file)) {
@@ -123,11 +139,11 @@ if (meta$md5 != hash) {
     "Income group"
   )]
   colnames(country_info) <- c("ISO_A3", "name", "region", "income")
-
+  
   map <- wid_update_country_map("../resources")
   map <- map[map$ISO_A3 %in% country_info$ISO_A3, "ISO_A3"]
   map <- merge(map, country_info)
-
+  
   countries <- unique(gdp$country[order(gdp$gdp)])
   palette <- structure(
     scico::scico(
@@ -148,17 +164,17 @@ if (meta$md5 != hash) {
     scico::scico(length(income), palette = "roma", end = .95),
     names = income
   )
-
+  
   map$color <- palette[map$ISO_A3]
   map$color[is.na(map$color)] <- "#9c9c9c"
   map$income_color <- income_color[map$income]
   map$income_color[is.na(map$income_color)] <- "#9c9c9c"
   map$region_color <- region_color[map$region]
   map$region_color[is.na(map$region_color)] <- "#9c9c9c"
-
+  
   unlink(paste0(out_dir, "countries.geojson"))
   sf::st_write(map, paste0(out_dir, "countries.geojson"))
-
+  
   ## copy updated files to site distribution
   files <- c(
     "metadata.json.gz",
@@ -173,23 +189,13 @@ if (meta$md5 != hash) {
       overwrite = TRUE
     )
   }
-
+  
   ## update package summaries
-
+  
   ### rebuild sysdata
   load("R/sysdata.rda")
-
+  
   wid_summaries <- wid_make_summaries("../gender_growth_gap")
   isic_to_section <- wid_update_isic("../resources")
   save(wid_summaries, isic_to_section, file = "R/sysdata.rda", compress = "xz")
-
-  ### rebuild report
-  rstudioapi::restartSession(clean = TRUE)
-  devtools::install(".", upgrade = "never")
-  library(WorkInData)
-  wid_make_report("../gender_growth_gap")
-  if (!requireNamespace("curl")) {
-    install.packages("curl")
-  }
-  pkgdown::build_site(preview = FALSE)
 }

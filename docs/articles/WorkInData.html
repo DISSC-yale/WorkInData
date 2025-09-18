@@ -103,20 +103,20 @@ graduate degree in 2018 by age and sex:</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">data_small</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 220,013 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 217,271 × 3</span></span></span>
 <span><span class="co">#&gt;      age sex   work </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    76 FALSE TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>    67 FALSE FALSE</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>    77 FALSE FALSE</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>    55 FALSE TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>    48 FALSE TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>    42 FALSE TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>    47 TRUE  FALSE</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    51 FALSE FALSE</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    48 TRUE  TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    34 TRUE  FALSE</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 220,003 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    40 FALSE TRUE </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>    40 FALSE FALSE</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>    59 FALSE TRUE </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>    24 TRUE  FALSE</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>    55 TRUE  TRUE </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>    40 TRUE  TRUE </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>    42 FALSE TRUE </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    30 FALSE TRUE </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    51 FALSE TRUE </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    36 FALSE TRUE </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 217,261 more rows</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">data_small</span>, <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Yonger"</span>, <span class="st">"Older"</span><span class="op">)</span><span class="op">[</span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">age</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1L</span><span class="op">]</span>,</span>
@@ -127,15 +127,15 @@ graduate degree in 2018 by age and sex:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;         </span></span>
 <span><span class="co">#&gt;          Female  Male</span></span>
-<span><span class="co">#&gt;   Older   19623 20187</span></span>
-<span><span class="co">#&gt;   Yonger  18044  7695</span></span>
+<span><span class="co">#&gt;   Older   19551 20005</span></span>
+<span><span class="co">#&gt;   Yonger  17869  7537</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; , , work = TRUE</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;         </span></span>
 <span><span class="co">#&gt;          Female  Male</span></span>
-<span><span class="co">#&gt;   Older   29039 35181</span></span>
-<span><span class="co">#&gt;   Yonger  46210 42310</span></span></code></pre></div>
+<span><span class="co">#&gt;   Older   28801 34676</span></span>
+<span><span class="co">#&gt;   Yonger  45667 41441</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -148,7 +148,7 @@ graduate degree in 2018 by age and sex:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

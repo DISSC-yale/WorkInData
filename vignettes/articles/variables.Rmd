@@ -6,13 +6,13 @@ title: "Variables"
 knitr::opts_chunk$set(collapse = TRUE, echo = FALSE)
 summaries <- WorkInData::wid_variables()
 ```
-Reformatted into parquet files partitioned by `survey` and `year` in 415 parts:
+Reformatted into parquet files partitioned by `survey` and `year` in 453 parts:
 
 **Variables**: 16
 
-**Observations**: 223,347,489
+**Observations**: 232,121,775
 
-**Size**: 1.54 GB
+**Size**: 1.59 GB
 
 
 # Sample
