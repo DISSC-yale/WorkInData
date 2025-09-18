@@ -190,8 +190,8 @@ export function makeSeries(
           .rollup(fun)
         if (toVariant.y || toVariant.x) d = d.groupby(baseGroups).derive(toVariant)
         d = d.groupby(groupVars).rollup(fun)
-        if (summaryDiv.y) d = d.derive({y: 'd.y / Math.max(1e-6, d.y_off)'})
-        if (summaryDiv.x) d = d.derive({x: 'd.x / Math.max(1e-6, d.x_off)'})
+        if (summaryDiv.y) d = d.derive({y: 'd.y_off ? d.y / d.y_off : 0'})
+        if (summaryDiv.x) d = d.derive({x: 'd.x_off ? d.x / d.x_off : 0'})
       } else {
         d = d.rollup(fun)
         if (toVariant.y || toVariant.x) d = d.groupby(groupVars).derive(toVariant)

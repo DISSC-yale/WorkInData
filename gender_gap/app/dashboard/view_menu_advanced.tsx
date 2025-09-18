@@ -19,6 +19,7 @@ import {splitComponents, VariableSpecContext, ViewContext, ViewDef, ViewActionCo
 import {DataContext, Resources} from '../data/load'
 import {CustomVariable} from './custom_variable'
 import {ColorBasis} from './color_basis_select'
+import {RegressionSelect} from './regression_select'
 
 export function AdvancedMenu() {
   const {levels} = useContext(DataContext) as Resources
@@ -75,13 +76,6 @@ export function AdvancedMenu() {
       </MenuItem>
     )
   })
-  const regressionSelect = useMemo(() => {
-    return ['none', 'linear', 'logarithmic', 'polynomial'].map(type => (
-      <MenuItem key={type} value={type}>
-        <Typography>{type === 'polynomial' ? type + ' (2nd order)' : type}</Typography>
-      </MenuItem>
-    ))
-  }, [])
   return (
     <>
       <Stack direction="row" sx={{alignItems: 'center'}}>
@@ -282,19 +276,7 @@ export function AdvancedMenu() {
         </FormControl>
       </Tooltip>
       <Box sx={{pt: 2}}>
-        <FormControl variant="outlined" fullWidth size="small">
-          <InputLabel id="regression_select">Regression Type</InputLabel>
-          <Select
-            labelId="regression_select"
-            label="Regression Type"
-            value={view.regression}
-            onChange={e => {
-              editView({key: 'regression', value: e.target.value as 'none'})
-            }}
-          >
-            {regressionSelect}
-          </Select>
-        </FormControl>
+        <RegressionSelect current={view.regression} viewAction={editView} />
       </Box>
       {view.as_plot && view.time_agg === 'all' && (view.color === 'country' || view.symbol === 'country') && (
         <FormControlLabel

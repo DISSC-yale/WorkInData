@@ -34,10 +34,18 @@ export const variableInfo: {
 }
 
 export const activityLabels = {
-  Agriculture: 'Employment Sector: Agriculture',
-  Industry: 'Employment Sector: Industry',
-  Services: 'Employment Sector: Services',
+  Agriculture: 'Agriculture',
+  Industry: 'Industry',
+  Services: 'Services',
   Unemployed: 'Unemployed',
-  'Out of Workforce': 'Out of Workforce',
+  'Out of Workforce': 'Out of Labor Force',
 }
 export const selectableVariables = ['country', 'year', 'main_activity', 'sex']
+export const sexSummaries = {
+  'Female-': {label: 'Gap (Female - Male)', level: 'Female', adjust: '-'},
+  'Male-': {label: 'Gap (Male - Female)', level: 'Male', adjust: '-'},
+  'Female/': {label: 'Ratio (Female / Male)', level: 'Female', adjust: '/'},
+  'Male/': {label: 'Ratio (Male / Female)', level: 'Male', adjust: '/'},
+  Female: {label: 'Share of women', level: 'Female', adjust: ''},
+  Male: {label: 'Share of men', level: 'Male', adjust: ''},
+}

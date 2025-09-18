@@ -1,19 +1,12 @@
 import {FormControl, InputLabel, MenuItem, Select, Typography} from '@mui/material'
 import {useContext, useMemo} from 'react'
-import {activityLabels, variableInfo} from '../metadata'
+import {activityLabels, sexSummaries, variableInfo} from '../metadata'
 import {Variable} from '../data/variable'
 import {ViewActionContext, ViewContext, type ViewDef} from '../data/view'
 import {DataContext, type Resources} from '../data/load'
 import {ColorBasis} from './color_basis_select'
+import {RegressionSelect} from './regression_select'
 
-const sexSummaries = {
-  Female: {label: 'Female Share', level: 'Female', adjust: ''},
-  Male: {label: 'Male Share', level: 'Male', adjust: ''},
-  'Female-': {label: 'Gap (Female - Male)', level: 'Female', adjust: '-'},
-  'Male-': {label: 'Gap (Male - Female)', level: 'Male', adjust: '-'},
-  'Female/': {label: 'Ratio (Female / Male)', level: 'Female', adjust: '/'},
-  'Male/': {label: 'Ratio (Male / Female)', level: 'Male', adjust: '/'},
-}
 const xSelections = {
   year: {label: 'Year', base: 'year'},
   gdpfalse: {label: 'GDP per capita', base: 'gdp', log: false},
@@ -66,7 +59,7 @@ export function BasicMenu({simple}: {simple?: boolean}) {
 
   return (
     <>
-      <Typography fontWeight="bold">1. Outcome</Typography>
+      <Typography fontWeight="bold">1. Outcome (Y-Axis)</Typography>
       <FormControl variant="outlined" fullWidth size="small">
         <InputLabel id="basic_y_subset_select">Main Activity</InputLabel>
         <Select
@@ -77,7 +70,7 @@ export function BasicMenu({simple}: {simple?: boolean}) {
             const value = e.target.value
             view.y = view.y.copy()
             view.y.updateLevel('subset', {key: 'level', value, levels: levels.sectors})
-            view.y.updateLevel('subset', {key: 'adjust', value: value === 'Out of Workforce' ? '-' : ''})
+            view.y.updateLevel('subset', {key: 'adjust', value: ''})
             editView({key: 'y', value: view.y})
           }}
           MenuProps={{autoFocus: false, disableAutoFocus: true}}
@@ -120,8 +113,9 @@ export function BasicMenu({simple}: {simple?: boolean}) {
               {xSelectItems}
             </Select>
           </FormControl>
-          <Typography fontWeight="bold">3. Coloring</Typography>
+          <Typography fontWeight="bold">3. Styling</Typography>
           <ColorBasis current={view.color_source} viewAction={editView} outlined={true} />
+          <RegressionSelect current={view.regression} viewAction={editView} />
         </>
       )}
       {!simple && (

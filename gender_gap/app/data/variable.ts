@@ -1,4 +1,4 @@
-import {variableInfo} from '../metadata'
+import {activityLabels, sexSummaries, variableInfo} from '../metadata'
 
 export const globalVariables = {year: true, gdp: true, gdp_ppp: true, population: true}
 export type LevelSpec = {
@@ -120,7 +120,7 @@ export class Variable {
   updateName() {
     let name = variableInfo[this.base].label_long || variableInfo[this.base].label
     if (this.isGlobal) {
-      if (this.base != 'year' && this.log) name += ' [log]'
+      if (this.base != 'year' && this.log) name += ', log'
     } else if (this.subset.variable) {
       name = Variable.activityLabel(this.subset)
       const valueType =
@@ -128,15 +128,12 @@ export class Variable {
         (this.base === 'weight' ? '' : (this.percent ? ' ' : '') + this.base)
       if (this.summary.variable) {
         name +=
-          ' [' +
-          (this.summary.adjust
-            ? `Gender ${this.summary.adjust === '-' ? 'Gap' : 'Ratio'}: ` + this.summary.level + ' Ref.'
-            : this.summary.level + ' Share') +
-          (valueType ? '; ' + valueType : '') +
-          ']'
-      } else if (valueType) name += ' [' + valueType + ']'
+          ': ' +
+          sexSummaries[(this.summary.level + this.summary.adjust) as 'Male'].label +
+          (valueType ? ', ' + valueType : '')
+      } else if (valueType) name += ', ' + valueType
     } else if (this.percent) {
-      name += ' [%]'
+      name += ', %'
     }
     this.name = name
     this.updateDescription()
@@ -163,7 +160,7 @@ export class Variable {
           ? this.subset.adjust === '-'
             ? 'employed or looking for work'
             : 'not employed or looking for work'
-          : ` who are ${this.subset.adjust === '-' ? 'not ' : ''}in ` + this.subset.level
+          : ` ${this.subset.adjust === '-' ? 'not ' : ''}employed in ` + this.subset.level
         : ''
       this.description =
         peopleRef
@@ -216,9 +213,7 @@ export class Variable {
     return spec.adjust === '-'
       ? spec.level && spec.level === 'Out of Workforce'
         ? 'Labor Force Participation'
-        : 'Not ' + spec.level
-      : (spec.level !== 'Out of Workforce' && spec.level !== 'Unemployed'
-          ? 'Employment Sector (' + spec.level + ')'
-          : spec.level) + (spec.adjust === '/' ? ' Proportion' : '')
+        : 'Not ' + activityLabels[spec.level as 'Industry']
+      : activityLabels[spec.level as 'Industry'] + (spec.adjust === '/' ? ' Proportion' : '')
   }
 }

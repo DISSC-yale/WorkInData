@@ -1,4 +1,4 @@
-import {FormControl, InputLabel, MenuItem, Select, Tooltip} from '@mui/material'
+import {FormControl, InputLabel, MenuItem, Select, Tooltip, Typography} from '@mui/material'
 import type {ViewAction} from '../data/view'
 
 export function ColorBasis({
@@ -24,9 +24,15 @@ export function ColorBasis({
             viewAction({key: 'color_source', value: e.target.value as 'gdp'})
           }}
         >
-          <MenuItem value="gdp">GDP per capita</MenuItem>
-          <MenuItem value="region">Region</MenuItem>
-          <MenuItem value="income">Income</MenuItem>
+          <MenuItem value="gdp">
+            <Typography>GDP per capita</Typography>
+          </MenuItem>
+          <MenuItem value="region">
+            <Typography>Region</Typography>
+          </MenuItem>
+          <MenuItem value="income">
+            <Typography>Income Classification</Typography>
+          </MenuItem>
         </Select>
       </FormControl>
     </Tooltip>

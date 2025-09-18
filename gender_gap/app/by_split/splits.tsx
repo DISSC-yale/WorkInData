@@ -95,7 +95,13 @@ export default function Splits() {
       </Stack>
 
       <Typography>
-        The figure below shows the relationship between the gender gap in {view.y.subset.level} and GDP per capita
+        The figure below shows the relationship between the{' '}
+        {view.y.summary.adjust === '-'
+          ? 'gender gap'
+          : view.y.summary.adjust === '/'
+          ? 'gender ratio'
+          : view.y.summary.level.toLowerCase() + ' share'}{' '}
+        in {view.y.subset.level.toLowerCase()} and {view.x.base === 'year' ? 'year' : 'GDP per capita'}
         {view.y_panels in splitDescriptions
           ? ', comparing individuals ' + splitDescriptions[view.y_panels as 'rural']
           : ''}
