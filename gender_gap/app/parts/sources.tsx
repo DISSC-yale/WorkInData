@@ -33,6 +33,7 @@ const cols = [
   {field: 'survey_name', headerName: 'Name'},
   {field: 'survey_link', headerName: 'Link'},
   {field: 'country_year_present', headerName: 'Country-Year Included', width: 200},
+  {field: 'sector_presence', headerName: 'Percent Sector Present', width: 200},
 ]
 
 export function Sources({sources}: {sources: ColumnTable}) {
