@@ -79,10 +79,10 @@ export function BasicMenu({simple}: {simple?: boolean}) {
         </Select>
       </FormControl>
       <FormControl variant="outlined" fullWidth size="small">
-        <InputLabel id="basic_y_summary_select">Sex Summary</InputLabel>
+        <InputLabel id="basic_y_summary_select">Gender Summary</InputLabel>
         <Select
           labelId="basic_y_summary_select"
-          label="Sex Summary"
+          label="Gender Summary"
           value={view.y.summary.level + view.y.summary.adjust}
           onChange={e => {
             const spec = sexSummaries[e.target.value as 'Male']

@@ -42,8 +42,8 @@ export const activityLabels = {
 }
 export const selectableVariables = ['country', 'year', 'main_activity', 'sex']
 export const sexSummaries = {
-  'Female-': {label: 'Gap (Female - Male)', level: 'Female', adjust: '-'},
   'Male-': {label: 'Gap (Male - Female)', level: 'Male', adjust: '-'},
+  'Female-': {label: 'Gap (Female - Male)', level: 'Female', adjust: '-'},
   'Female/': {label: 'Ratio (Female / Male)', level: 'Female', adjust: '/'},
   'Male/': {label: 'Ratio (Male / Female)', level: 'Male', adjust: '/'},
   Female: {label: 'Share of women', level: 'Female', adjust: ''},

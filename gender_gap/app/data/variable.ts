@@ -149,7 +149,7 @@ export class Variable {
         peoplePrefix + (this.summary.variable ? (this.summary.level === 'Male' ? 'men' : 'women') : 'participants'),
       ]
       if (this.summary.variable && this.summary.adjust !== '') {
-        peopleRef.push(peoplePrefix + (peopleRef[0] === 'men' ? 'women' : 'men'))
+        peopleRef.push(peoplePrefix + (peopleRef[0].includes('women') ? 'men' : 'women'))
       }
       const subsetRef = this.subset.variable
         ? this.subset.level === 'Unemployed'
