@@ -36,17 +36,17 @@ const cols = [
   {field: 'sector_presence', headerName: 'Percent Sector Present', width: 200},
 ]
 
-export function Sources({sources, inText}: {sources: ColumnTable; inText?: boolean}) {
+export function Sources({sources, type}: {sources: ColumnTable; type?: 'intext' | 'fullwidth'}) {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(!open)
   return (
     <>
-      {inText ? (
+      {type && type === 'intext' ? (
         <Link onClick={close} sx={{display: 'inline', cursor: 'pointer'}} component="a">
           sources
         </Link>
       ) : (
-        <Button color="inherit" onClick={close} variant="outlined" size="small">
+        <Button color="inherit" onClick={close} variant="outlined" fullWidth={!!type} size="small">
           <Typography>sources</Typography>
         </Button>
       )}

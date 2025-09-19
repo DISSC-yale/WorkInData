@@ -97,7 +97,7 @@ export default function Splits() {
         (HWLFS; work-in-data), an initiative that harmonizes labor market and time use microdata across countries. HWLFS
         draws from a combination of IPUMS, household surveys, and labour force surveys from national statistical
         offices, regional statistical hubs, and the World Bank. See the table of data{' '}
-        <Sources sources={full.meta.sources} inText={true} /> for specific citations.
+        <Sources sources={full.meta.sources} type="intext" /> for specific citations.
       </Typography>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMore />} aria-controls="howto-split" id="howto-split_header">
@@ -108,7 +108,7 @@ export default function Splits() {
             This demonstration version has a demographic lens, showing how shares of working-age women and men in five
             labor market outcomes vary across age, education, marital status, rural/urban location, and the presence of
             young children in the household. A{' '}
-            <Link href="https://dissc-yale.github.io/WorkInData/gender_gap/" rel="noreferrer">
+            <Link href="https://dissc-yale.github.io/WorkInData/gender_gap/" rel="noreferrer" target="_blank">
               full version
             </Link>{' '}
             of the portal is also available, which begins with labor market outcomes and later has an option to drill

@@ -216,15 +216,16 @@ export function makeSeries(
         series.data = seriesData
         data.push(series)
       } else {
+        const hasYear = lineVars.includes('year')
         if (meanTime) {
           delete means.year
           d = d.groupby(lineVars.filter(l => l !== 'year')).rollup(means)
-          if (lineVars.includes('year')) lineVars.splice(lineVars.indexOf('year'), 1)
+          if (hasYear) lineVars.splice(lineVars.indexOf('year'), 1)
         }
         d = d
           .groupby(lineVars.filter((l, i) => !!i || l !== 'year'))
-          .select(['x', 'y', ...lineVars].filter(l => l !== ''))
-        if (lineVars.includes('year')) d = d.orderby('year')
+          .select(['x', 'y', ...lineVars, hasYear || meanTime ? '' : 'year'].filter(l => l !== ''))
+        if (hasYear) d = d.orderby('year')
         d = d.reify()
         d.columnNames().forEach((v, i) => (varIndices[v] = i))
         const dataArray: number[][] = []

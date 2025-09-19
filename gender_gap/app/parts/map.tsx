@@ -105,6 +105,7 @@ export default function Map({
                     '<table><tr><td>Word Bank Region</td><td><strong>' +
                     countryInfo[name].region +
                     '</strong></td></tr>' +
+                    (data.year ? '<tr><td>Year</td><td><strong>' + data.year + '</strong></td></tr>' : '') +
                     '<tr><td>' +
                     view.y.name +
                     (data && 'value' in data

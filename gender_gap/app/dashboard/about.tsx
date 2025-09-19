@@ -1,4 +1,4 @@
-import {Box, Button, CardContent, Link, Typography, useColorScheme} from '@mui/material'
+import {Box, Button, CardContent, Link, Stack, Typography, useColorScheme} from '@mui/material'
 import {FilterActionContext, urlParamsToString, ViewActionContext, type URLParams} from '../data/view'
 import {Variable} from '../data/variable'
 import {useContext} from 'react'
@@ -197,25 +197,54 @@ export function About() {
       }}
     >
       <Box sx={{overflowY: 'auto', height: '100%'}}>
-        <Typography>
-          This site was built by the Yale{' '}
-          <Link href="https://egc.yale.edu/" rel="noreferrer" target="_blank">
-            Economic Growth Center
-          </Link>
-          .
-        </Typography>
-        <Typography>
-          Data are aggregates created from the{' '}
-          <Link href="https://sites.google.com/site/gottliebcharles/work-in-data" rel="noreferrer" target="_blank">
-            Work in Data
-          </Link>{' '}
-          dataset on{' '}
-          <Typography component="code" sx={{fontFamily: 'monospace', whiteSpace: 'nowrap'}}>
-            {meta.updated}
+        <Stack spacing={1}>
+          <Typography>
+            This site was built by the Yale{' '}
+            <Link href="https://egc.yale.edu/" rel="noreferrer" target="_blank">
+              Economic Growth Center
+            </Link>
+            .
           </Typography>
-          .
-        </Typography>
-        <Sources sources={meta.sources} />
+          <Typography>
+            Data are aggregates created from the{' '}
+            <Link href="https://sites.google.com/site/gottliebcharles/work-in-data" rel="noreferrer" target="_blank">
+              Work in Data
+            </Link>{' '}
+            dataset on{' '}
+            <Typography component="code" sx={{fontFamily: 'monospace', whiteSpace: 'nowrap'}}>
+              {meta.updated}
+            </Typography>
+            .
+          </Typography>
+          <Sources sources={meta.sources} type="fullwidth" />
+          <Button
+            href="https://egc.yale.edu/gender-and-labor"
+            rel="noreferrer"
+            target="_blank"
+            variant="outlined"
+            fullWidth
+          >
+            Simplified
+          </Button>
+          <Button
+            href="https://dissc-yale.github.io/WorkInData/"
+            rel="noreferrer"
+            target="_blank"
+            variant="outlined"
+            fullWidth
+          >
+            Documentation
+          </Button>
+          <Button
+            href="https://github.com/DISSC-yale/WorkInData"
+            rel="noreferrer"
+            target="_blank"
+            variant="outlined"
+            fullWidth
+          >
+            GitHub
+          </Button>
+        </Stack>
         <Typography variant="h5" sx={{pt: 1, pb: 1}}>
           Examples
         </Typography>
@@ -231,16 +260,6 @@ export function About() {
               <Button
                 className="code"
                 onClick={() => {
-                  // view.x.index = variableSpecs.findIndex(s => s.name === view.x.name)
-                  // if (view.x.index === -1) {
-                  //   view.x.index = variableSpecs.length
-                  //   setVariableSpecs([...variableSpecs, view.x])
-                  // }
-                  // view.y.index = variableSpecs.findIndex(s => s.name === view.y.name)
-                  // if (view.y.index === -1) {
-                  //   view.y.index = variableSpecs.length
-                  //   setVariableSpecs([...variableSpecs, view.y])
-                  // }
                   filterAction({key: 'replace', filter: view})
                   viewAction({key: 'replace', view})
                 }}
