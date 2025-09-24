@@ -44,8 +44,8 @@ wid_aggregate <- function(
       Urban = "rural == FALSE"
     ),
     age = c(
-      `Under 35` = "age > 35",
-      `35 or Over` = "age <= 35"
+      `Under 35` = "age < 35",
+      `35 or Over` = "age >= 35"
     ),
     marital_status = c(
       `Partnered` = 'marital_status == "Married / In-Union / Co-Habiting"',

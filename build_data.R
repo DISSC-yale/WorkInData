@@ -56,7 +56,7 @@ publishable <- merge(publishable, employment_shares, all.x = TRUE)
 agg <- wid_aggregate(
   "../gender_growth_gap",
   age > 14,
-  age < 66,
+  age < 65,
   selection = publishable[
     !is.na(publishable$sector_presence) &
       publishable$sector_presence >= 80,
