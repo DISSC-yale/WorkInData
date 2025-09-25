@@ -101,7 +101,7 @@ if (meta$md5 != hash) {
     dataframe = "column",
     auto_unbox = TRUE
   )
-  
+
   ### country-level data
   if (!requireNamespace("WDI")) {
     install.packages("WDI")
@@ -121,7 +121,7 @@ if (meta$md5 != hash) {
     gzfile(paste0(out_dir, "world_bank.json.gz")),
     dataframe = "columns"
   )
-  
+
   ### country map
   country_info_file <- paste0("../resources/CLASS.xlsx")
   if (!file.exists(country_info_file)) {
@@ -139,11 +139,11 @@ if (meta$md5 != hash) {
     "Income group"
   )]
   colnames(country_info) <- c("ISO_A3", "name", "region", "income")
-  
+
   map <- wid_update_country_map("../resources")
   map <- map[map$ISO_A3 %in% country_info$ISO_A3, "ISO_A3"]
   map <- merge(map, country_info)
-  
+
   countries <- unique(gdp$country[order(gdp$gdp)])
   palette <- structure(
     scico::scico(
@@ -164,17 +164,17 @@ if (meta$md5 != hash) {
     scico::scico(length(income), palette = "roma", end = .95),
     names = income
   )
-  
+
   map$color <- palette[map$ISO_A3]
   map$color[is.na(map$color)] <- "#9c9c9c"
   map$income_color <- income_color[map$income]
   map$income_color[is.na(map$income_color)] <- "#9c9c9c"
   map$region_color <- region_color[map$region]
   map$region_color[is.na(map$region_color)] <- "#9c9c9c"
-  
+
   unlink(paste0(out_dir, "countries.geojson"))
   sf::st_write(map, paste0(out_dir, "countries.geojson"))
-  
+
   ## copy updated files to site distribution
   files <- c(
     "metadata.json.gz",
@@ -189,12 +189,12 @@ if (meta$md5 != hash) {
       overwrite = TRUE
     )
   }
-  
+
   ## update package summaries
-  
+
   ### rebuild sysdata
   load("R/sysdata.rda")
-  
+
   wid_summaries <- wid_make_summaries("../gender_growth_gap")
   isic_to_section <- wid_update_isic("../resources")
   save(wid_summaries, isic_to_section, file = "R/sysdata.rda", compress = "xz")

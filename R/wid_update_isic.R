@@ -28,9 +28,8 @@ wid_update_isic <- function(
         names = unlist(isic_codes[, c(
           "section",
           "full_code",
-          "class",
-          "group",
-          "division"
+          "division",
+          "class"
         )])
       )
       isic_to_section[
