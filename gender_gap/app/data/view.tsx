@@ -65,7 +65,7 @@ const defaultView: ViewDef = {
   x_panels: '',
   y_panels: '',
   time_agg: 'last',
-  select_year: '2018',
+  select_year: '',
   country_center: false,
   color_source: 'region',
   advanced: false,
@@ -90,8 +90,8 @@ const defaultParams: URLParams = {
   sectors: 'Agriculture,Industry,Out of Workforce,Services,Unemployed',
   sexes: 'Female,Male',
   demo_seg: 'total',
-  min_year: '1998',
-  max_year: '2018',
+  min_year: '',
+  max_year: '',
 }
 export function urlParamsToString(params: URLParams) {
   const p: string[] = []
@@ -130,7 +130,6 @@ const yearSelectors = {
 
 export function DataView({children}: Readonly<{children?: React.ReactNode}>) {
   const full = useContext(DataContext) as Resources
-
   const [variableSpecs, setVariableSpecs] = useState<Variable[]>(
     (
       [
@@ -158,6 +157,11 @@ export function DataView({children}: Readonly<{children?: React.ReactNode}>) {
   )
 
   const urlParams = useMemo(() => {
+    if (!defaultParams.min_year) {
+      defaultParams.min_year = full.levels.baseYearRange[0]
+      defaultParams.max_year = full.levels.baseYearRange[1]
+      defaultView.select_year = defaultParams.select_year = defaultParams.max_year
+    }
     const params = {...defaultParams}
     const search = window.location.search
     if (search) {
@@ -313,8 +317,10 @@ export function DataView({children}: Readonly<{children?: React.ReactNode}>) {
       .filter('(d, p) => d.country in p.c && d.sex in p.s && d.main_activity in p.a')
       .filter(
         view.time_agg === 'specified'
-          ? 'd.year === ' + (view.select_year || 0)
-          : `d.year >= ${filter.min_year} && d.year <= ${filter.max_year}`
+          ? 'd.year === ' + (view.select_year || full.levels.baseYearRange[1])
+          : `d.year >= ${filter.min_year || full.levels.baseYearRange[0]} && d.year <= ${
+              filter.max_year || full.levels.baseYearRange[1]
+            }`
       )
     return view.time_agg in yearSelectors
       ? filtered.groupby('country').filter(yearSelectors[view.time_agg as 'first'])
