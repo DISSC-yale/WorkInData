@@ -4,7 +4,9 @@
 #' aggregate economic activity categories.
 #'
 #' @param codes A character vector of original ISIC codes, which can be at the
-#' section, division, group, class, or 4-digit level.
+#' section, division, class, or 4-digit level. The latest unique classification
+#' will be used unless the original code is prefixed with \code{40_},
+#' \code{31_}, or \code{30_} for revisions \code{4}, \code{3.1}, or \code{3}.
 #' @param level Level of dis-aggregation (determining number of categories):
 #' \tabular{ll}{
 #'   \code{1} \tab Section-level (default; 21 categories).\cr

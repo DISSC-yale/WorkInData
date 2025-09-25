@@ -6,7 +6,10 @@
 #' @param reformat_dir Directory to save the dataset files in.
 #' @param selection Character vector specifying a subset of files to include (e.g.,
 #' \code{c("AGO_2008_IBEP", "ALB_20.._LFS", "2024")}).
+#' @param isic_prefixes A list mapping country_year_survey IDs to ISIC prefixes
+#' (\code{30_}, \code{31_}, or \code{40_}, for revisions \code{3}, \code{3.1}, or \code{4}).
 #' @param cores Number of CPU cores to use during processing.
+#' @param overwrite Logical; if \code{TRUE}, will rewrite existing partitions.
 #' @return Nothing; writes files to \code{reformat_dir}.
 #' @examples
 #' \dontrun{
@@ -19,7 +22,9 @@ wid_reformat <- function(
   original_dir,
   reformat_dir,
   selection = NULL,
-  cores = parallel::detectCores() - 5
+  isic_prefixes = list(),
+  cores = parallel::detectCores() - 2,
+  overwrite = FALSE
 ) {
   dir.create(reformat_dir, FALSE, TRUE)
 
@@ -44,7 +49,7 @@ wid_reformat <- function(
       year,
       "/part-0.parquet"
     )
-    if (!file.exists(out_file)) {
+    if (overwrite || !file.exists(out_file)) {
       dir.create(dirname(out_file), FALSE, TRUE)
       files_in_dir <- split(files, dirname(files))
       data <- Filter(
@@ -166,9 +171,15 @@ wid_reformat <- function(
             #     d[[variable]] <- d[[variable]]$cast(write_schema[[variable]]$type)
             #   }
             # }
-
-            dir_parts <- strsplit(basename(dirname(fs[1])), "_")[[1]]
-            d$country <- dir_parts[1]
+            country <- strsplit(basename(dirname(fs[1])), "_")[[1]][[1]]
+            d$country <- country
+            survey_id <- paste(country, year, survey, sep = "_")
+            if ("main_job_ind" %in% colnames(d) && !is.null(isic_prefixes[[survey_id]])) {
+              main_job_inds <- d$main_job_ind$as_vector()
+              su <- !is.na(main_job_inds)
+              main_job_inds[su] <- paste0(isic_prefixes[[survey_id]], main_job_inds[su])
+              d$main_job_ind <- main_job_inds
+            }
             d[, colnames(d) %in% names(write_schema)]
           }
         })
@@ -205,7 +216,7 @@ wid_reformat <- function(
         main_activity[
           (!is.na(data$work_search) & !data$work_search)$as_vector()
         ] <- "Out of Workforce"
-        su <- (su & data$work & !is.na(data$main_job_ind))$as_vector()
+        su <- (su & !is.na(data$main_job_ind))$as_vector()
         main_activity[su] <- wid_convert_isic(
           isic_to_section[as.character(data$main_job_ind[su])],
           full_label = TRUE
@@ -250,8 +261,10 @@ wid_reformat <- function(
 
   if (cores > 1) {
     call_env <- new.env(parent = globalenv())
+    call_env$overwrite <- overwrite
     call_env$cores <- cores
     call_env$reformat_dir <- reformat_dir
+    call_env$isic_prefixes <- isic_prefixes
     call_env$file_sets <- file_sets
     call_env$reformat_by_survey_year <- reformat_by_survey_year
     environment(reformat_by_survey_year) <- call_env

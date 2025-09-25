@@ -5,7 +5,8 @@
 \title{Reformat Original Data}
 \usage{
 wid_reformat(original_dir, reformat_dir, selection = NULL,
-  cores = parallel::detectCores() - 5)
+  isic_prefixes = list(), cores = parallel::detectCores() - 2,
+  overwrite = FALSE)
 }
 \arguments{
 \item{original_dir}{Directory containing cleaned data.}
@@ -15,7 +16,12 @@ wid_reformat(original_dir, reformat_dir, selection = NULL,
 \item{selection}{Character vector specifying a subset of files to include (e.g.,
 \code{c("AGO_2008_IBEP", "ALB_20.._LFS", "2024")}).}
 
+\item{isic_prefixes}{A list mapping country_year_survey IDs to ISIC prefixes
+(\code{30_}, \code{31_}, or \code{40_}, for revisions \code{3}, \code{3.1}, or \code{4}).}
+
 \item{cores}{Number of CPU cores to use during processing.}
+
+\item{overwrite}{Logical; if \code{TRUE}, will rewrite existing partitions.}
 }
 \value{
 Nothing; writes files to \code{reformat_dir}.

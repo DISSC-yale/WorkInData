@@ -1,6 +1,20 @@
 library(WorkInData)
 
 # rebuild dataset
+
+## prepare ISIC prefix map
+survey_info <- readRDS("../resources/all_surveys.rds")$surveys
+survey_info$isic_prefix <- as.character(cut(
+  survey_info$main_job_ind_code,
+  c(0, 4, 8, 12),
+  c("40_", "30_", "31_")
+))
+survey_info <- survey_info[!is.na(survey_info$isic_prefix), ]
+isic_prefixes <- as.list(structure(survey_info$isic_prefix, names = do.call(paste, c(
+  as.list(survey_info[, c("country", "year", "survey")]), sep = "_"
+))))
+
+## reformat data
 out_dir <- "gender_gap/public/"
 validated <- vroom::vroom("../validated_surveys.csv")
 selection <- do.call(
@@ -8,7 +22,12 @@ selection <- do.call(
   c(as.list(validated[, c("country", "year", "survey")]), sep = "_")
 )
 unlink("../gender_growth_gap_temp", recursive = TRUE)
-wid_reformat("../data_cleaned", "../gender_growth_gap_temp", selection)
+wid_reformat(
+  "../data_cleaned",
+  "../gender_growth_gap_temp",
+  selection,
+  isic_prefixes
+)
 
 meta_file <- paste0(out_dir, "metadata.json.gz")
 meta <- jsonlite::read_json(meta_file)
