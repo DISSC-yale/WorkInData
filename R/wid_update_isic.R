@@ -32,7 +32,8 @@ wid_update_isic <- function(
             "section",
             "full_code",
             "division",
-            "class"
+            "class",
+            "group"
           )])
         )
       )

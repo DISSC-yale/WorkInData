@@ -1,18 +1,19 @@
 #' Convert ISIC Codes
 #'
 #' Convert International Standard Industrial Classification (ISIC) codes to
-#' aggregate economic activity categories.
+#' aggregate economic activity categories, based on the
+#' \href{https://ilostat.ilo.org/methods/concepts-and-definitions/classification-economic-activities/}{International Labour Organization classification}.
 #'
 #' @param codes A character vector of original ISIC codes, which can be at the
-#' section, division, class, or 4-digit level. The latest unique classification
-#' will be used unless the original code is prefixed with \code{40_},
+#' section, division, group, class, or 4-digit level. The latest unique classification
+#' will be used unless the original code has a revision prefix: \code{40_},
 #' \code{31_}, or \code{30_} for revisions \code{4}, \code{3.1}, or \code{3}.
 #' @param level Level of dis-aggregation (determining number of categories):
 #' \tabular{ll}{
-#'   \code{1} \tab Section-level (default; 21 categories).\cr
+#'   \code{1} \tab Section-level (21 categories).\cr
 #'   \code{2} \tab Lowest activity-level (6 categories).\cr
-#'   \code{3} \tab 4 categories.\cr
-#'   \code{4} \tab 3 categories.\cr
+#'   \code{3} \tab Split service sectors (4 categories).\cr
+#'   \code{4} \tab Agriculture, Industry, or Services (3 categories).\cr
 #'   \code{5} \tab Agricultural or not (2 categories).\cr
 #' }
 #' @param full_label Logical; if \code{TRUE}, will return full text labels
