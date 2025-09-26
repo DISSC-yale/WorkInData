@@ -37,6 +37,11 @@ wid_update_isic <- function(
           )])
         )
       )
+      if (version != 40) {
+        rev3_to_4 <- c(B = "A", C = "B", D = "C", L = "O", M = "P", N = "Q")
+        su <- isic_to_section %in% names(rev3_to_4)
+        isic_to_section[su] <- rev3_to_4[isic_to_section[su]]
+      }
       isic_to_section[
         !duplicated(paste(isic_to_section, names(isic_to_section)))
       ]
