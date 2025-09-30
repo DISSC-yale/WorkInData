@@ -242,7 +242,7 @@ export default function Splits() {
             size="small"
             onChange={(_, value) => editView({key: 'time_agg', value: value ? 'all' : 'last'})}
           >
-            <ToggleButton value="all" aria-label="show first year">
+            <ToggleButton value="all" aria-label="show first year" color={view.time_agg == 'all' ? 'info' : 'standard'}>
               All
             </ToggleButton>
           </ToggleButtonGroup>
@@ -257,17 +257,26 @@ export default function Splits() {
             size="small"
             onChange={(_, value) => changeYear(true, value)}
           >
-            <ToggleButton value="first" aria-label="show first year">
+            <ToggleButton
+              value="first"
+              aria-label="show first year"
+              color={view.time_agg == 'first' ? 'info' : 'standard'}
+            >
               First
             </ToggleButton>
             <ToggleButton
               sx={{textDecoration: view.time_agg === 'specified' ? '' : 'line-through'}}
               value={view.select_year}
+              color={view.time_agg == 'specified' ? 'info' : 'standard'}
               aria-label="show a specified year"
             >
               {view.select_year}
             </ToggleButton>
-            <ToggleButton value="last" aria-label="show latest year">
+            <ToggleButton
+              value="last"
+              aria-label="show latest year"
+              color={view.time_agg == 'last' ? 'info' : 'standard'}
+            >
               Last
             </ToggleButton>
           </ToggleButtonGroup>

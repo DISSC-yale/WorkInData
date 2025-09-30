@@ -190,7 +190,7 @@ export function AdvancedMenu() {
                     editView({key: 'symbol', value})
                   }}
                 >
-                  {splitOptions.filter(e => e.key !== 'year')}
+                  {splitOptions.filter(e => e.key !== 'year' && e.key !== 'country')}
                 </Select>
               </FormControl>
             </Tooltip>

@@ -121,8 +121,8 @@ export class Variable {
     let name = variableInfo[this.base].label_long || variableInfo[this.base].label
     if (this.isGlobal) {
       if (this.base != 'year' && this.log) name += ', log'
-    } else if (this.subset.variable) {
-      name = Variable.activityLabel(this.subset)
+    } else if (this.subset.variable || this.summary.variable) {
+      if (this.subset.variable) name = Variable.activityLabel(this.subset)
       const valueType =
         (this.percent ? (!this.summary.variable || !this.summary.overall ? '%' : ' overall %') : '') +
         (this.base === 'weight' ? '' : (this.percent ? ' ' : '') + this.base)
@@ -144,12 +144,11 @@ export class Variable {
         (this.base === 'year' || !this.log ? '' : 'Log of ') +
         (variableInfo[this.base].label_long || variableInfo[this.base].label)
     } else {
-      const peoplePrefix = this.summary.overall ? '' : this.base === 'weight' ? 'represented ' : ''
       const peopleRef = [
-        peoplePrefix + (this.summary.variable ? (this.summary.level === 'Male' ? 'men' : 'women') : 'participants'),
+        (this.summary.variable ? (this.summary.level === 'Male' ? 'men' : 'women') : 'people') + ` (${this.base})`,
       ]
       if (this.summary.variable && this.summary.adjust !== '') {
-        peopleRef.push(peoplePrefix + (peopleRef[0].includes('women') ? 'men' : 'women'))
+        peopleRef.push((peopleRef[0].includes('women') ? 'men' : 'women') + ` (${this.base})`)
       }
       const subsetRef = this.subset.variable
         ? this.subset.level === 'Unemployed'
@@ -166,7 +165,7 @@ export class Variable {
         peopleRef
           .map(p =>
             this.summary.overall
-              ? (this.percent ? 'percent of ' + (this.base === 'weight' ? 'represented people' : 'participants') : '') +
+              ? (this.percent ? `percent of people (${this.base})` : '') +
                 (subsetRef ? ' ' + subsetRef.toLowerCase() : '') +
                 (this.percent ? ' and are ' : '') +
                 p

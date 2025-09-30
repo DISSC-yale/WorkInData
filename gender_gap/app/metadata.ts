@@ -3,8 +3,8 @@ export const variableInfo: {
 } = {
   country: {label: 'Country'},
   year: {label: 'Year'},
-  count: {label: 'Participants', fullName: 'Number of survey participants within segments.'},
-  weight: {label: 'Represented People', fullName: 'Sum of survey weights within segments.'},
+  count: {label: 'Participant Count', fullName: 'Number of survey participants within segments.'},
+  weight: {label: 'Weight Sum', fullName: 'Sum of survey weights within segments.'},
   gdp: {
     label: 'GDP per capita (current US$)',
     fullName: 'Gross Domestic Product Per Capita (in current US$)',
@@ -24,8 +24,8 @@ export const variableInfo: {
     source: 'World Bank',
     source_url: 'https://data.worldbank.org/indicator/NY.GDP.PCAP.CD',
   },
-  main_activity: {label: 'Job Sector'},
-  sex: {label: 'Sex'},
+  main_activity: {label: 'Main Activity'},
+  sex: {label: 'Gender'},
   age: {label: 'Age'},
   children_under_5: {label: 'Children Under 5'},
   education: {label: 'Education'},

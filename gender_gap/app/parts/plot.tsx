@@ -26,7 +26,7 @@ function axisMax({max}: {max: number}, adj = 1) {
   return +(max + adj).toFixed(2)
 }
 function assignRanges(range: number[], options: AxisOptions, lock: boolean) {
-  const adj = Math.max(0.01, Math.abs(range[0] - range[1]) * 0.02)
+  const adj = range[0] > 1900 ? 0 : Math.max(0.01, Math.abs(range[0] - range[1]) * 0.02)
   if (lock) {
     options.min = +(range[0] - adj).toFixed(2)
     options.max = +(range[2] + adj).toFixed(2)

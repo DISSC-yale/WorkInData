@@ -57,13 +57,13 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
       color_source: 'gdp',
       min_year: '1998',
       advanced: false,
-      regression: 'linear',
+      regression: 'polynomial',
     },
   },
   {
     title: 'Within Countries',
     comment:
-      'Looking at trends over time within countries, we see that there is much more between-country variation than with:',
+      'Looking at trends over time within countries, we see that there is much more between-country variation than within-country variation:',
     view: {
       as_plot: true,
       lock_range: true,
@@ -85,7 +85,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
       min_year: '1998',
       advanced: false,
       countries: 'CHN,IND,MEX,USA,BRA',
-      regression: 'linear',
+      regression: 'polynomial',
     },
   },
   {
@@ -112,14 +112,14 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
       min_year: '1998',
       advanced: false,
       countries: 'CHN,IND,MEX,USA,BRA',
-      regression: 'linear',
+      regression: 'polynomial',
     },
   },
   {
     title: 'By Employment Sector',
     comment:
-      'We can see different between-country relationships between GDP and sex gaps in participation rates within single employment sectors.' +
-      ' For instance, where is a negative relationship within the industry sector:',
+      'We can see different between-country relationships between log GDP per capita (PPP) and gender gaps in participation rates within single employment sectors.' +
+      ' For instance, gender gaps in industry are positively associated with GDP per capita:',
     view: {
       as_plot: true,
       lock_range: true,
@@ -128,7 +128,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
         base: 'weight',
         percent: true,
         subset: {variable: 'main_activity', level: 'Industry', levelIndex: 1, adjust: ''},
-        summary: {variable: 'sex', level: 'Female', levelIndex: 0, adjust: '-'},
+        summary: {variable: 'sex', level: 'Male', levelIndex: 1, adjust: '-'},
       }),
       color: 'country',
       symbol: '',
@@ -140,12 +140,12 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
       color_source: 'gdp',
       min_year: '1998',
       advanced: false,
-      regression: 'linear',
+      regression: 'polynomial',
     },
   },
   {
     title: '',
-    comment: 'But a positive relationship within the services sector:',
+    comment: 'However, gender gaps in services are more negatively associated with GDP per capita (PPP):',
     view: {
       as_plot: true,
       lock_range: true,
@@ -154,7 +154,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
         base: 'weight',
         percent: true,
         subset: {variable: 'main_activity', level: 'Services', levelIndex: 3, adjust: ''},
-        summary: {variable: 'sex', level: 'Female', levelIndex: 0, adjust: '-'},
+        summary: {variable: 'sex', level: 'Male', levelIndex: 1, adjust: '-'},
       }),
       color: 'country',
       symbol: '',
@@ -166,7 +166,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
       color_source: 'gdp',
       min_year: '1998',
       advanced: false,
-      regression: 'linear',
+      regression: 'polynomial',
     },
   },
 ]
@@ -217,6 +217,10 @@ export function About() {
             .
           </Typography>
           <Sources sources={meta.sources} type="fullwidth" />
+
+          <Typography variant="h5" sx={{pt: 1, pb: 1}}>
+            Links
+          </Typography>
           <Button
             href="https://egc.yale.edu/gender-and-labor"
             rel="noreferrer"
@@ -224,7 +228,7 @@ export function About() {
             variant="outlined"
             fullWidth
           >
-            Simplified
+            Simplified Display
           </Button>
           <Button
             href="https://dissc-yale.github.io/WorkInData/"
@@ -242,11 +246,14 @@ export function About() {
             variant="outlined"
             fullWidth
           >
-            GitHub
+            Source Code
           </Button>
         </Stack>
         <Typography variant="h5" sx={{pt: 1, pb: 1}}>
           Examples
+        </Typography>
+        <Typography variant="body2">
+          The following walks through a few examples of things we might explore in the data.
         </Typography>
         {exampleParams.map(({title, comment, view}, i) => {
           return (

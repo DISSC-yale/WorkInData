@@ -136,18 +136,35 @@ export function DataView({children}: Readonly<{children?: React.ReactNode}>) {
         {base: 'year'},
         {base: 'population', log: false},
         {base: 'gdp', log: true},
-        {base: 'gdp_ppp', log: true},
-        {base: 'weight', percent: true},
         {
           base: 'weight',
           percent: true,
-          subset: {variable: 'main_activity', level: 'Agriculture', adjust: ''},
+          subset: {variable: 'main_activity', level: 'Out of Workforce', adjust: '-'},
+          summary: {variable: 'sex', level: 'Male', adjust: '-'},
         },
         {
           base: 'weight',
           percent: true,
           subset: {variable: 'main_activity', level: 'Agriculture', adjust: ''},
-          summary: {variable: 'sex', level: 'Female', adjust: '-'},
+          summary: {variable: 'sex', level: 'Male', adjust: '-'},
+        },
+        {
+          base: 'weight',
+          percent: true,
+          subset: {variable: 'main_activity', level: 'Industry', adjust: ''},
+          summary: {variable: 'sex', level: 'Male', adjust: '-'},
+        },
+        {
+          base: 'weight',
+          percent: true,
+          subset: {variable: 'main_activity', level: 'Services', adjust: ''},
+          summary: {variable: 'sex', level: 'Male', adjust: '-'},
+        },
+        {
+          base: 'weight',
+          percent: true,
+          subset: {variable: 'main_activity', level: 'Unemployed', adjust: ''},
+          summary: {variable: 'sex', level: 'Male', adjust: '-'},
         },
       ] as Partial<Variable>[]
     ).map((s, i) => {
@@ -189,32 +206,31 @@ export function DataView({children}: Readonly<{children?: React.ReactNode}>) {
         })
     }
     return params
-  }, [full.variableLevels, variableSpecs])
+  }, [full.variableLevels, full.levels.baseYearRange, variableSpecs])
   const editView = (state: ViewDef, action: ViewAction) => {
     if (action.key === 'reset') {
       const newState = {
         ...defaultParams,
-        ...urlParams,
         x: defaultParams.x.copy(),
         y: defaultParams.y.copy(),
         as_plot: state.as_plot,
         advanced: state.advanced,
       }
-      updateUrlParams(newState)
+      updateUrlParams({...urlParams, ...newState})
       return newState
     }
     if (action.key === 'replace') {
-      updateUrlParams({...defaultParams, ...urlParams, ...action.view})
+      updateUrlParams({...urlParams, ...action.view})
       return {...action.view}
     }
-    const newState = {...urlParams, ...state, [action.key]: action.value}
+    const newState = {...state, [action.key]: action.value}
     if (variableSpecs.findIndex(s => s.name === newState.x.name) === -1) {
       setVariableSpecs([...variableSpecs, newState.x])
     }
     if (variableSpecs.findIndex(s => s.name === newState.y.name) === -1) {
       setVariableSpecs([...variableSpecs, newState.y])
     }
-    updateUrlParams(newState)
+    updateUrlParams({...urlParams, ...newState})
     return newState
   }
   const urlParamsToFilter = (urlParams: URLParams) => {
@@ -325,7 +341,7 @@ export function DataView({children}: Readonly<{children?: React.ReactNode}>) {
     return view.time_agg in yearSelectors
       ? filtered.groupby('country').filter(yearSelectors[view.time_agg as 'first'])
       : filtered
-  }, [subset, filter, view.time_agg, view.select_year])
+  }, [subset, filter, view.time_agg, view.select_year, full.levels.baseYearRange])
 
   return (
     <ViewActionContext.Provider value={viewAction}>

@@ -197,7 +197,7 @@ export function CustomVariable({spec, update}: {spec?: Variable; update: () => v
                     )}
                   </Stack>
                   <FormControlLabel
-                    label="Summarize By Sex"
+                    label="Summarize By Gender"
                     sx={{flexDirection: 'row'}}
                     control={
                       <Switch
