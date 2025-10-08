@@ -6,8 +6,10 @@
 #'
 #' @param codes A character vector of original ISIC codes, which can be at the
 #' section, division, group, class, or 4-digit level. The latest unique classification
-#' will be used unless the original code has a revision prefix: \code{40_},
-#' \code{31_}, or \code{30_} for revisions \code{4}, \code{3.1}, or \code{3}.
+#' will be used unless the original code has a revision and/or code type prefix:
+#' \code{revision_type_code}, where \code{revision} is one of
+#' \code{40_}, \code{31_}, or \code{30_} for revisions \code{4}, \code{3.1}, or \code{3},
+#' and \code{type} is one of \code{division}, \code{group}, or \code{class}.
 #' @param level Level of dis-aggregation (determining number of categories):
 #' \tabular{ll}{
 #'   \code{1} \tab Section-level (21 categories).\cr
@@ -20,10 +22,16 @@
 #' rather than short codes.
 #' @return A character vector containing short code or labels.
 #' @examples
+#' # revision 4 sections by default
 #' (codes <- LETTERS[1:21])
 #' wid_convert_isic(codes)
 #' wid_convert_isic(codes, 1, full_label = TRUE)
 #' wid_convert_isic(codes, 2, full_label = TRUE)
+#' 
+#' # disambiguating in the case of overlaps
+#' wid_convert_isic("111", 4, full_label = TRUE)
+#' wid_convert_isic("31_111", 4, full_label = TRUE)
+#' wid_convert_isic("31_group_111", 4, full_label = TRUE)
 #' @export
 
 wid_convert_isic <- function(codes, level = 4L, full_label = FALSE) {

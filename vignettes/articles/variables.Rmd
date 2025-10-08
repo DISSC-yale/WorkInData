@@ -301,7 +301,7 @@ Industry classification (International Standard Industrial Classification; ISIC)
 
 **Type**: string
 
-**Missing**: 128,471,814
+**Missing**: 128,049,711
 
 **Value Summary**:
 
@@ -320,7 +320,7 @@ If working, the industry sector of the job; otherwise, either unemployed or out 
 
 **Type**: string
 
-**Missing**: 47,988,417
+**Missing**: 49,984,425
 
 **Value Summary**:
 

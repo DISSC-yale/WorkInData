@@ -4,11 +4,22 @@ library(WorkInData)
 
 ## prepare ISIC prefix map
 survey_info <- readRDS("../resources/all_surveys.rds")$surveys
-survey_info$isic_prefix <- as.character(cut(
-  survey_info$main_job_ind_code,
-  c(0, 4, 8, 12),
-  c("40_", "30_", "31_")
-))
+survey_info$isic_prefix <- c(
+  "40_",
+  "40_division_",
+  "40_group_",
+  "40_class_",
+  "30_",
+  "30_division_",
+  "30_group_",
+  "30_class_",
+  "31_",
+  "31_division_",
+  "31_group_",
+  "31_class_",
+  "40_"
+)[survey_info$main_job_ind_code]
+
 survey_info <- survey_info[!is.na(survey_info$isic_prefix), ]
 isic_prefixes <- as.list(structure(survey_info$isic_prefix, names = do.call(paste, c(
   as.list(survey_info[, c("country", "year", "survey")]), sep = "_"

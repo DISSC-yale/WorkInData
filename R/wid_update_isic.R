@@ -22,19 +22,24 @@ wid_update_isic <- function(
   if (file.exists(out_file) && (overwrite || !file.exists(final_file))) {
     isic_mapping <- function(sheet, version) {
       isic_codes <- readxl::read_excel(out_file, sheet)
-      isic_codes$full_code <- sub("^\\w", "", isic_codes$full_code)
       isic_to_section <- structure(
         rep(isic_codes$section, 5),
         names = paste0(
-          version,
-          "_",
-          unlist(isic_codes[, c(
-            "section",
-            "full_code",
-            "division",
-            "class",
-            "group"
-          )])
+          paste0(
+            version,
+            "_",
+            rep(
+              c("", "", "division_", "group_", "class_"),
+              each = nrow(isic_codes)
+            ),
+            unlist(isic_codes[, c(
+              "section",
+              "full_code",
+              "division",
+              "group",
+              "class"
+            )])
+          )
         )
       )
       if (version != 40) {
@@ -54,6 +59,14 @@ wid_update_isic <- function(
       `5150` = "G"
     )
     isic_to_section <- c(
+      structure(
+        isic_to_section,
+        names = sub(".*_", "", names(isic_to_section))
+      ),
+      structure(
+        isic_to_section,
+        names = sub("_[^_]+_", "", names(isic_to_section))
+      ),
       structure(
         isic_to_section,
         names = sub("^.._", "", names(isic_to_section))
