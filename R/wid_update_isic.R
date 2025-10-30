@@ -43,18 +43,7 @@ wid_update_isic <- function(
         )
       )
       if (version != 40) {
-        rev3_to_4 <- c(
-          B = "A",
-          C = "B",
-          D = "C",
-          L = "O",
-          M = "P",
-          N = "Q",
-          E = "E",
-          "F" = "F",
-          H = "H",
-          P = "P"
-        )
+        rev3_to_4 <- c(B = "A", C = "B", D = "C", L = "O", M = "P", N = "Q")
         su <- isic_to_section %in% names(rev3_to_4)
         isic_to_section[su] <- rev3_to_4[isic_to_section[su]]
         names(rev3_to_4) <- paste0(version, "_", names(rev3_to_4))
@@ -84,7 +73,27 @@ wid_update_isic <- function(
         isic_to_section,
         names = sub("^.._", "", names(isic_to_section))
       ),
-      isic_to_section
+      isic_to_section,
+      structure(
+        isic_to_section,
+        names = sub("30_", "31_", names(isic_to_section), fixed = TRUE)
+      ),
+      structure(
+        isic_to_section,
+        names = sub("30_", "40_", names(isic_to_section), fixed = TRUE)
+      ),
+      structure(
+        isic_to_section,
+        names = sub("31_", "40_", names(isic_to_section), fixed = TRUE)
+      ),
+      structure(
+        isic_to_section,
+        names = sub("40_", "30_", names(isic_to_section), fixed = TRUE)
+      ),
+      structure(
+        isic_to_section,
+        names = sub("40_", "31_", names(isic_to_section), fixed = TRUE)
+      )
     )
     isic_to_section <- isic_to_section[unique(names(isic_to_section))]
     saveRDS(isic_to_section, final_file, compress = "xz")
