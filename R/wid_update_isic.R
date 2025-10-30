@@ -2,8 +2,8 @@
 #' @export
 
 wid_update_isic <- function(
-    out_dir = getOption("WID_RESOURCE_DIR"),
-    overwrite = FALSE
+  out_dir = getOption("WID_RESOURCE_DIR"),
+  overwrite = FALSE
 ) {
   out_file <- paste0(out_dir, "/ISIC.xlsx")
   final_file <- paste0(out_dir, "/isic_to_section.rds")
@@ -43,9 +43,22 @@ wid_update_isic <- function(
         )
       )
       if (version != 40) {
-        rev3_to_4 <- c(B = "A", C = "B", D = "C", L = "O", M = "P", N = "Q")
+        rev3_to_4 <- c(
+          B = "A",
+          C = "B",
+          D = "C",
+          L = "O",
+          M = "P",
+          N = "Q",
+          E = "E",
+          "F" = "F",
+          H = "H",
+          P = "P"
+        )
         su <- isic_to_section %in% names(rev3_to_4)
         isic_to_section[su] <- rev3_to_4[isic_to_section[su]]
+        names(rev3_to_4) <- paste0(version, "_", names(rev3_to_4))
+        isic_to_section <- c(isic_to_section, rev3_to_4)
       }
       isic_to_section[
         !duplicated(paste(isic_to_section, names(isic_to_section)))
