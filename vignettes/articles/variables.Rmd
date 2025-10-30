@@ -12,7 +12,7 @@ Reformatted into parquet files partitioned by `survey` and `year` in 453 parts:
 
 **Observations**: 232,121,775
 
-**Size**: 1.59 GB
+**Size**: 1.56 GB
 
 
 # Sample
@@ -320,7 +320,7 @@ If working, the industry sector of the job; otherwise, either unemployed or out 
 
 **Type**: string
 
-**Missing**: 49,984,425
+**Missing**: 49,615,055
 
 **Value Summary**:
 
