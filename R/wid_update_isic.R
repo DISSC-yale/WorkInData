@@ -5,94 +5,84 @@ wid_update_isic <- function(
   out_dir = getOption("WID_RESOURCE_DIR"),
   overwrite = FALSE
 ) {
-  out_file <- paste0(out_dir, "/ISIC.xlsx")
+  out_file <- paste0(out_dir, "/un_isic.csv")
   final_file <- paste0(out_dir, "/isic_to_section.rds")
-  if (overwrite || !file.exists(out_file)) {
-    if (requireNamespace("readxl")) {
-      dir.create(out_dir, FALSE, TRUE)
-      utils::download.file(
-        "https://www.ilo.org/ilostat-files/Documents/ISIC.xlsx",
-        out_file,
-        mode = "wb"
-      )
+  if (overwrite || !file.exists(final_file)) {
+    if (file.exists(out_file)) {
+      raw_codes <- vroom::vroom(out_file)
     } else {
-      message("install the `readxl` package to download ISIC classifications")
-    }
-  }
-  if (file.exists(out_file) && (overwrite || !file.exists(final_file))) {
-    isic_mapping <- function(sheet, version) {
-      isic_codes <- readxl::read_excel(out_file, sheet)
-      isic_to_section <- structure(
-        rep(isic_codes$section, 5),
-        names = paste0(
-          paste0(
-            version,
-            "_",
-            rep(
-              c("", "", "division_", "group_", "class_"),
-              each = nrow(isic_codes)
-            ),
-            unlist(isic_codes[, c(
-              "section",
-              "full_code",
-              "division",
-              "group",
-              "class"
-            )])
-          )
+      raw_codes <- do.call(
+        rbind,
+        lapply(
+          c("4", "3_1", "3"),
+          function(version) {
+            raw <- vroom::vroom(
+              paste0(
+                "https://unstats.un.org/unsd/classifications/Econ/Download/In%20Text/ISIC_Rev_",
+                version,
+                "_english_structure.txt"
+              ),
+              col_types = list(Code = "c", Description = "c")
+            )
+            raw$Revision <- c("3" = 30, "3_1" = 31, "4" = 40)[version]
+            raw$Section <- NA_character_
+            raw$Type <- c("section", "division", "group", "class")[nchar(
+              raw$Code
+            )]
+            last_section <- ""
+            is_section <- grepl("^[A-Z]$", raw$Code)
+            for (i in seq_along(raw$Section)) {
+              if (is_section[[i]]) last_section <- raw$Code[[i]]
+              raw$Section[[i]] <- last_section
+            }
+            raw[, c("Revision", "Section", "Type", "Code", "Description")]
+          }
         )
       )
-      if (version != 40) {
-        rev3_to_4 <- c(B = "A", C = "B", D = "C", L = "O", M = "P", N = "Q")
-        su <- isic_to_section %in% names(rev3_to_4)
-        isic_to_section[su] <- rev3_to_4[isic_to_section[su]]
-        names(rev3_to_4) <- paste0(version, "_", names(rev3_to_4))
-        isic_to_section <- c(isic_to_section, rev3_to_4)
-      }
-      isic_to_section[
-        !duplicated(paste(isic_to_section, names(isic_to_section)))
-      ]
+      vroom::vroom_write(raw_codes, out_file, ",")
     }
-    isic_to_section <- c(
-      isic_mapping("ISIC_Rev_4", 40),
-      isic_mapping("ISIC_Rev_3.1", 31),
-      isic_mapping("ISIC_Rev_3", 30),
-      `500` = "A",
-      `5150` = "G"
+    isic_to_section <- structure(
+      raw_codes$Section,
+      names = sub(
+        "section_",
+        "",
+        do.call(
+          paste,
+          c(as.list(raw_codes[, c("Revision", "Type", "Code")]), sep = "_")
+        ),
+        fixed = TRUE
+      )
     )
+    rev3_to_4 <- c(B = "A", C = "B", D = "C", L = "O", M = "P", N = "Q")
+    su <- grepl("^3", names(isic_to_section)) &
+      isic_to_section %in% names(rev3_to_4)
+    isic_to_section[su] <- rev3_to_4[isic_to_section[su]]
     isic_to_section <- c(
-      structure(
-        isic_to_section,
-        names = sub(".*_", "", names(isic_to_section))
-      ),
-      structure(
-        isic_to_section,
-        names = sub("_[^_]+_", "", names(isic_to_section))
-      ),
-      structure(
-        isic_to_section,
-        names = sub("^.._", "", names(isic_to_section))
-      ),
       isic_to_section,
       structure(
         isic_to_section,
-        names = sub("30_", "31_", names(isic_to_section), fixed = TRUE)
+        names = sub("_0", "_", names(isic_to_section), fixed = TRUE)
       ),
       structure(
         isic_to_section,
-        names = sub("30_", "40_", names(isic_to_section), fixed = TRUE)
+        names = sub("_[^_]+", "", names(isic_to_section))
       ),
       structure(
         isic_to_section,
-        names = sub("31_", "40_", names(isic_to_section), fixed = TRUE)
+        names = sub(
+          "_0",
+          "_",
+          sub("_[^_]+", "", names(isic_to_section)),
+          fixed = TRUE
+        )
       ),
       structure(
         isic_to_section,
-        names = sub("40_", "30_", names(isic_to_section), fixed = TRUE)
+        names = sub("^.*_", "", names(isic_to_section))
       ),
       structure(
         isic_to_section,
-        names = sub("40_", "31_", names(isic_to_section), fixed = TRUE)
+        names = sub("^.*_0?", "", names(isic_to_section))
       )
     )
     isic_to_section <- isic_to_section[unique(names(isic_to_section))]

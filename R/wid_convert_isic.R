@@ -1,8 +1,8 @@
 #' Convert ISIC Codes
 #'
 #' Convert International Standard Industrial Classification (ISIC) codes to
-#' aggregate economic activity categories, based on the
-#' \href{https://ilostat.ilo.org/methods/concepts-and-definitions/classification-economic-activities/}{International Labour Organization classification}.
+#' aggregate economic activity categories, based on classifications from the
+#' \href{https://unstats.un.org/unsd/classifications/Econ/}{United Nations Statistics Division}.
 #'
 #' @param codes A character vector of original ISIC codes, which can be at the
 #' section, division, group, class, or 4-digit level. The latest unique classification
@@ -27,11 +27,11 @@
 #' wid_convert_isic(codes)
 #' wid_convert_isic(codes, 1, full_label = TRUE)
 #' wid_convert_isic(codes, 2, full_label = TRUE)
-#' 
+#'
 #' # disambiguating in the case of overlaps
 #' wid_convert_isic("111", 4, full_label = TRUE)
-#' wid_convert_isic("31_111", 4, full_label = TRUE)
-#' wid_convert_isic("31_group_111", 4, full_label = TRUE)
+#' wid_convert_isic("0111", 4, full_label = TRUE)
+#' wid_convert_isic("31_class_111", 4, full_label = TRUE)
 #' @export
 
 wid_convert_isic <- function(codes, level = 4L, full_label = FALSE) {

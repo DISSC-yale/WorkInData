@@ -21,9 +21,16 @@ survey_info$isic_prefix <- c(
 )[survey_info$main_job_ind_code]
 
 survey_info <- survey_info[!is.na(survey_info$isic_prefix), ]
-isic_prefixes <- as.list(structure(survey_info$isic_prefix, names = do.call(paste, c(
-  as.list(survey_info[, c("country", "year", "survey")]), sep = "_"
-))))
+isic_prefixes <- as.list(structure(
+  survey_info$isic_prefix,
+  names = do.call(
+    paste,
+    c(
+      as.list(survey_info[, c("country", "year", "survey")]),
+      sep = "_"
+    )
+  )
+))
 
 ## reformat data
 out_dir <- "gender_gap/public/"

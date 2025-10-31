@@ -19,15 +19,15 @@
 #' @export
 
 wid_reformat <- function(
-    original_dir,
-    reformat_dir,
-    selection = NULL,
-    isic_prefixes = list(),
-    cores = parallel::detectCores() - 2,
-    overwrite = FALSE
+  original_dir,
+  reformat_dir,
+  selection = NULL,
+  isic_prefixes = list(),
+  cores = parallel::detectCores() - 2,
+  overwrite = FALSE
 ) {
   dir.create(reformat_dir, FALSE, TRUE)
-  
+
   reformat_by_survey_year <- function(files) {
     schema <- wid_schema(TRUE)
     write_schema <- wid_schema()
@@ -84,7 +84,7 @@ wid_reformat <- function(
               d[which.min(rows)] <- NULL
             }
             d <- do.call(cbind, d)
-            
+
             # combine overlapping self-employment variables
             d$main_job_pay <- NA_real_
             d$main_job_pay_freq <- NA_integer_
@@ -118,7 +118,7 @@ wid_reformat <- function(
                 d[[pairs[2]]] <- p1
               }
             }
-            
+
             # conversions
             variables <- colnames(d)
             to_drop <- NULL
@@ -176,8 +176,8 @@ wid_reformat <- function(
             survey_id <- paste(country, year, survey, sep = "_")
             if (
               "main_job_ind" %in%
-              colnames(d) &&
-              !is.null(isic_prefixes[[survey_id]])
+                colnames(d) &&
+                !is.null(isic_prefixes[[survey_id]])
             ) {
               main_job_inds <- d$main_job_ind$as_vector()
               su <- !is.na(main_job_inds)
@@ -218,11 +218,9 @@ wid_reformat <- function(
         main_activity[
           (su & !data$work_search)$as_vector()
         ] <- "Out of Workforce"
-        su <- (
-          !is.na(data$work) &
-             data$work &
-             !is.na(data$main_job_ind)
-        )$as_vector()
+        su <- (!is.na(data$work) &
+          data$work &
+          !is.na(data$main_job_ind))$as_vector()
         main_activity[su] <- wid_convert_isic(
           isic_to_section[as.character(data$main_job_ind[su])],
           full_label = TRUE
@@ -233,7 +231,7 @@ wid_reformat <- function(
     }
     NULL
   }
-  
+
   all_files <- list.files(
     original_dir,
     "v2",
@@ -264,7 +262,7 @@ wid_reformat <- function(
     ),
     recursive = FALSE
   )
-  
+
   if (cores > 1) {
     call_env <- new.env(parent = globalenv())
     call_env$overwrite <- overwrite
