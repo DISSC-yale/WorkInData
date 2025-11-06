@@ -213,11 +213,11 @@ wid_reformat <- function(
           })
         )
         main_activity <- rep(NA_character_, nrow(data))
-        su <- !is.na(data$work) & !data$work & !is.na(data$work_search)
-        main_activity[(su & data$work_search)$as_vector()] <- "Unemployed"
-        main_activity[
-          (su & !data$work_search)$as_vector()
-        ] <- "Out of Workforce"
+        su <- !is.na(data$work) & !data$work
+        main_activity[su] <- "Out of Workforce"
+        main_activity[(su &
+          !is.na(data$work_search) &
+          data$work_search)$as_vector()] <- "Unemployed"
         su <- (!is.na(data$work) &
           data$work &
           !is.na(data$main_job_ind))$as_vector()
