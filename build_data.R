@@ -100,7 +100,7 @@ agg <- wid_aggregate(
     c("country", "year", "survey")
   ]
 )
-vroom::vroom_write(agg, "../wid_gender_growth_gap_agg.csv.xz", ",")
+vroom::vroom_write(agg, "docs/gender_gap/data.csv.gz", ",")
 jsonlite::write_json(
   agg,
   gzfile(paste0(out_dir, "data.json.gz")),
@@ -216,7 +216,7 @@ if (meta$md5 != hash) {
   files <- c(
     "metadata.json.gz",
     "data.json.gz",
-    "work_bank.json.gz",
+    "world_bank.json.gz",
     "countries.geojson"
   )
   for (file in files) {

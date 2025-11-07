@@ -62,7 +62,8 @@ export function Data({children}: Readonly<{children?: React.ReactNode}>) {
       const countries: {[index: string]: boolean} = {}
       const values = [...new Set(data.array('country'))]
       values.forEach(country => {
-        if (!(country in countryInfo)) countryInfo[country] = {name: country, region: 'Europe & Central Asia'}
+        if (!(country in countryInfo))
+          countryInfo[country] = {name: country, region: country == 'MLT' ? 'Europe & Central Asia' : 'Unknown'}
       })
       values
         .sort((a, b) => {
