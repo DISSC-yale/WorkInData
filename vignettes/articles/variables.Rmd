@@ -320,7 +320,7 @@ If working, the industry sector of the job; otherwise, either unemployed or out 
 
 **Type**: string
 
-**Missing**: 46,967,867
+**Missing**: 36,527,488
 
 **Value Summary**:
 
