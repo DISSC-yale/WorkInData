@@ -20,6 +20,7 @@ export type ViewDef = {
   color_source: 'gdp' | 'region' | 'income'
   advanced: boolean
   regression: 'none' | 'linear' | 'exponential' | 'logarithmic' | 'polynomial'
+  within_split: boolean
 }
 
 export type FilterDef = {
@@ -41,7 +42,7 @@ export type ViewAction =
     }
   | {key: 'time_agg'; value: TimeAgg}
   | {key: 'color_source'; value: 'gdp' | 'region' | 'level'}
-  | {key: 'as_plot' | 'lock_range' | 'country_center' | 'advanced'; value: boolean}
+  | {key: 'as_plot' | 'lock_range' | 'country_center' | 'advanced' | 'within_split'; value: boolean}
   | {key: 'regression'; value: 'none' | 'linear' | 'exponential' | 'logarithmic' | 'polynomial'}
 export type FilterAction =
   | {key: 'reset'}
@@ -70,9 +71,10 @@ const defaultView: ViewDef = {
   color_source: 'region',
   advanced: false,
   regression: 'polynomial',
+  within_split: true,
 }
 const defaultXY = {x: defaultView.x.toString(), y: defaultView.y.toString()}
-const binaryParams = {as_plot: true, lock_range: true, country_center: true, advanced: true}
+const binaryParams = {as_plot: true, lock_range: true, country_center: true, advanced: true, within_split: true}
 
 export type URLParams = ViewDef & {
   demo_seg?: string

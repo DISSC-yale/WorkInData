@@ -32,6 +32,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
       min_year: '1998',
       advanced: false,
       regression: 'polynomial',
+      within_split: true,
     },
   },
   {
@@ -58,6 +59,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
       min_year: '1998',
       advanced: false,
       regression: 'polynomial',
+      within_split: true,
     },
   },
   {
@@ -86,6 +88,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
       advanced: false,
       countries: 'CHN,IND,MEX,USA,BRA',
       regression: 'polynomial',
+      within_split: true,
     },
   },
   {
@@ -113,6 +116,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
       advanced: false,
       countries: 'CHN,IND,MEX,USA,BRA',
       regression: 'polynomial',
+      within_split: true,
     },
   },
   {
@@ -141,6 +145,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
       min_year: '1998',
       advanced: false,
       regression: 'polynomial',
+      within_split: true,
     },
   },
   {
@@ -167,6 +172,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
       min_year: '1998',
       advanced: false,
       regression: 'polynomial',
+      within_split: true,
     },
   },
 ]

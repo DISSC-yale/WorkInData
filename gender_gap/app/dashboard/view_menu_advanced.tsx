@@ -278,6 +278,19 @@ export function AdvancedMenu() {
       <Box sx={{pt: 2}}>
         <RegressionSelect current={view.regression} viewAction={editView} />
       </Box>
+      {(view.x_panels || view.y_panels) &&
+        ((view.x.summary.variable && view.x.percent) || (view.y.summary.variable && view.y.percent)) && (
+          <FormControlLabel
+            label="Within Split Totals"
+            labelPlacement="start"
+            control={
+              <Switch
+                checked={view.within_split}
+                onChange={() => editView({key: 'within_split', value: !view.within_split})}
+              />
+            }
+          />
+        )}
       {view.as_plot && view.time_agg === 'all' && (view.color === 'country' || view.symbol === 'country') && (
         <FormControlLabel
           label="Country Mean Center"

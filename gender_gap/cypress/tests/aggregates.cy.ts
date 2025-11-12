@@ -77,6 +77,7 @@ describe('tests aggregated results', () => {
         select_year: '2018',
         advanced: true,
         regression: 'none',
+        within_split: true,
       }
       const dataTotal = data.filter('d.variable === "total"')
       checkValues([totals.overall], dataTotal, view)

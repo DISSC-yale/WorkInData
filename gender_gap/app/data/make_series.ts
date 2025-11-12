@@ -117,8 +117,9 @@ export function makeSeries(
   }
   if (view.as_plot && view.x.base) means.x = view.x.percent ? 'mean(d.x)' : 'mean(d.x / d.n_years)'
 
-  const toVariant: {y: string; y_off?: string; x?: string; x_off?: string} = {y: view.y.formula('y')}
-  if (view.as_plot && view.x.base) toVariant.x = view.x.formula('x')
+  const toVariantY: {y: string; y_off?: string} = {y: view.y.formula('y')}
+  const toVariantX: {x?: string; x_off?: string} = {}
+  if (view.as_plot && view.x.base) toVariantX.x = view.x.formula('x')
 
   const groupVars = view.as_plot ? [...lineVars] : ['country']
   const countryCenter = groupVars.includes('country') && view.country_center && view.as_plot && view.time_agg === 'all'
@@ -134,7 +135,7 @@ export function makeSeries(
     }
     if (!view.y.summary.overall) baseFun.y_summary_sum = `max(d.y_summary_sum)`
     if (summaryDiv.y && view.y.percent)
-      toVariant.y_off = `d.y_off / d.y${view.y.summary.overall ? '' : '_summary'}_sum * 100`
+      toVariantY.y_off = `d.y_off / d.y${view.y.summary.overall ? '' : '_summary'}_sum * 100`
   }
   if (view.as_plot && view.x.summary.variable) {
     summaries.x = view.x.summaryFormula('x')
@@ -145,7 +146,7 @@ export function makeSeries(
     }
     if (!view.x.summary.overall) baseFun.x_summary_sum = `max(d.x_summary_sum)`
     if (summaryDiv.x && view.x.percent)
-      toVariant.x_off = `d.x_off / d.x${view.x.summary.overall ? '' : '_summary'}_sum * 100`
+      toVariantX.x_off = `d.x_off / d.x${view.x.summary.overall ? '' : '_summary'}_sum * 100`
   }
 
   const meanTime = view.time_agg === 'mean' || (view.time_agg === 'all' && !view.as_plot)
@@ -156,15 +157,17 @@ export function makeSeries(
     x_sum: `sum(d.${view.x.base})`,
     y_sum: `sum(d.${view.y.base})`,
   })
-  if (summaries.x) {
-    prepedData = prepedData
-      .groupby([...baseGroups, view.x.summary.variable].filter(v => !!v))
-      .derive({x_summary_sum: `sum(d.${view.x.base})`})
-  }
-  if (summaries.y) {
-    prepedData = prepedData
-      .groupby([...baseGroups, view.y.summary.variable].filter(v => !!v))
-      .derive({y_summary_sum: `sum(d.${view.y.base})`})
+  if (!view.within_split) {
+    if (summaries.x) {
+      prepedData = prepedData
+        .groupby([...baseGroups, view.x.summary.variable].filter(v => !!v))
+        .derive({x_summary_sum: `sum(d.${view.x.base})`})
+    }
+    if (summaries.y) {
+      prepedData = prepedData
+        .groupby([...baseGroups, view.y.summary.variable].filter(v => !!v))
+        .derive({y_summary_sum: `sum(d.${view.y.base})`})
+    }
   }
   const baseData = prepedData.groupby(groupVars)
   xPanelLevels.forEach((x, xi) => {
@@ -180,6 +183,18 @@ export function makeSeries(
       if (panelX) d = d.filter(`d.${panelX} == '${x}'`)
       if (panelY) d = d.filter(`d.${panelY} == '${y}'`)
       if (!d.numRows()) return
+      if (view.within_split) {
+        if (summaries.x) {
+          d = d
+            .groupby([...baseGroups, view.x.summary.variable].filter(v => !!v))
+            .derive({x_summary_sum: `sum(d.${view.x.base})`})
+        }
+        if (summaries.y) {
+          d = d
+            .groupby([...baseGroups, view.y.summary.variable].filter(v => !!v))
+            .derive({y_summary_sum: `sum(d.${view.y.base})`})
+        }
+      }
       const nCountries = unique(d, 'country').length
       const fun = {...baseFun}
       d = d.derive(toXY)
@@ -188,13 +203,23 @@ export function makeSeries(
           .derive(summaries)
           .groupby([...baseGroups, ...groupVars, view.x.summary.variable, view.y.summary.variable].filter(v => !!v))
           .rollup(fun)
-        if (toVariant.y || toVariant.x) d = d.groupby(baseGroups).derive(toVariant)
+        if (toVariantX.x) {
+          d = d.groupby([...baseGroups, view.x.summary.variable].filter(v => !!v)).derive(toVariantX)
+        }
+        if (toVariantY.y) {
+          d = d.groupby([...baseGroups, view.y.summary.variable].filter(v => !!v)).derive(toVariantY)
+        }
         d = d.groupby(groupVars).rollup(fun)
         if (summaryDiv.y) d = d.derive({y: 'd.y_off ? d.y / d.y_off : 0'})
         if (summaryDiv.x) d = d.derive({x: 'd.x_off ? d.x / d.x_off : 0'})
       } else {
         d = d.rollup(fun)
-        if (toVariant.y || toVariant.x) d = d.groupby(groupVars).derive(toVariant)
+        if (toVariantX.x) {
+          d = d.groupby([...baseGroups, view.x.summary.variable].filter(v => !!v)).derive(toVariantX)
+        }
+        if (toVariantY.y) {
+          d = d.groupby([...baseGroups, view.y.summary.variable].filter(v => !!v)).derive(toVariantY)
+        }
       }
       if (countryCenter) {
         const centers: {y: string; x?: string} = {y: 'd.y - mean(d.y)', x: 'd.x - mean(d.x)'}

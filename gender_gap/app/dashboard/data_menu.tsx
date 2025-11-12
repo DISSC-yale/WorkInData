@@ -81,6 +81,10 @@ export function DataMenu() {
       isAdvanced = true
       basicView.country_center = false
     }
+    if (!basicView.within_split) {
+      isAdvanced = true
+      basicView.within_split = true
+    }
     if (!basicView.lock_range) {
       isAdvanced = true
       basicView.lock_range = true
