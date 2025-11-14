@@ -63,7 +63,10 @@
 <div class="section level2">
 <h2 id="data-access">Data Access<a class="anchor" aria-label="anchor" href="#data-access"></a>
 </h2>
-<p>Aggregated data are available in <a href="https://github.com/dissc-yale/WorkInData/tree/main/gender_gap/public/data.json.gz" class="external-link">gender_gap/public/data.json.gz</a>.</p>
+<p>Aggregated data are available in <a href="https://github.com/dissc-yale/WorkInData/tree/main/gender_gap/public/data.csv.gz" class="external-link">gender_gap/public/data.csv.gz</a>.</p>
+<p>You can load this into R directly:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu"><a href="https://vroom.r-lib.org/reference/vroom.html" class="external-link">vroom</a></span><span class="op">(</span><span class="st">"https://dissc-yale.github.io/WorkInData/gender_gap/data.csv.gz"</span><span class="op">)</span></span></code></pre></div>
 <p>See the <a href="https://dissc-yale.github.io/WorkInData/gender_gap">Gender Growth Gap</a> site to explore these or download in a different format.</p>
 <p>Microdata are not currently accessible externally.</p>
 </div>
@@ -71,12 +74,13 @@
 <h2 id="package-installation">Package Installation<a class="anchor" aria-label="anchor" href="#package-installation"></a>
 </h2>
 <p>Install the package from an R console:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"dissc-yale/WorkInData"</span><span class="op">)</span></span></code></pre></div>
 <p>Then load the package:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dissc-yale.github.io/WorkInData">WorkInData</a></span><span class="op">)</span></span></code></pre></div>
+<p>See the <a href="https://dissc-yale.github.io/WorkInData/articles/WorkInData.html">introduction</a> for more.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
