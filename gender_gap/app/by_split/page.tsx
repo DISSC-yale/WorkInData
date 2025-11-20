@@ -1,6 +1,6 @@
 'use client'
 
-import {Box, createTheme, CssBaseline, Stack, ThemeProvider, Typography} from '@mui/material'
+import {Box, createTheme, CssBaseline, ThemeProvider} from '@mui/material'
 import Splits from './splits'
 import {DataView} from '../data/view'
 
@@ -45,12 +45,6 @@ export default function Home() {
     <ThemeProvider theme={theme} defaultMode="light" noSsr>
       <CssBaseline enableColorScheme />
       <Box>
-        <Stack spacing={2} sx={{mb: 3}}>
-          <Typography>
-            How do gender gaps in labor markets evolve with development? Do these patterns differ across regions? How do
-            gender gaps vary across demographic groups?
-          </Typography>
-        </Stack>
         <DataView>
           <Splits />
         </DataView>
