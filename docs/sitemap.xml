@@ -1,13 +1,10 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://dissc-yale.github.io/WorkInData/404.html</loc></url>
-<url><loc>https://dissc-yale.github.io/WorkInData/LICENSE-text.html</loc></url>
-<url><loc>https://dissc-yale.github.io/WorkInData/LICENSE.html</loc></url>
-<url><loc>https://dissc-yale.github.io/WorkInData/articles/WorkInData.html</loc></url>
 <url><loc>https://dissc-yale.github.io/WorkInData/articles/index.html</loc></url>
 <url><loc>https://dissc-yale.github.io/WorkInData/articles/variables.html</loc></url>
+<url><loc>https://dissc-yale.github.io/WorkInData/articles/WorkInData.html</loc></url>
 <url><loc>https://dissc-yale.github.io/WorkInData/authors.html</loc></url>
 <url><loc>https://dissc-yale.github.io/WorkInData/gender_gap/404.html</loc></url>
-<url><loc>https://dissc-yale.github.io/WorkInData/gender_gap/_not-found.html</loc></url>
 <url><loc>https://dissc-yale.github.io/WorkInData/gender_gap/by_split.html</loc></url>
 <url><loc>https://dissc-yale.github.io/WorkInData/gender_gap/coverage/app/index.html</loc></url>
 <url><loc>https://dissc-yale.github.io/WorkInData/gender_gap/coverage/app/metadata.ts.html</loc></url>
@@ -22,8 +19,10 @@
 <url><loc>https://dissc-yale.github.io/WorkInData/gender_gap/coverage/app/parts/plot.tsx.html</loc></url>
 <url><loc>https://dissc-yale.github.io/WorkInData/gender_gap/coverage/index.html</loc></url>
 <url><loc>https://dissc-yale.github.io/WorkInData/gender_gap/index.html</loc></url>
+<url><loc>https://dissc-yale.github.io/WorkInData/gender_gap/_not-found.html</loc></url>
 <url><loc>https://dissc-yale.github.io/WorkInData/index.html</loc></url>
-<url><loc>https://dissc-yale.github.io/WorkInData/reference/WorkInData-package.html</loc></url>
+<url><loc>https://dissc-yale.github.io/WorkInData/LICENSE-text.html</loc></url>
+<url><loc>https://dissc-yale.github.io/WorkInData/LICENSE.html</loc></url>
 <url><loc>https://dissc-yale.github.io/WorkInData/reference/download_reports.html</loc></url>
 <url><loc>https://dissc-yale.github.io/WorkInData/reference/get_report_links.html</loc></url>
 <url><loc>https://dissc-yale.github.io/WorkInData/reference/index.html</loc></url>
@@ -41,5 +40,6 @@
 <url><loc>https://dissc-yale.github.io/WorkInData/reference/wid_update_country_map.html</loc></url>
 <url><loc>https://dissc-yale.github.io/WorkInData/reference/wid_update_resources.html</loc></url>
 <url><loc>https://dissc-yale.github.io/WorkInData/reference/wid_variables.html</loc></url>
+<url><loc>https://dissc-yale.github.io/WorkInData/reference/WorkInData-package.html</loc></url>
 </urlset>
 

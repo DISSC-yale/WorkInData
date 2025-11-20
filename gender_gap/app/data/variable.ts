@@ -144,11 +144,12 @@ export class Variable {
         (this.base === 'year' || !this.log ? '' : 'Log of ') +
         (variableInfo[this.base].label_long || variableInfo[this.base].label)
     } else {
+      const baseRef = this.base == 'weight' ? 'with weights' : this.base == 'count' ? 'raw count' : this.base
       const peopleRef = [
-        (this.summary.variable ? (this.summary.level === 'Male' ? 'men' : 'women') : 'people') + ` (${this.base})`,
+        (this.summary.variable ? (this.summary.level === 'Male' ? 'men' : 'women') : 'people') + ` (${baseRef})`,
       ]
       if (this.summary.variable && this.summary.adjust !== '') {
-        peopleRef.push((peopleRef[0].includes('women') ? 'men' : 'women') + ` (${this.base})`)
+        peopleRef.push((peopleRef[0].includes('women') ? 'men' : 'women') + ` (${baseRef})`)
       }
       const subsetRef = this.subset.variable
         ? this.subset.level === 'Unemployed'
@@ -165,7 +166,7 @@ export class Variable {
         peopleRef
           .map(p =>
             this.summary.overall
-              ? (this.percent ? `percent of people (${this.base})` : '') +
+              ? (this.percent ? `percent of people (${baseRef})` : '') +
                 (subsetRef ? ' ' + subsetRef.toLowerCase() : '') +
                 (this.percent ? ' and are ' : '') +
                 p

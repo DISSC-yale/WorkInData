@@ -8,11 +8,12 @@ An R package to reformat and work with the
 Aggregated data are available in [gender_gap/public/data.csv.gz](https://github.com/dissc-yale/WorkInData/tree/main/gender_gap/public/data.csv.gz).
 
 You can load this into R directly:
+
 ```R
 data <- vroom::vroom("https://dissc-yale.github.io/WorkInData/gender_gap/data.csv.gz")
 ```
 
-See the [Gender Growth Gap](https://dissc-yale.github.io/WorkInData/gender_gap) site to explore these or download in a different format.
+See the [Gender, Labor & Growth](https://dissc-yale.github.io/WorkInData/gender_gap) site to explore these or download in a different format.
 
 Microdata are not currently accessible externally.
 

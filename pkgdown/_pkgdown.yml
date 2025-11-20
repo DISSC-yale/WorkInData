@@ -3,10 +3,10 @@ url: https://dissc-yale.github.io/WorkInData
 template:
   bootstrap: 5
   bslib:
-    info: "#E6F2FD"
-    headings-color: "#206B72"
-    link-color: "#216B73"
-    link-color-dark: "#cef4f9"
+    info: '#E6F2FD'
+    headings-color: '#206B72'
+    link-color: '#216B73'
+    link-color-dark: '#cef4f9'
     link-decoration: underline dotted
   light-switch: true
 
@@ -25,7 +25,7 @@ navbar:
       text: Variables
       href: articles/variables.html
     site:
-      text: Gender Growth Gap
+      text: Gender, Labor & Growth
       href: gender_gap
 
 home:
@@ -36,21 +36,21 @@ reference:
   - title: Data
     desc: Functions to use the Work in Data dataset
   - contents:
-    - wid_open
-    - wid_subset
-    - wid_aggregate
-    - starts_with("wid_convert")
+      - wid_open
+      - wid_subset
+      - wid_aggregate
+      - starts_with("wid_convert")
 
   - title: Information
     desc: Functions providing information about the data
   - contents:
-    - wid_variables
-    - wid_schema
+      - wid_variables
+      - wid_schema
 
   - title: Utilities
     desc: Functions used to prepare the data and content
   - contents:
-    - wid_reformat
-    - wid_make_summaries
-    - wid_make_report
-    - starts_with("wid_update")
+      - wid_reformat
+      - wid_make_summaries
+      - wid_make_report
+      - starts_with("wid_update")
