@@ -1,4 +1,4 @@
-import {Close, Download} from '@mui/icons-material'
+import {Close, Code, Download} from '@mui/icons-material'
 import {
   Autocomplete,
   Button,
@@ -11,6 +11,7 @@ import {
   FormControlLabel,
   IconButton,
   InputLabel,
+  Link,
   MenuItem,
   Select,
   Stack,
@@ -73,7 +74,18 @@ export function Export() {
           >
             <Close />
           </IconButton>
-          <DialogContent sx={{width: 500, maxWidth: '100%'}}>
+          <DialogContent sx={{width: 500, maxWidth: '100%', pt: 0}}>
+            <Typography>
+              Direct link to full dataset:{' '}
+              <Link
+                href="https://dissc-yale.github.io/WorkInData/gender_gap/data.csv.gz"
+                rel="noreferrer"
+                target="_blank"
+              >
+                data.csv.gz
+              </Link>
+            </Typography>
+            <Typography sx={{pt: 1}}>Custom Export</Typography>
             <Stack spacing={1}>
               <Stack direction="row" spacing={1}>
                 <TextField

@@ -19,7 +19,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
         base: 'weight',
         percent: true,
         subset: {variable: 'main_activity', level: 'Out of Workforce', levelIndex: 2, adjust: '-'},
-        summary: {variable: 'sex', level: 'Female', levelIndex: 0, adjust: '-'},
+        summary: {variable: 'sex', level: 'Male', levelIndex: 1, adjust: '-'},
       }),
       color: 'country',
       symbol: '',
@@ -37,7 +37,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
   },
   {
     title: '',
-    comment: 'Splitting by education, we see that this pattern only appears in the lower education subset:',
+    comment: 'Splitting by education, we see that this pattern mainly appears in the lower education subset:',
     view: {
       as_plot: true,
       lock_range: true,
@@ -46,7 +46,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
         base: 'weight',
         percent: true,
         subset: {variable: 'main_activity', level: 'Out of Workforce', levelIndex: 2, adjust: '-'},
-        summary: {variable: 'sex', level: 'Female', levelIndex: 0, adjust: '-'},
+        summary: {variable: 'sex', level: 'Male', levelIndex: 1, adjust: '-'},
       }),
       color: 'country',
       symbol: '',
@@ -65,7 +65,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
   {
     title: 'Within Countries',
     comment:
-      'Looking at trends over time within countries, we see that there is much more between-country variation than within-country variation:',
+      'Looking at trends over time within countries, we see that there is more between-country variation than within-country variation:',
     view: {
       as_plot: true,
       lock_range: true,
@@ -74,7 +74,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
         base: 'weight',
         percent: true,
         subset: {variable: 'main_activity', level: 'Out of Workforce', levelIndex: 2, adjust: '-'},
-        summary: {variable: 'sex', level: 'Female', levelIndex: 0, adjust: '-'},
+        summary: {variable: 'sex', level: 'Male', levelIndex: 1, adjust: '-'},
       }),
       color: 'country',
       symbol: '',
@@ -102,7 +102,7 @@ const exampleParams: {title: string; comment: string; view: URLParams}[] = [
         base: 'weight',
         percent: true,
         subset: {variable: 'main_activity', level: 'Out of Workforce', levelIndex: 2, adjust: '-'},
-        summary: {variable: 'sex', level: 'Female', levelIndex: 0, adjust: '-'},
+        summary: {variable: 'sex', level: 'Male', levelIndex: 1, adjust: '-'},
       }),
       color: 'country',
       symbol: '',

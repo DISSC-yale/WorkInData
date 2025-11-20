@@ -56,6 +56,7 @@ export default function Dashboard() {
         </Button>
       </NavBar>
       <Box
+        component="main"
         sx={{
           position: 'absolute',
           bottom: 0,
