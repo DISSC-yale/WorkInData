@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   articles/variables: variables.html
   articles/WorkInData: WorkInData.html
-last_built: 2025-11-21T05:15Z
+last_built: 2025-11-28T05:10Z
 urls:
   reference: https://dissc-yale.github.io/WorkInData/reference
   article: https://dissc-yale.github.io/WorkInData/articles
