@@ -221,7 +221,7 @@ export function About() {
             </Typography>
             .
           </Typography>
-          <Button href="gender_gap/sources" target="_blank" rel="noreferrer" variant="outlined">
+          <Button href="sources" target="_blank" rel="noreferrer" variant="outlined">
             Sources
           </Button>
 
