@@ -17,7 +17,6 @@ import {DataDisplay} from '../data/display'
 import {BasicMenu} from '../dashboard/view_menu_basic'
 import {Export} from '../parts/export'
 import {FilterCountry} from '../dashboard/filter_country'
-import {Sources} from '../parts/sources'
 
 const splitDescriptions = {
   age: 'age 35 or over, to those under 35',
@@ -187,7 +186,9 @@ export default function Splits() {
           >
             Full Dashboard
           </Button>
-          <Sources sources={full.meta.sources} />
+          <Button href="sources" target="_blank" rel="noreferrer" variant="outlined">
+            Sources
+          </Button>
         </Stack>
       </Stack>
     </Stack>

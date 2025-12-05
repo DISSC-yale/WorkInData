@@ -1,13 +1,14 @@
 'use client'
 
 import {CssBaseline, ThemeProvider, createTheme} from '@mui/material'
+import type {ColorSystemOptions} from '@mui/material/styles'
 
-const theme = createTheme({
-  colorSchemes: {
-    dark: {palette: {mode: 'dark', primary: {main: '#a5cdff'}, secondary: {main: '#68abff'}}},
-    light: {palette: {mode: 'light', primary: {main: '#286dc0'}, secondary: {main: '#286dc0'}}},
-  },
-})
+export const colorSchemes: {dark: ColorSystemOptions; light: ColorSystemOptions} = {
+  dark: {palette: {mode: 'dark', primary: {main: '#a5cdff'}, secondary: {main: '#68abff'}}},
+  light: {palette: {mode: 'light', primary: {main: '#286dc0'}, secondary: {main: '#286dc0'}}},
+}
+
+const theme = createTheme({colorSchemes: colorSchemes})
 
 export default function Theme({children}: Readonly<{children: React.ReactNode}>) {
   return (

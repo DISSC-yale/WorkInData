@@ -3,6 +3,7 @@
 import {Box, createTheme, CssBaseline, ThemeProvider} from '@mui/material'
 import Splits from './splits'
 import {DataView} from '../data/view'
+import {colorSchemes} from '../theme'
 
 const FONT_URL = 'https://egc.yale.edu/themes/custom/economics/assets/dist/fonts/'
 
@@ -35,9 +36,7 @@ const theme = createTheme({
       `,
     },
   },
-  colorSchemes: {
-    light: {palette: {mode: 'light', primary: {main: '#286dc0'}, secondary: {main: '#286dc0'}}},
-  },
+  colorSchemes: colorSchemes['light'],
 })
 
 export default function Home() {
