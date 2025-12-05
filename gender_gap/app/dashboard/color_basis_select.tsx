@@ -18,8 +18,6 @@ export function ColorBasis({
           labelId="color_basis_select"
           label="Color Basis"
           value={current}
-          autoFocus={false}
-          MenuProps={{autoFocus: false, disableAutoFocus: true}}
           onChange={e => {
             viewAction({key: 'color_source', value: e.target.value as 'gdp'})
           }}

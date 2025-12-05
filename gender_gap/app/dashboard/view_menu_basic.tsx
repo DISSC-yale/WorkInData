@@ -73,7 +73,6 @@ export function BasicMenu({simple}: {simple?: boolean}) {
             view.y.updateLevel('subset', {key: 'adjust', value: ''})
             editView({key: 'y', value: view.y})
           }}
-          MenuProps={{autoFocus: false, disableAutoFocus: true}}
         >
           {activities}
         </Select>
@@ -91,7 +90,6 @@ export function BasicMenu({simple}: {simple?: boolean}) {
             view.y.updateLevel('summary', {key: 'adjust', value: spec.adjust as ''})
             editView({key: 'y', value: view.y})
           }}
-          MenuProps={{autoFocus: false, disableAutoFocus: true}}
         >
           {sexSummary}
         </Select>
@@ -108,7 +106,6 @@ export function BasicMenu({simple}: {simple?: boolean}) {
               onChange={e => {
                 editView({key: 'x', value: new Variable(xSelections[e.target.value as 'year'])})
               }}
-              MenuProps={{autoFocus: false, disableAutoFocus: true}}
             >
               {xSelectItems}
             </Select>

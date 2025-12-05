@@ -79,10 +79,16 @@ export default function Splits() {
     }
   }
   return (
-    <Stack spacing={2}>
+    <Stack spacing={2} component="main">
       <Stack direction="row" spacing={1}>
         <Typography sx={{alignSelf: 'center', fontWeight: 700}}>Demographic Splits: </Typography>
         <ToggleButtonGroup
+          sx={{
+            "& button[aria-pressed='true']": {
+              backgroundColor: '#d6ecfe !important',
+              borderColor: '#000',
+            },
+          }}
           value={view.y_panels || 'total'}
           exclusive
           size="small"
@@ -124,7 +130,16 @@ export default function Splits() {
           </Typography>
         </Stack>
       </Stack>
-      <Stack direction="row" spacing={1} sx={{justifyContent: 'space-between', pr: 1, pl: 1}}>
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{
+          justifyContent: 'space-between',
+          pr: 1,
+          pl: 1,
+          "& button[aria-pressed='true']": {backgroundColor: '#d6ecfe !important', borderColor: '#000', borderWidth: 2},
+        }}
+      >
         <Stack direction="row">
           <Typography sx={{alignSelf: 'center', fontWeight: 700, pr: 2}}>Year: </Typography>
           <ToggleButtonGroup
@@ -134,7 +149,7 @@ export default function Splits() {
             size="small"
             onChange={(_, value) => editView({key: 'time_agg', value: value ? 'all' : 'last'})}
           >
-            <ToggleButton value="all" aria-label="show first year" color={view.time_agg == 'all' ? 'info' : 'standard'}>
+            <ToggleButton value="all" aria-label="show all years">
               All
             </ToggleButton>
           </ToggleButtonGroup>
@@ -149,26 +164,17 @@ export default function Splits() {
             size="small"
             onChange={(_, value) => changeYear(true, value)}
           >
-            <ToggleButton
-              value="first"
-              aria-label="show first year"
-              color={view.time_agg == 'first' ? 'info' : 'standard'}
-            >
+            <ToggleButton value="first" aria-label="show first year">
               First
             </ToggleButton>
             <ToggleButton
               sx={{textDecoration: view.time_agg === 'specified' ? '' : 'line-through'}}
               value={view.select_year}
-              color={view.time_agg == 'specified' ? 'info' : 'standard'}
               aria-label="show a specified year"
             >
               {view.select_year}
             </ToggleButton>
-            <ToggleButton
-              value="last"
-              aria-label="show latest year"
-              color={view.time_agg == 'last' ? 'info' : 'standard'}
-            >
+            <ToggleButton value="last" aria-label="show latest year">
               Last
             </ToggleButton>
           </ToggleButtonGroup>
