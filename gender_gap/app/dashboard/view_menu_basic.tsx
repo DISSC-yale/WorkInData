@@ -1,4 +1,4 @@
-import {FormControl, InputLabel, MenuItem, Select, Typography} from '@mui/material'
+import {FormControl, InputLabel, ListSubheader, MenuItem, Select, Typography} from '@mui/material'
 import {useContext, useMemo} from 'react'
 import {activityLabels, sexSummaries, variableInfo} from '../metadata'
 import {Variable} from '../data/variable'
@@ -30,12 +30,23 @@ export function BasicMenu({simple}: {simple?: boolean}) {
   const editView = useContext(ViewActionContext)
 
   const activities = useMemo(
-    () =>
-      Object.keys(activityLabels).map(activity => (
-        <MenuItem key={activity} value={activity}>
-          {activityLabels[activity as 'Unemployed']}
-        </MenuItem>
-      )),
+    () => [
+      <ListSubheader>Specific Activities</ListSubheader>,
+      ...Object.keys(activityLabels)
+        .filter(activity => activity[0] !== '0')
+        .map(activity => (
+          <MenuItem key={activity} value={activity}>
+            {activityLabels[activity as 'Unemployed']}
+          </MenuItem>
+        )),
+      <ListSubheader>Aggregate Activities</ListSubheader>,
+      <MenuItem key="Employed" value="Agriculture,Industry,Services">
+        Employed
+      </MenuItem>,
+      <MenuItem key="In Laborforce" value="Agriculture,Industry,Services,Unemployed">
+        In Labor Force
+      </MenuItem>,
+    ],
     []
   )
   const sexSummary = useMemo(
@@ -65,9 +76,9 @@ export function BasicMenu({simple}: {simple?: boolean}) {
         <Select
           labelId="basic_y_subset_select"
           label="Main Activity"
-          value={view.y.subset.level}
+          value={view.y.subset.level as string}
           onChange={e => {
-            const value = e.target.value
+            const value = e.target.value.split(',').sort()
             view.y = view.y.copy()
             view.y.updateLevel('subset', {key: 'level', value, levels: levels.sectors})
             view.y.updateLevel('subset', {key: 'adjust', value: ''})

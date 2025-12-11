@@ -17,11 +17,12 @@ import {DataDisplay} from '../data/display'
 import {BasicMenu} from '../dashboard/view_menu_basic'
 import {Export} from '../parts/export'
 import {FilterCountry} from '../dashboard/filter_country'
+import {Variable} from '../data/variable'
 
 const splitDescriptions = {
   age: 'age 35 or over, to those under 35',
   children_under_5: 'from households with children under 5, to those with no children under 5',
-  education: 'with a secondary education or less, to those with post-secondary education',
+  education: 'with a vocational degree or less, to those with post-secondary degree',
   marital_status: 'married, in-union, or cohabiting, to those who are divorces, separated, widowed, or never married',
   rural: 'who live in urban areas, to those who live in rural areas',
 }
@@ -79,7 +80,7 @@ export default function Splits() {
     }
   }
   return (
-    <Stack spacing={2} component="main">
+    <Stack spacing={2} component="main" sx={{pr: 1}}>
       <Stack direction="row" spacing={1}>
         <Typography sx={{alignSelf: 'center', fontWeight: 700}}>Demographic Splits: </Typography>
         <ToggleButtonGroup
@@ -100,13 +101,13 @@ export default function Splits() {
       </Stack>
 
       <Typography>
-        The figure below shows the relationship between the{' '}
+        The figure below shows the relationship between the {Variable.activityLabel(view.y.subset).toLowerCase()}{' '}
         {view.y.summary.adjust === '-'
           ? 'gender gap'
           : view.y.summary.adjust === '/'
           ? 'gender ratio'
-          : view.y.summary.level.toLowerCase() + ' share'}{' '}
-        in {view.y.subset.level.toLowerCase()} and {view.x.base === 'year' ? 'year' : 'GDP per capita'}
+          : (view.y.summary.level as string).toLowerCase() + ' share'}{' '}
+        and {view.x.base === 'year' ? 'year' : 'GDP per capita'}
         {view.y_panels in splitDescriptions
           ? ', comparing individuals ' + splitDescriptions[view.y_panels as 'rural']
           : ''}

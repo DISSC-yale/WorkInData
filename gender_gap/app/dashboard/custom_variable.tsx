@@ -1,6 +1,7 @@
 'use client'
 
 import {
+  Checkbox,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -8,6 +9,7 @@ import {
   FormControlLabel,
   IconButton,
   InputLabel,
+  ListItemText,
   MenuItem,
   Select,
   Stack,
@@ -156,22 +158,41 @@ export function CustomVariable({spec, update}: {spec?: Variable; update: () => v
                           <Select
                             labelId="subset_select"
                             label="Main Activity"
-                            value={spec.subset ? spec.subset.level : ''}
+                            value={
+                              spec.subset
+                                ? Array.isArray(spec.subset.level)
+                                  ? spec.subset.level
+                                  : [spec.subset.level]
+                                : []
+                            }
+                            renderValue={selected => selected.join(', ')}
                             onChange={e => {
+                              const value = Array.isArray(e.target.value)
+                                ? e.target.value.length === 1
+                                  ? e.target.value[0]
+                                  : e.target.value.sort()
+                                : e.target.value
+                              if (Array.isArray(value) && !value.length) return
                               spec.updateLevel('subset', {
                                 key: 'level',
-                                value: e.target.value,
+                                value,
                                 levels: variableLevels[spec.subset.variable],
                               })
                               update()
                             }}
+                            multiple
                           >
                             {spec.subset &&
                               variableLevels[spec.subset.variable].map(v => (
                                 <MenuItem key={v} value={v}>
-                                  <Tooltip title={v in variableInfo ? variableInfo[v].label : v} placement="left">
-                                    <Typography>{v}</Typography>
-                                  </Tooltip>
+                                  <Checkbox
+                                    checked={
+                                      Array.isArray(spec.subset.level)
+                                        ? spec.subset.level.includes(v)
+                                        : v === spec.subset.level
+                                    }
+                                  />
+                                  <ListItemText primary={v} />
                                 </MenuItem>
                               ))}
                           </Select>

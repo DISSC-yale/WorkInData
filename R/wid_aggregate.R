@@ -52,15 +52,17 @@ wid_aggregate <- function(
       `Not Partnered` = 'marital_status != "Married / In-Union / Co-Habiting"'
     ),
     education = c(
-      `None to Secondary` = 'education %in% c("None", "Primary", "High School", "Secondary")',
-      `Post-Secondary` = 'education %in% c("Undergraduate", "Vocational", "Graduate")'
+      `None to Vocational` = 'education %in% c("None", "Primary", "High School", "Secondary", "Vocational")',
+      `Post-Secondary` = 'education %in% c("Undergraduate", "Graduate")'
     ),
     children_under_5 = c(
       Any = "n_child_5 != 0",
       None = "n_child_5 == 0"
     )
   )
-  for (v in names(levels)) split_levels[[v]] <- levels[[v]]
+  for (v in names(levels)) {
+    split_levels[[v]] <- levels[[v]]
+  }
   vars <- c(
     "country",
     "year",

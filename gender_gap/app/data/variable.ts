@@ -3,8 +3,8 @@ import {activityLabels, sexSummaries, variableInfo} from '../metadata'
 export const globalVariables = {year: true, gdp: true, gdp_ppp: true, population: true}
 export type LevelSpec = {
   variable: string
-  level: string
-  levelIndex?: number
+  level: string | string[]
+  levelIndex?: number | number[]
   adjust: '' | '-' | '/'
   overall?: boolean
 }
@@ -46,8 +46,16 @@ export class Variable {
           if (k === 'subset' || k === 'summary') {
             this[k] = {...spec[k]} as LevelSpec
             if (levels) {
-              this[k].levelIndex = levels[this[k].variable].indexOf(this[k].level)
-              if (this[k].levelIndex === -1) this[k] = {...defaultLevelSpec}
+              const ls = levels[this[k].variable]
+              this[k].levelIndex = Array.isArray(this[k].level)
+                ? this[k].level.map(l => ls.indexOf(l)).filter(i => i != -1)
+                : ls.indexOf(this[k].level)
+              if (
+                Array.isArray(this[k].levelIndex)
+                  ? !this[k].levelIndex.length || this[k].levelIndex[0] == -1
+                  : this[k].levelIndex === -1
+              )
+                this[k] = {...defaultLevelSpec}
             }
           } else {
             this[k as 'base'] = spec[k as 'base'] as string
@@ -73,7 +81,7 @@ export class Variable {
     which: 'subset' | 'summary',
     slot:
       | {key: 'remove'}
-      | {key: 'variable' | 'level'; value: string; levels: string[]}
+      | {key: 'variable' | 'level'; value: string | string[]; levels: string[]}
       | {key: 'adjust'; value: '' | '-' | '/'}
       | {key: 'overall'; value: boolean}
   ) {
@@ -87,7 +95,9 @@ export class Variable {
           spec.level = slot.levels[0]
           spec.levelIndex = 0
         } else {
-          spec.levelIndex = slot.levels.indexOf(spec.level)
+          spec.levelIndex = Array.isArray(spec.level)
+            ? spec.level.map(l => slot.levels.indexOf(l))
+            : slot.levels.indexOf(spec.level)
         }
       }
     }
@@ -97,12 +107,16 @@ export class Variable {
     const subsetParts = part.split('.')
     const adjust = subsetParts[0][0] === '!' ? '-' : subsetParts[0][0] === '|' ? '/' : ''
     const variable = adjust ? subsetParts[0].substring(1) : subsetParts[0]
-    const levelIndex = +subsetParts[1].replace('t', '')
     const levels = allLevels[variable]
+    const levelIndex = subsetParts[1]
+      .replace('t', '')
+      .split(',')
+      .map(i => +i)
+      .filter(i => i < levels.length)
     return {
       variable,
       levelIndex,
-      level: levelIndex >= levels.length ? '' : levels[levelIndex],
+      level: levelIndex.length ? (levelIndex.length == 1 ? levels[levelIndex[0]] : levelIndex.map(i => levels[i])) : '',
       adjust,
       overall: subsetParts[1].endsWith('t'),
     } as LevelSpec
@@ -196,7 +210,12 @@ export class Variable {
     }`
   }
   subsetFormula() {
-    return `(d.${this.subset.variable}${this.subset.adjust === '-' ? '!==' : '==='}"${this.subset.level}")`
+    return Array.isArray(this.subset.level)
+      ? (this.subset.adjust === '-' ? '!' : '') +
+          '(' +
+          this.subset.level.map(l => `(d.${this.subset.variable}==="${l}")`).join('||') +
+          ')'
+      : `(d.${this.subset.variable}${this.subset.adjust === '-' ? '!==' : '==='}"${this.subset.level}")`
   }
   summaryFormula(base: string) {
     return this.summary.adjust === '-'
@@ -210,6 +229,19 @@ export class Variable {
     return new Variable(this)
   }
   static activityLabel(spec: LevelSpec) {
+    if (Array.isArray(spec.level) && spec.level.length === 1) {
+      spec.level = spec.level[0]
+    }
+    if (Array.isArray(spec.level) && Array.isArray(spec.levelIndex)) {
+      const levelId = spec.levelIndex.sort().join(',')
+      return (
+        (spec.adjust === '-' ? 'Not ' : '') +
+        (levelId in activityLabels
+          ? activityLabels[levelId as '0,1,3']
+          : spec.level.map(l => activityLabels[l as 'Industry']).join(', ')) +
+        (spec.adjust === '/' ? ' Proportion' : '')
+      )
+    }
     return spec.adjust === '-'
       ? spec.level && spec.level === 'Out of Workforce'
         ? 'Labor Force Participation'

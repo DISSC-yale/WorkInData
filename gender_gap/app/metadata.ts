@@ -39,6 +39,8 @@ export const activityLabels = {
   Services: 'Services',
   Unemployed: 'Unemployed',
   'Out of Workforce': 'Out of Labor Force',
+  '0,1,3': 'Employed',
+  '0,1,3,4': 'In Labor Force',
 }
 export const selectableVariables = ['country', 'year', 'main_activity', 'sex']
 export const sexSummaries = {
