@@ -1,13 +1,13 @@
 # Variables
 
-Reformatted into parquet files partitioned by `survey` and `year` in 453
+Reformatted into parquet files partitioned by `survey` and `year` in 448
 parts:
 
 **Variables**: 16
 
-**Observations**: 232,121,775
+**Observations**: 231,823,382
 
-**Size**: 1.56 GB
+**Size**: 1.55 GB
 
 ## Sample
 
@@ -51,11 +51,12 @@ Initials of the source survey.
 | IHS       |     40,608 |
 | ILCS      |    230,050 |
 | ILFS      |    171,391 |
-| IPUMS     | 37,571,867 |
+| IPUMS     | 38,616,177 |
 | KCHSP     |    240,183 |
 | KLIPS     |    269,397 |
 | LFCLS     |     79,653 |
 | LFS       | 61,280,991 |
+| LMD       |  3,088,974 |
 | LSMS      |    512,019 |
 | NBHS      |     48,845 |
 | NLFS      |    471,306 |
@@ -63,7 +64,6 @@ Initials of the source survey.
 | PLFS      |  5,392,638 |
 | PNAD      |  2,202,843 |
 | PSLM      |  2,139,291 |
-| QLFS      |  4,431,677 |
 | RLMS      |    244,223 |
 | SILC      |    139,907 |
 
@@ -113,20 +113,20 @@ Year in which the survey was conducted.
 | 1993  |  1,990,889 |
 | 1994  |  2,290,725 |
 | 1995  |  2,525,712 |
-| 1996  |  2,919,918 |
+| 1996  |  3,284,742 |
 | 1997  |  2,147,462 |
 | 1998  |  2,671,661 |
 | 1999  |  2,658,202 |
 | 2000  |  5,218,593 |
-| 2001  |  4,418,129 |
+| 2001  |  4,793,426 |
 | 2002  |  4,550,018 |
 | 2003  |  3,318,114 |
 | 2004  |  3,910,772 |
 | 2005  | 10,343,371 |
 | 2006  | 10,740,706 |
-| 2007  | 10,364,801 |
-| 2008  | 11,550,758 |
-| 2009  | 12,603,944 |
+| 2007  | 10,668,990 |
+| 2008  | 11,174,840 |
+| 2009  | 12,244,479 |
 | 2010  | 12,848,149 |
 | 2011  | 11,500,483 |
 | 2012  | 10,961,928 |
@@ -136,10 +136,10 @@ Year in which the survey was conducted.
 | 2016  |  8,670,506 |
 | 2017  | 10,218,122 |
 | 2018  |  7,114,535 |
-| 2019  |  6,726,283 |
-| 2020  |  2,786,950 |
-| 2021  |  1,644,443 |
-| 2022  |  1,610,456 |
+| 2019  |  6,746,365 |
+| 2020  |  2,577,033 |
+| 2021  |  1,461,891 |
+| 2022  |  1,375,523 |
 | 2023  |    763,545 |
 
 ### Survey Year
@@ -150,7 +150,7 @@ Survey year for panel construction.
 
 **Type**: int16
 
-**Missing**: 135,278,433
+**Missing**: 136,322,743
 
 **Value Summary**:
 
@@ -196,8 +196,8 @@ Survey year for panel construction.
 | 2005  | 6,378,108 |
 | 2006  | 5,234,255 |
 | 2007  | 5,443,730 |
-| 2008  | 5,573,637 |
-| 2009  | 5,590,231 |
+| 2008  | 5,197,719 |
+| 2009  | 5,230,766 |
 | 2010  | 6,499,040 |
 | 2011  | 5,834,099 |
 | 2012  | 6,144,634 |
@@ -207,10 +207,10 @@ Survey year for panel construction.
 | 2016  | 5,927,241 |
 | 2017  | 6,062,195 |
 | 2018  | 3,847,499 |
-| 2019  | 3,733,313 |
-| 2020  | 1,539,073 |
-| 2021  | 1,534,826 |
-| 2022  | 1,617,055 |
+| 2019  | 3,753,395 |
+| 2020  | 1,329,156 |
+| 2021  | 1,352,274 |
+| 2022  | 1,382,122 |
 | 2023  |   909,678 |
 
 ### Sampling Weight
@@ -228,9 +228,9 @@ Weight provided in the source survey; either cross-sectional or panel.
 | Feature |                    Value |
 |:--------|-------------------------:|
 | min     |                   0.0000 |
-| mean    |  15,973,843,485,038.1562 |
-| sd      |  92,423,848,337,606.0156 |
-| median  |                 121.4803 |
+| mean    |  15,994,508,415,701.9297 |
+| sd      |  92,481,825,178,190.9219 |
+| median  |                 118.0283 |
 | max     | 999,997,973,725,184.0000 |
 
 ## Location
@@ -354,7 +354,7 @@ Country in which the survey was conducted.
 | VEN   |  1,188,303 |
 | VNM   |    384,782 |
 | YEM   |     85,850 |
-| ZAF   |  4,431,677 |
+| ZAF   |  4,133,284 |
 | ZMB   |  1,667,421 |
 | ZWE   |     79,653 |
 
@@ -366,14 +366,14 @@ Whether the respondent’s location is classified as rural.
 
 **Type**: bool
 
-**Missing**: 56,522,713
+**Missing**: 56,809,414
 
 **Value Summary**:
 
 | Level |       Count |
 |:------|------------:|
-| FALSE | 110,490,353 |
-| TRUE  |  65,108,709 |
+| FALSE | 110,114,956 |
+| TRUE  |  64,899,012 |
 
 ## Individual
 
@@ -403,16 +403,16 @@ Respondents age.
 
 **Type**: int32
 
-**Missing**: 628,673
+**Missing**: 633,014
 
 **Value Summary**:
 
 | Feature |    Value |
 |:--------|---------:|
 | min     |   0.0000 |
-| mean    |  34.6279 |
-| sd      |  21.6416 |
-| median  |  32.4144 |
+| mean    |  34.6272 |
+| sd      |  21.6400 |
+| median  |  32.5674 |
 | max     | 810.0000 |
 
 ### Sex
@@ -429,8 +429,8 @@ Whether the respondent reported being female.
 
 | Level |       Count |
 |:------|------------:|
-| FALSE | 113,081,263 |
-| TRUE  | 118,463,536 |
+| FALSE | 112,954,987 |
+| TRUE  | 118,291,419 |
 
 ### Marital Status
 
@@ -440,15 +440,15 @@ Marital status of the respondent.
 
 **Type**: string
 
-**Missing**: 14,572,489
+**Missing**: 14,610,030
 
 **Value Summary**:
 
 | Level                            |       Count |
 |:---------------------------------|------------:|
-| Divorced / Separated / Widowed   |  22,031,187 |
-| Married / In-Union / Co-Habiting | 104,414,353 |
-| Never Married                    |  91,103,746 |
+| Divorced / Separated / Widowed   |  21,988,539 |
+| Married / In-Union / Co-Habiting | 104,376,373 |
+| Never Married                    |  90,848,440 |
 
 ### Education
 
@@ -458,19 +458,19 @@ Highest level of education completed.
 
 **Type**: string
 
-**Missing**: 22,597,122
+**Missing**: 22,716,696
 
 **Value Summary**:
 
 | Level         |      Count |
 |:--------------|-----------:|
-| Graduate      |  4,525,233 |
-| High School   | 42,260,965 |
-| None          | 44,059,222 |
-| Primary       | 34,418,208 |
-| Secondary     | 40,140,817 |
-| Undergraduate | 18,508,754 |
-| Vocational    | 25,611,454 |
+| Graduate      |  4,504,573 |
+| High School   | 42,443,572 |
+| None          | 43,850,306 |
+| Primary       | 34,351,823 |
+| Secondary     | 39,854,967 |
+| Undergraduate | 18,472,073 |
+| Vocational    | 25,629,372 |
 
 ## Household
 
@@ -489,8 +489,8 @@ Number of children under 5 within the household.
 | Feature |   Value |
 |:--------|--------:|
 | min     |  0.0000 |
-| mean    |  0.3692 |
-| sd      |  0.7075 |
+| mean    |  0.3657 |
+| sd      |  0.7046 |
 | median  |  0.0000 |
 | max     | 21.0000 |
 
@@ -504,14 +504,14 @@ Whether the respondent worked in the reference period.
 
 **Type**: bool
 
-**Missing**: 35,134,187
+**Missing**: 35,831,632
 
 **Value Summary**:
 
 | Level |      Count |
 |:------|-----------:|
-| FALSE | 99,481,637 |
-| TRUE  | 97,505,951 |
+| FALSE | 98,574,744 |
+| TRUE  | 97,417,006 |
 
 ### Looking for Work
 
@@ -522,14 +522,14 @@ currently working.
 
 **Type**: bool
 
-**Missing**: 143,080,517
+**Missing**: 142,967,339
 
 **Value Summary**:
 
 | Level |      Count |
 |:------|-----------:|
-| FALSE | 80,348,629 |
-| TRUE  |  8,692,629 |
+| FALSE | 80,147,853 |
+| TRUE  |  8,708,190 |
 
 ## Job
 
@@ -542,7 +542,7 @@ Classification; ISIC).
 
 **Type**: string
 
-**Missing**: 128,049,711
+**Missing**: 127,973,177
 
 **Value Summary**:
 
@@ -561,14 +561,14 @@ or out of workforce.
 
 **Type**: string
 
-**Missing**: 36,527,488
+**Missing**: 37,232,854
 
 **Value Summary**:
 
 | Level            |      Count |
 |:-----------------|-----------:|
-| Agriculture      | 16,154,846 |
-| Industry         | 20,849,566 |
-| Out of Workforce | 90,789,008 |
-| Services         | 59,108,238 |
-| Unemployed       |  8,692,629 |
+| Agriculture      | 16,157,299 |
+| Industry         | 20,837,385 |
+| Out of Workforce | 89,866,554 |
+| Services         | 59,021,100 |
+| Unemployed       |  8,708,190 |

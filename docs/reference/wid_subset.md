@@ -96,8 +96,8 @@ wid_subset(variables = "work_search")[-1]
 #> [13] "ENAHO"     "ENEMDU"    "ENES"      "ENOE"      "ENPE"      "EULFS"    
 #> [19] "GEIH"      "GLSS"      "HILDA"     "HLFS"      "IBEP"      "IHS"      
 #> [25] "ILCS"      "ILFS"      "IPUMS"     "KCHSP"     "KLIPS"     "LFCLS"    
-#> [31] "LFS"       "LSMS"      "NBHS"      "NLFS"      "NSS"       "PLFS"     
-#> [37] "PNAD"      "PSLM"      "QLFS"      "RLMS"      "SILC"     
+#> [31] "LFS"       "LMD"       "LSMS"      "NBHS"      "NLFS"      "NSS"      
+#> [37] "PLFS"      "PNAD"      "PSLM"      "RLMS"      "SILC"     
 #> 
 #> $years
 #>  [1] 1960 1962 1963 1967 1968 1969 1970 1971 1972 1973 1974 1975 1976 1977 1978

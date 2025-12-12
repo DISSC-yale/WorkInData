@@ -6,13 +6,13 @@ title: "Variables"
 knitr::opts_chunk$set(collapse = TRUE, echo = FALSE)
 summaries <- WorkInData::wid_variables()
 ```
-Reformatted into parquet files partitioned by `survey` and `year` in 453 parts:
+Reformatted into parquet files partitioned by `survey` and `year` in 448 parts:
 
 **Variables**: 16
 
-**Observations**: 232,121,775
+**Observations**: 231,823,382
 
-**Size**: 1.56 GB
+**Size**: 1.55 GB
 
 
 # Sample
@@ -63,7 +63,7 @@ Survey year for panel construction.
 
 **Type**: int16
 
-**Missing**: 135,278,433
+**Missing**: 136,322,743
 
 **Value Summary**:
 
@@ -122,7 +122,7 @@ Whether the respondent's location is classified as rural.
 
 **Type**: bool
 
-**Missing**: 56,522,713
+**Missing**: 56,809,414
 
 **Value Summary**:
 
@@ -162,7 +162,7 @@ Respondents age.
 
 **Type**: int32
 
-**Missing**: 628,673
+**Missing**: 633,014
 
 **Value Summary**:
 
@@ -200,7 +200,7 @@ Marital status of the respondent.
 
 **Type**: string
 
-**Missing**: 14,572,489
+**Missing**: 14,610,030
 
 **Value Summary**:
 
@@ -219,7 +219,7 @@ Highest level of education completed.
 
 **Type**: string
 
-**Missing**: 22,597,122
+**Missing**: 22,716,696
 
 **Value Summary**:
 
@@ -261,7 +261,7 @@ Whether the respondent worked in the reference period.
 
 **Type**: bool
 
-**Missing**: 35,134,187
+**Missing**: 35,831,632
 
 **Value Summary**:
 
@@ -280,7 +280,7 @@ Whether the respondent is looking for work, given that they are not currently wo
 
 **Type**: bool
 
-**Missing**: 143,080,517
+**Missing**: 142,967,339
 
 **Value Summary**:
 
@@ -301,7 +301,7 @@ Industry classification (International Standard Industrial Classification; ISIC)
 
 **Type**: string
 
-**Missing**: 128,049,711
+**Missing**: 127,973,177
 
 **Value Summary**:
 
@@ -320,7 +320,7 @@ If working, the industry sector of the job; otherwise, either unemployed or out 
 
 **Type**: string
 
-**Missing**: 36,527,488
+**Missing**: 37,232,854
 
 **Value Summary**:
 

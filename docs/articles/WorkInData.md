@@ -43,20 +43,20 @@ data_small <- data |>
   dplyr::collect()
 
 data_small
-#> # A tibble: 217,271 × 3
+#> # A tibble: 215,948 × 3
 #>      age sex   work 
 #>    <int> <lgl> <lgl>
-#>  1    40 FALSE TRUE 
-#>  2    40 FALSE FALSE
-#>  3    59 FALSE TRUE 
-#>  4    24 TRUE  FALSE
-#>  5    55 TRUE  TRUE 
-#>  6    40 TRUE  TRUE 
-#>  7    42 FALSE TRUE 
-#>  8    30 FALSE TRUE 
-#>  9    51 FALSE TRUE 
-#> 10    36 FALSE TRUE 
-#> # ℹ 217,261 more rows
+#>  1    34 TRUE  TRUE 
+#>  2    47 TRUE  TRUE 
+#>  3    70 FALSE TRUE 
+#>  4    40 FALSE TRUE 
+#>  5    46 FALSE TRUE 
+#>  6    38 FALSE TRUE 
+#>  7    39 FALSE FALSE
+#>  8    36 FALSE TRUE 
+#>  9    50 FALSE FALSE
+#> 10    35 FALSE TRUE 
+#> # ℹ 215,938 more rows
 ```
 
 ``` r
@@ -69,13 +69,13 @@ with(data_small, table(
 #> 
 #>         
 #>          Female  Male
-#>   Older   19551 20005
-#>   Yonger  17869  7537
+#>   Older   19452 19928
+#>   Yonger  17766  7502
 #> 
 #> , , work = TRUE
 #> 
 #>         
 #>          Female  Male
-#>   Older   28801 34676
-#>   Yonger  45667 41441
+#>   Older   28590 34503
+#>   Yonger  45327 41153
 ```

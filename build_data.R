@@ -101,11 +101,8 @@ agg <- wid_aggregate(
   ]
 )
 vroom::vroom_write(agg, paste0(out_dir, "data.csv.gz"), ",")
-jsonlite::write_json(
-  agg,
-  gzfile(paste0(out_dir, "data.json.gz")),
-  dataframe = "columns"
-)
+agg_file <- paste0(out_dir, "data.json.gz")
+jsonlite::write_json(agg, gzfile(agg_file), dataframe = "columns")
 
 ### prepare test data
 jsonlite::write_json(
@@ -118,7 +115,7 @@ jsonlite::write_json(
 )
 
 ## prepare external data if aggregate has changed
-hash <- tools::md5sum(paste0(out_dir, "data.json.gz"))[[1]]
+hash <- tools::md5sum(agg_file)[[1]]
 if (meta$md5 != hash) {
   meta$updated <- Sys.Date()
   meta$md5 <- hash
