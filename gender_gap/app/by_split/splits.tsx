@@ -4,6 +4,7 @@ import {
   IconButton,
   LinearProgress,
   Stack,
+  TextField,
   ToggleButton,
   ToggleButtonGroup,
   Typography,
@@ -49,57 +50,21 @@ export default function Splits() {
       </Stack>
     )
   }
-  const changeYear = (forward: boolean, value?: string) => {
+  const changeYear = (forward: boolean) => {
     const range = full.levels.baseYearRange
-    if (!value) {
-      value = view.select_year
-      if (forward) {
-        if (view.time_agg === 'last') return
-        value =
-          view.select_year < range[1]
-            ? view.time_agg === 'specified'
-              ? '' + (+view.select_year + 1)
-              : view.select_year
-            : 'last'
-      } else {
-        value =
-          view.select_year > range[0]
-            ? view.time_agg === 'specified'
-              ? '' + (+view.select_year - 1)
-              : view.select_year
-            : 'first'
+    const value = +view.select_year
+    if (forward) {
+      if (view.select_year < range[1]) {
+        editView({key: 'select_year', value: '' + (value + 1)})
       }
-    }
-    if (value === 'first' || value === 'last') {
-      editView({key: 'time_agg', value})
     } else {
-      if (view.time_agg !== 'specified') {
-        editView({key: 'time_agg', value: 'specified'})
+      if (view.select_year > range[0]) {
+        editView({key: 'select_year', value: '' + (value - 1)})
       }
-      editView({key: 'select_year', value})
     }
   }
   return (
     <Stack spacing={2} component="main" sx={{pr: 1}}>
-      <Stack direction="row" spacing={1}>
-        <Typography sx={{alignSelf: 'center', fontWeight: 700}}>Demographic Splits: </Typography>
-        <ToggleButtonGroup
-          sx={{
-            "& button[aria-pressed='true']": {
-              backgroundColor: '#d6ecfe !important',
-              borderColor: '#000',
-            },
-          }}
-          value={view.y_panels || 'total'}
-          exclusive
-          size="small"
-          onChange={(_, value) => editView({key: 'y_panels', value: value || ''})}
-          aria-label="demographic split"
-        >
-          {demoSplits}
-        </ToggleButtonGroup>
-      </Stack>
-
       <Typography>
         The figure below shows the relationship between the {Variable.activityLabel(view.y.subset).toLowerCase()}{' '}
         {view.y.summary.adjust === '-'
@@ -115,6 +80,39 @@ export default function Splits() {
         displayed, introduce a different color for each global region, change the set of countries which are shown, and
         change the set of years from which data are drawn (below the figure).
       </Typography>
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{
+          "& button[aria-pressed='true']": {
+            backgroundColor: '#d6ecfe !important',
+            borderColor: '#000',
+            borderWidth: 2,
+          },
+        }}
+      >
+        <Typography sx={{alignSelf: 'center', fontWeight: 700}}>Demographic Splits: </Typography>
+        <ToggleButtonGroup
+          value="total"
+          exclusive
+          size="small"
+          onChange={() => editView({key: 'y_panels', value: ''})}
+          aria-label="clear demographic split"
+        >
+          <ToggleButton value="" selected={!view.y_panels || view.y_panels === 'total'}>
+            None
+          </ToggleButton>
+        </ToggleButtonGroup>
+        <ToggleButtonGroup
+          value={view.y_panels || 'total'}
+          exclusive
+          size="small"
+          onChange={(_, value) => editView({key: 'y_panels', value: value || ''})}
+          aria-label="demographic split"
+        >
+          {demoSplits}
+        </ToggleButtonGroup>
+      </Stack>
       <Stack sx={{height: 600}} direction="row" spacing={2}>
         <DataDisplay mode="light" />
         <Stack spacing={1} sx={{minWidth: 280}}>
@@ -145,43 +143,44 @@ export default function Splits() {
           <Typography sx={{alignSelf: 'center', fontWeight: 700, pr: 2}}>Year: </Typography>
           <ToggleButtonGroup
             value={view.time_agg}
-            aria-label="show all times"
-            exclusive
-            size="small"
-            onChange={(_, value) => editView({key: 'time_agg', value: value ? 'all' : 'last'})}
-          >
-            <ToggleButton value="all" aria-label="show all years">
-              All
-            </ToggleButton>
-          </ToggleButtonGroup>
-          <IconButton onClick={() => changeYear(false)} aria-label="back a year">
-            <ChevronLeft />
-          </IconButton>
-          <ToggleButtonGroup
-            value={view.time_agg === 'specified' ? view.select_year : view.time_agg}
             sx={{'& .MuiButtonBase-root': {pr: 2, pl: 2}}}
             aria-label="time handling options"
             exclusive
             size="small"
-            onChange={(_, value) => changeYear(true, value)}
+            onChange={(_, value) => value && editView({key: 'time_agg', value})}
           >
+            <ToggleButton value="all" aria-label="show all years">
+              All
+            </ToggleButton>
             <ToggleButton value="first" aria-label="show first year">
               First
-            </ToggleButton>
-            <ToggleButton
-              sx={{textDecoration: view.time_agg === 'specified' ? '' : 'line-through'}}
-              value={view.select_year}
-              aria-label="show a specified year"
-            >
-              {view.select_year}
             </ToggleButton>
             <ToggleButton value="last" aria-label="show latest year">
               Last
             </ToggleButton>
+            <ToggleButton value="specified" aria-label="show specified year">
+              Specified
+            </ToggleButton>
           </ToggleButtonGroup>
-          <IconButton onClick={() => changeYear(true)} aria-label="forward a year">
-            <ChevronRight />
-          </IconButton>
+          {view.time_agg === 'specified' && (
+            <Stack direction="row">
+              <IconButton onClick={() => changeYear(false)} aria-label="back a year">
+                <ChevronLeft />
+              </IconButton>
+              <TextField
+                label="Year"
+                type="number"
+                size="small"
+                fullWidth
+                value={view.select_year}
+                slotProps={{htmlInput: {min: full.levels.baseYearRange[0], max: full.levels.baseYearRange[1], step: 1}}}
+                onChange={e => editView({key: 'select_year', value: e.target.value})}
+              />
+              <IconButton onClick={() => changeYear(true)} aria-label="forward a year">
+                <ChevronRight />
+              </IconButton>
+            </Stack>
+          )}
         </Stack>
         <Stack direction="row" spacing={2}>
           <Button

@@ -183,7 +183,7 @@ export function DataMenu() {
                   update={value => filterAction({key: 'sectors', value})}
                 />
                 <Selector
-                  label="Sexes"
+                  label="Gender"
                   options={full.levels.sexes}
                   selection={filter.sexes}
                   update={value => filterAction({key: 'sexes', value})}

@@ -1,4 +1,4 @@
-import {Close, Code, Download} from '@mui/icons-material'
+import {Close, Download} from '@mui/icons-material'
 import {
   Autocomplete,
   Button,
@@ -7,13 +7,10 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  FormControl,
   FormControlLabel,
   IconButton,
-  InputLabel,
   Link,
   MenuItem,
-  Select,
   Stack,
   Switch,
   TextField,
@@ -36,7 +33,6 @@ export function Export() {
 
   const [open, setOpen] = useState(false)
   const [fullExport, setFullExport] = useState(false)
-  const [delimiter, setDelimiter] = useState(',')
   const allColumns = useMemo(() => full.data.columnNames(), [full.data])
   const [columns, setColumns] = useState(allColumns)
   const [filename, setFilename] = useState('')
@@ -85,31 +81,17 @@ export function Export() {
                 data.csv.gz
               </Link>
             </Typography>
-            <Typography sx={{pt: 1}}>Custom Export</Typography>
+            <Typography sx={{pt: 1, pb: 1}}>Custom Export</Typography>
             <Stack spacing={1}>
-              <Stack direction="row" spacing={1}>
-                <TextField
-                  fullWidth
-                  size="small"
-                  label="Filename"
-                  value={filename}
-                  onChange={e => setFilename(e.target.value)}
-                >
-                  {filename}
-                </TextField>
-                <FormControl sx={{width: 110}} variant="outlined" fullWidth size="small">
-                  <InputLabel id="separator_select">Type</InputLabel>
-                  <Select
-                    labelId="separator_select"
-                    label="Type"
-                    value={delimiter}
-                    onChange={e => setDelimiter(e.target.value)}
-                  >
-                    <MenuItem value=",">CSV</MenuItem>
-                    <MenuItem value="\t">TSV</MenuItem>
-                  </Select>
-                </FormControl>
-              </Stack>
+              <TextField
+                fullWidth
+                size="small"
+                label="Filename"
+                value={filename}
+                onChange={e => setFilename(e.target.value)}
+              >
+                {filename}
+              </TextField>
               <Autocomplete
                 options={allColumns}
                 sx={{'& li': {p: 0}}}
@@ -151,9 +133,7 @@ export function Export() {
             </Stack>
           </DialogContent>
           <DialogActions sx={{justifyContent: 'right'}}>
-            <Typography>
-              {delimiter === ',' ? 'CSV' : 'TSV'} file with {data.numRows()} rows
-            </Typography>
+            <Typography>CSV file with {data.numRows()} rows</Typography>
             <Button
               variant="contained"
               onClick={() => {
@@ -161,10 +141,8 @@ export function Export() {
                 document.body.appendChild(e)
                 e.rel = 'noreferrer'
                 e.target = '_blank'
-                e.download = filename + (delimiter === ',' ? '.csv' : '.tsv')
-                e.href = URL.createObjectURL(
-                  new Blob([data.toCSV({delimiter, columns})], {type: 'text/csv; charset=utf-8'})
-                )
+                e.download = filename + '.csv'
+                e.href = URL.createObjectURL(new Blob([data.toCSV({columns})], {type: 'text/csv; charset=utf-8'}))
                 setTimeout(function () {
                   e.dispatchEvent(new MouseEvent('click'))
                   URL.revokeObjectURL.bind(null, e.href)
