@@ -16,7 +16,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import {ColumnTable} from 'arquero'
+import {ColumnTable, from} from 'arquero'
 import {useContext, useMemo, useState} from 'react'
 import {DataContext, Resources} from '../data/load'
 import {FilteredContext, ViewContext, ViewDef} from '../data/view'
@@ -30,10 +30,25 @@ export function Export() {
   const full = useContext(DataContext) as Resources
   const view = useContext(ViewContext) as ViewDef
   const filtered = useContext(FilteredContext)
+  const countryData = useMemo(
+    () =>
+      from(Object.values(full.countryInfo))
+        .select('ISO_A3', 'name', 'region', 'income')
+        .rename({ISO_A3: 'country', name: 'country_name'}),
+    [full.countryInfo]
+  )
 
   const [open, setOpen] = useState(false)
   const [fullExport, setFullExport] = useState(false)
-  const allColumns = useMemo(() => full.data.columnNames(), [full.data])
+  const [includeCountry, setIncludeCountry] = useState(true)
+  const data = useMemo(() => {
+    let base = fullExport ? full.data : filtered
+    if (includeCountry) {
+      base = base.join(countryData)
+    }
+    return base
+  }, [fullExport, includeCountry, full.data, filtered])
+  const allColumns = useMemo(() => data.columnNames(), [data])
   const [columns, setColumns] = useState(allColumns)
   const [filename, setFilename] = useState('')
   const defaultNames = useMemo(() => {
@@ -50,7 +65,6 @@ export function Export() {
     }
   }, [filtered, view, allColumns, full.meta.updated])
   const close = () => setOpen(!open)
-  const data = fullExport ? full.data : filtered
   return (
     <>
       <Button color="inherit" onClick={close} startIcon={<Download />}>
@@ -113,6 +127,12 @@ export function Export() {
                 size="small"
                 onChange={(_, selection) => setColumns(selection)}
               ></Autocomplete>
+              <FormControlLabel
+                sx={{float: 'right'}}
+                label="Include Country Info"
+                labelPlacement="start"
+                control={<Switch checked={includeCountry} onChange={() => setIncludeCountry(!includeCountry)} />}
+              />
               <FormControlLabel
                 sx={{float: 'right'}}
                 label="Full Dataset"

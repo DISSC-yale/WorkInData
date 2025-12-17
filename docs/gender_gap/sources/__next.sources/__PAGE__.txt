@@ -1,9 +1,9 @@
 1:"$Sreact.fragment"
 2:I[47257,["/WorkInData/gender_gap/_next/static/chunks/42879de7b8087bc9.js"],"ClientPageRoot"]
-3:I[79516,["/WorkInData/gender_gap/_next/static/chunks/71caf7cdcbef66d5.js","/WorkInData/gender_gap/_next/static/chunks/678e42269cf9cd9e.js","/WorkInData/gender_gap/_next/static/chunks/440e5913ee11abba.js","/WorkInData/gender_gap/_next/static/chunks/ef9908ec530060d5.js","/WorkInData/gender_gap/_next/static/chunks/82af9aa3d45a8f35.js"],"default"]
+3:I[79516,["/WorkInData/gender_gap/_next/static/chunks/71caf7cdcbef66d5.js","/WorkInData/gender_gap/_next/static/chunks/7bf74825183c39dd.js","/WorkInData/gender_gap/_next/static/chunks/440e5913ee11abba.js","/WorkInData/gender_gap/_next/static/chunks/ef9908ec530060d5.js","/WorkInData/gender_gap/_next/static/chunks/82af9aa3d45a8f35.js"],"default"]
 6:I[97367,["/WorkInData/gender_gap/_next/static/chunks/42879de7b8087bc9.js"],"OutletBoundary"]
 7:"$Sreact.suspense"
-0:{"buildId":"d9IQpe6YsZ7_66sGb0Go-","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/WorkInData/gender_gap/_next/static/chunks/440e5913ee11abba.js","async":true}],["$","script","script-1",{"src":"/WorkInData/gender_gap/_next/static/chunks/ef9908ec530060d5.js","async":true}],["$","script","script-2",{"src":"/WorkInData/gender_gap/_next/static/chunks/82af9aa3d45a8f35.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"IFfLmtupDBqvGf53-69OZ","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/WorkInData/gender_gap/_next/static/chunks/440e5913ee11abba.js","async":true}],["$","script","script-1",{"src":"/WorkInData/gender_gap/_next/static/chunks/ef9908ec530060d5.js","async":true}],["$","script","script-2",{"src":"/WorkInData/gender_gap/_next/static/chunks/82af9aa3d45a8f35.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
 4:{}
 5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
 8:null
