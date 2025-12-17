@@ -134,7 +134,9 @@ export default function Map({
               series,
               toolbox: {
                 feature: {
-                  saveAsImage: {},
+                  saveAsImage: {
+                    name: 'gender_growth_gap_' + view.y.toString() + '_map',
+                  },
                 },
               },
             },

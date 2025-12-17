@@ -321,7 +321,9 @@ export default function Plot({
               series: fits.length ? [...series, ...fits] : series,
               toolbox: {
                 feature: {
-                  saveAsImage: {name: 'gender_growth_gap_' + view.y + (view.x ? '_' + view.x : '')},
+                  saveAsImage: {
+                    name: 'gender_growth_gap_' + view.y.toString() + (view.x ? '_' + view.x.toString() : ''),
+                  },
                 },
               },
             },

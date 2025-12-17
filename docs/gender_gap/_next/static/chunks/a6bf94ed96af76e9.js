@@ -14,4 +14,4 @@
           src: local('Verdana');
           size-adjust: 95.5%;
         }
-      `}},colorSchemes:G.colorSchemes.light});function H(){return(0,t.jsxs)(o.ThemeProvider,{theme:U,defaultMode:"light",noSsr:!0,children:[(0,t.jsx)(i.CssBaseline,{enableColorScheme:!0}),(0,t.jsx)(a.Box,{children:(0,t.jsx)(_.DataView,{children:(0,t.jsx)(N,{})})})]})}e.s(["default",()=>H],65530)},78878,e=>{e.v(t=>Promise.all(["static/chunks/ff9c529359bc712e.js"].map(t=>e.l(t))).then(()=>t(5255)))}]);
+      `}},colorSchemes:G.colorSchemes.light});function H(){return(0,t.jsxs)(o.ThemeProvider,{theme:U,defaultMode:"light",noSsr:!0,children:[(0,t.jsx)(i.CssBaseline,{enableColorScheme:!0}),(0,t.jsx)(a.Box,{children:(0,t.jsx)(_.DataView,{children:(0,t.jsx)(N,{})})})]})}e.s(["default",()=>H],65530)},78878,e=>{e.v(t=>Promise.all(["static/chunks/d02d99d390ef7b6d.js"].map(t=>e.l(t))).then(()=>t(5255)))}]);
