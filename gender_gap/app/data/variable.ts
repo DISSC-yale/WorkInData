@@ -209,6 +209,14 @@ export class Variable {
         : ':' + this.levelToString('subset') + ':' + this.levelToString('summary')
     }`
   }
+  toFileName() {
+    return this.toString()
+      .replaceAll(':', '-')
+      .replaceAll('%', 'perc')
+      .replaceAll('!', 'not')
+      .replaceAll('|', 'ratio')
+      .replaceAll('.', '')
+  }
   subsetFormula() {
     return Array.isArray(this.subset.level)
       ? (this.subset.adjust === '-' ? '!' : '') +

@@ -322,7 +322,7 @@ export default function Plot({
               toolbox: {
                 feature: {
                   saveAsImage: {
-                    name: 'gender_growth_gap_' + view.y.toString() + (view.x ? '_' + view.x.toString() : ''),
+                    name: 'gender_growth_gap_' + view.y.toFileName() + (view.x ? '_' + view.x.toFileName() : ''),
                   },
                 },
               },
