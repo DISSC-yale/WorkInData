@@ -19,8 +19,8 @@ export function tooltipPlacer(pos: number[], params: LineSeriesOption, dom: HTML
   const tooltipRect = dom.getBoundingClientRect()
   const halfSize = tooltipRect.width / 2
   const setPosition = {
-    top: pos[1] - (pos[1] < window.innerHeight / 2 ? -20 : tooltipRect.height + 20),
-    left: pos[0] - (pos[0] > halfSize ? (window.innerWidth - pos[0] > halfSize ? halfSize : halfSize * 2) : -20),
+    top: pos[1] - (pos[1] < window.innerHeight / 2 ? -40 : tooltipRect.height + 40),
+    left: pos[0] - (pos[0] > halfSize ? (window.innerWidth - pos[0] > halfSize ? halfSize : halfSize * 2) : -30),
   }
   return setPosition
 }

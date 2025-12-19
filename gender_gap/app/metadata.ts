@@ -2,7 +2,7 @@ export const variableInfo: {
   [index: string]: {label: string; label_long?: string; fullName?: string; source?: string; source_url?: string}
 } = {
   country: {label: 'Country'},
-  year: {label: 'Year'},
+  year: {label: 'Year', fullName: 'Year the survey was conducted.'},
   count: {label: 'Participant Count', fullName: 'Number of survey participants within segments.'},
   weight: {label: 'Weight Sum', fullName: 'Sum of survey weights within segments.'},
   gdp: {

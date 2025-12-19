@@ -2,6 +2,7 @@
 
 import {DarkMode, LightMode} from '@mui/icons-material'
 import {AppBar, IconButton, Stack, Toolbar, Typography, useColorScheme} from '@mui/material'
+import {InfoDisplay} from './info'
 
 export default function NavBar({children}: Readonly<{children?: React.ReactNode}>) {
   const {mode, setMode} = useColorScheme()
@@ -13,6 +14,7 @@ export default function NavBar({children}: Readonly<{children?: React.ReactNode}
           Gender, Labor & Growth
         </Typography>
         <Stack direction="row" spacing={1} sx={{'& .MuiButtonBase-root': {ml: {md: 1, sm: 0, xs: 0}}}}>
+          <InfoDisplay />
           <IconButton color="inherit" onClick={() => setMode(isDark ? 'light' : 'dark')} aria-label="toggle dark mode">
             {isDark ? <LightMode /> : <DarkMode />}
           </IconButton>

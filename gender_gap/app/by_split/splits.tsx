@@ -19,6 +19,7 @@ import {BasicMenu} from '../dashboard/view_menu_basic'
 import {Export} from '../parts/export'
 import {FilterCountry} from '../dashboard/filter_country'
 import {Variable} from '../data/variable'
+import {InfoDisplay} from '../parts/info'
 
 const splitDescriptions = {
   age: 'age 35 or over, to those under 35',
@@ -183,6 +184,7 @@ export default function Splits() {
           )}
         </Stack>
         <Stack direction="row" spacing={2}>
+          <InfoDisplay />
           <Button
             sx={{float: 'right'}}
             href="https://dissc-yale.github.io/WorkInData/gender_gap"

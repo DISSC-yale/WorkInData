@@ -245,7 +245,7 @@ export default function Plot({
                 textStyle: {
                   color: colors.text,
                 },
-                backgroundColor: colors.bg,
+                backgroundColor: colors.bg + '60',
                 borderWidth: 0,
                 axisPointer: {
                   type: 'line',
