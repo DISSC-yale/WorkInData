@@ -60,20 +60,5 @@ if (dir.exists(db_dir)) {
   )
   wid_aggregate(db_dir, selection = selection)
 }
-#> cell cutoff removed 0 of 220 rows, which excludes 0 of 5348590 people.
-#> # A tibble: 220 × 8
-#> # Groups:   country, year, sex, main_activity [20]
-#>    country  year sex    main_activity    variable level  count      weight
-#>    <chr>   <int> <chr>  <chr>            <chr>    <chr>  <int>       <dbl>
-#>  1 IND      2004 Male   Agriculture      total    all    34942 23626406539
-#>  2 IND      2004 Male   Industry         total    all    16314 11037425591
-#>  3 IND      2004 Male   Out of Workforce total    all    71458 44921362764
-#>  4 IND      2004 Male   Services         total    all    28587 14925483582
-#>  5 IND      2004 Male   Unemployed       total    all     3358  1410530988
-#>  6 IND      2004 Female Agriculture      total    all    14886 10872332572
-#>  7 IND      2004 Female Industry         total    all     3504  2487577454
-#>  8 IND      2004 Female Out of Workforce total    all   118035 73812218107
-#>  9 IND      2004 Female Services         total    all     5347  2833352056
-#> 10 IND      2004 Female Unemployed       total    all     1340   543395196
-#> # ℹ 210 more rows
+#> Error in unserialize(node$con): error reading from connection
 ```
