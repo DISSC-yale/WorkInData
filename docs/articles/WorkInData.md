@@ -46,16 +46,16 @@ data_small
 #> # A tibble: 215,948 × 3
 #>      age sex   work 
 #>    <int> <lgl> <lgl>
-#>  1    39 FALSE TRUE 
-#>  2    31 FALSE TRUE 
-#>  3    43 TRUE  FALSE
-#>  4    23 TRUE  FALSE
-#>  5    49 FALSE TRUE 
-#>  6    58 FALSE TRUE 
-#>  7    31 FALSE TRUE 
-#>  8    31 FALSE TRUE 
-#>  9    42 TRUE  TRUE 
-#> 10    38 FALSE FALSE
+#>  1    35 TRUE  TRUE 
+#>  2    26 FALSE TRUE 
+#>  3    36 TRUE  TRUE 
+#>  4    65 TRUE  TRUE 
+#>  5    70 FALSE TRUE 
+#>  6    56 TRUE  FALSE
+#>  7    41 FALSE TRUE 
+#>  8    41 TRUE  TRUE 
+#>  9    64 FALSE TRUE 
+#> 10    24 TRUE  TRUE 
 #> # ℹ 215,938 more rows
 ```
 

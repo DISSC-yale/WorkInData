@@ -12,7 +12,7 @@ Reformatted into parquet files partitioned by `survey` and `year` in 448 parts:
 
 **Observations**: 231,823,382
 
-**Size**: 1.55 GB
+**Size**: 1.58 GB
 
 
 # Sample

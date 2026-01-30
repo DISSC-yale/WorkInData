@@ -7,7 +7,7 @@ parts:
 
 **Observations**: 231,823,382
 
-**Size**: 1.55 GB
+**Size**: 1.58 GB
 
 ## Sample
 
@@ -228,9 +228,9 @@ Weight provided in the source survey; either cross-sectional or panel.
 | Feature |                    Value |
 |:--------|-------------------------:|
 | min     |                   0.0000 |
-| mean    |  15,994,508,415,701.9297 |
+| mean    |  15,994,508,415,701.9355 |
 | sd      |  92,481,825,178,190.9219 |
-| median  |                 118.0283 |
+| median  |                 118.1642 |
 | max     | 999,997,973,725,184.0000 |
 
 ## Location
@@ -410,9 +410,9 @@ Respondents age.
 | Feature |    Value |
 |:--------|---------:|
 | min     |   0.0000 |
-| mean    |  34.6272 |
-| sd      |  21.6400 |
-| median  |  32.5674 |
+| mean    |  34.5252 |
+| sd      |  21.6816 |
+| median  |  32.4476 |
 | max     | 810.0000 |
 
 ### Sex
@@ -489,10 +489,10 @@ Number of children under 5 within the household.
 | Feature |   Value |
 |:--------|--------:|
 | min     |  0.0000 |
-| mean    |  0.3657 |
-| sd      |  0.7046 |
+| mean    |  0.3828 |
+| sd      |  0.7620 |
 | median  |  0.0000 |
-| max     | 21.0000 |
+| max     | 28.0000 |
 
 ## Work
 
