@@ -228,9 +228,9 @@ Weight provided in the source survey; either cross-sectional or panel.
 | Feature |                    Value |
 |:--------|-------------------------:|
 | min     |                   0.0000 |
-| mean    |  15,994,508,415,701.9355 |
-| sd      |  92,481,825,178,190.9219 |
-| median  |                 118.1642 |
+| mean    |  15,994,508,415,701.9316 |
+| sd      |  92,481,825,178,190.9062 |
+| median  |                 117.5943 |
 | max     | 999,997,973,725,184.0000 |
 
 ## Location
@@ -412,7 +412,7 @@ Respondents age.
 | min     |   0.0000 |
 | mean    |  34.5252 |
 | sd      |  21.6816 |
-| median  |  32.4476 |
+| median  |  32.4648 |
 | max     | 810.0000 |
 
 ### Sex
