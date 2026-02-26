@@ -8,8 +8,8 @@
 <title>Get Started • WorkInData</title>
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Get Started">
 </head>
 <body>
@@ -72,11 +72,11 @@
 <div class="section level2">
 <h2 id="cluster-setup">Cluster setup<a class="anchor" aria-label="anchor" href="#cluster-setup"></a>
 </h2>
-<p>The microdata are stored on Yale’s Grace HPC cluster.</p>
+<p>The microdata are stored on Yale’s Bouchet HPC cluster.</p>
 <p>Assuming you have a Yale identity, see the <a href="https://docs.ycrc.yale.edu/clusters-at-yale/" class="external-link">YCRC guide</a> to
 get started on the cluster.</p>
 <p>The package requires Arrow, which is available on the cluster in
-modules (e.g., <code>Arrow/16</code>).</p>
+modules (e.g., <code>Arrow/17</code>).</p>
 </div>
 <div class="section level2">
 <h2 id="using-the-data">Using the data<a class="anchor" aria-label="anchor" href="#using-the-data"></a>
@@ -89,7 +89,7 @@ modules (e.g., <code>Arrow/16</code>).</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dissc-yale.github.io/WorkInData">WorkInData</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wid_open.html">wid_open</a></span><span class="op">(</span><span class="st">"/gpfs/gibbs/pi/dissc/work-in-data/gender_growth_gap"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wid_open.html">wid_open</a></span><span class="op">(</span><span class="st">"/nfs/roberts/pi/dissc/work-in-data/gender_growth_gap"</span><span class="op">)</span></span></code></pre></div>
 <p>Here, <code>data</code> is a regular <a href="https://arrow.apache.org/docs/r/reference/open_dataset.html" class="external-link">Arrow
 Dataset</a>, so you can use <code>dplyr</code> to interact with it, but
 the <code>wid_subset</code> function can be used to filter more
@@ -103,7 +103,7 @@ graduate degree in 2018 by age and sex:</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">data_small</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 215,948 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 183,116 × 3</span></span></span>
 <span><span class="co">#&gt;      age sex   work </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    35 TRUE  TRUE </span></span>
@@ -116,7 +116,7 @@ graduate degree in 2018 by age and sex:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    41 TRUE  TRUE </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    64 FALSE TRUE </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    24 TRUE  TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 215,938 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 183,106 more rows</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">data_small</span>, <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Yonger"</span>, <span class="st">"Older"</span><span class="op">)</span><span class="op">[</span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">age</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1L</span><span class="op">]</span>,</span>
@@ -127,15 +127,15 @@ graduate degree in 2018 by age and sex:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;         </span></span>
 <span><span class="co">#&gt;          Female  Male</span></span>
-<span><span class="co">#&gt;   Older   19452 19928</span></span>
-<span><span class="co">#&gt;   Yonger  17766  7502</span></span>
+<span><span class="co">#&gt;   Older   16773 17459</span></span>
+<span><span class="co">#&gt;   Yonger  11098  5688</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; , , work = TRUE</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;         </span></span>
 <span><span class="co">#&gt;          Female  Male</span></span>
-<span><span class="co">#&gt;   Older   28590 34503</span></span>
-<span><span class="co">#&gt;   Yonger  45327 41153</span></span></code></pre></div>
+<span><span class="co">#&gt;   Older   22331 26608</span></span>
+<span><span class="co">#&gt;   Yonger  45226 36459</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

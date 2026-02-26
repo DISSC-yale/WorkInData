@@ -60,20 +60,20 @@ if (dir.exists(db_dir)) {
   )
   wid_aggregate(db_dir, selection = selection)
 }
-#> cell cutoff removed 0 of 220 rows, which excludes 0 of 5348590 people.
-#> # A tibble: 220 × 8
-#> # Groups:   country, year, sex, main_activity [20]
-#>    country  year sex    main_activity    variable level  count      weight
-#>    <chr>   <int> <chr>  <chr>            <chr>    <chr>  <int>       <dbl>
-#>  1 IND      2004 Male   Agriculture      total    all    34942 23626406539
-#>  2 IND      2004 Male   Industry         total    all    16314 11037425591
-#>  3 IND      2004 Male   Out of Workforce total    all    71458 44921362764
-#>  4 IND      2004 Male   Services         total    all    28587 14925483582
-#>  5 IND      2004 Male   Unemployed       total    all     3358  1410530988
-#>  6 IND      2004 Female Agriculture      total    all    14886 10872332572
-#>  7 IND      2004 Female Industry         total    all     3504  2487577454
-#>  8 IND      2004 Female Out of Workforce total    all   118035 73812218107
-#>  9 IND      2004 Female Services         total    all     5347  2833352056
-#> 10 IND      2004 Female Unemployed       total    all     1340   543395196
-#> # ℹ 210 more rows
+#> cell cutoff removed 1 of 264 rows, which excludes 23 of 5348590 people.
+#> # A tibble: 263 × 8
+#> # Groups:   country, year, sex, main_activity [24]
+#>    country  year sex    main_activity         variable level  count      weight
+#>    <chr>   <int> <chr>  <chr>                 <chr>    <chr>  <int>       <dbl>
+#>  1 IND      2004 Male   Agriculture           total    all    34942 23626406539
+#>  2 IND      2004 Male   Industry              total    all    10992  7169138951
+#>  3 IND      2004 Male   Out of Workforce      total    all    71458 44921362764
+#>  4 IND      2004 Male   Services - Market     total    all    31819 17580381594
+#>  5 IND      2004 Male   Services - Non-Market total    all     2090  1213388628
+#>  6 IND      2004 Male   Unemployed            total    all     3358  1410530988
+#>  7 IND      2004 Female Agriculture           total    all    14886 10872332572
+#>  8 IND      2004 Female Industry              total    all     2969  2018753456
+#>  9 IND      2004 Female Out of Workforce      total    all   118035 73812218107
+#> 10 IND      2004 Female Services - Market     total    all     4839  2550226703
+#> # ℹ 253 more rows
 ```

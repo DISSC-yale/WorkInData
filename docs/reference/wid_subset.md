@@ -96,8 +96,8 @@ wid_subset(variables = "work_search")[-1]
 #> [13] "ENAHO"     "ENEMDU"    "ENES"      "ENOE"      "ENPE"      "EULFS"    
 #> [19] "GEIH"      "GLSS"      "HILDA"     "HLFS"      "IBEP"      "IHS"      
 #> [25] "ILCS"      "ILFS"      "IPUMS"     "KCHSP"     "KLIPS"     "LFCLS"    
-#> [31] "LFS"       "LMD"       "LSMS"      "NBHS"      "NLFS"      "NSS"      
-#> [37] "PLFS"      "PNAD"      "PSLM"      "RLMS"      "SILC"     
+#> [31] "LFS"       "LSMS"      "NBHS"      "NLFS"      "NSS"       "PLFS"     
+#> [37] "PNAD"      "PSLM"      "QLFS"      "RLMS"      "SILC"     
 #> 
 #> $years
 #>  [1] 1960 1962 1963 1967 1968 1969 1970 1971 1972 1973 1974 1975 1976 1977 1978
@@ -114,11 +114,11 @@ if (dir.exists(db_dir)) {
 #> # A tibble: 5 × 15
 #>     age country education id_ind      main_activity  main_job_ind marital_status
 #>   <int> <chr>   <chr>     <chr>       <chr>          <chr>        <chr>         
-#> 1   653 IND     None      45727110201 Agriculture    31_class_111 Never Married 
-#> 2   205 IND     Primary   41499210202 Out of Workfo… NA           Married / In-…
-#> 3   262 IND     Graduate  41962220204 Out of Workfo… NA           Married / In-…
-#> 4   302 IND     NA        43285110203 Industry       31_class_20… Married / In-…
-#> 5   810 IND     NA        43977220104 Out of Workfo… NA           Never Married 
+#> 1   205 IND     Primary   41499210202 Out of Workfo… NA           Married / In-…
+#> 2   262 IND     Graduate  41962220204 Out of Workfo… NA           Married / In-…
+#> 3   302 IND     NA        43285110203 Industry       2029         Married / In-…
+#> 4   810 IND     NA        43977220104 Out of Workfo… NA           Never Married 
+#> 5   653 IND     None      45727110201 Agriculture    111          Never Married 
 #> # ℹ 8 more variables: n_child_5 <int>, rural <lgl>, sex <lgl>, survey <chr>,
 #> #   wgt <dbl>, work <lgl>, work_search <lgl>, year <int>
 ```

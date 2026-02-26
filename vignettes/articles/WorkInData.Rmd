@@ -13,11 +13,11 @@ data <- wid_open("../../../gender_growth_gap")
 
 # Cluster setup
 
-The microdata are stored on Yale's Grace HPC cluster.
+The microdata are stored on Yale's Bouchet HPC cluster.
 
 Assuming you have a Yale identity, see the [YCRC guide](https://docs.ycrc.yale.edu/clusters-at-yale/) to get started on the cluster.
 
-The package requires Arrow, which is available on the cluster in modules (e.g., `Arrow/16`).
+The package requires Arrow, which is available on the cluster in modules (e.g., `Arrow/17`).
 
 # Using the data
 
@@ -33,7 +33,7 @@ Then load the library and connect to the data:
 ```r
 library(WorkInData)
 
-data <- wid_open("/gpfs/gibbs/pi/dissc/work-in-data/gender_growth_gap")
+data <- wid_open("/nfs/roberts/pi/dissc/work-in-data/gender_growth_gap")
 ```
 
 Here, `data` is a regular [Arrow Dataset](https://arrow.apache.org/docs/r/reference/open_dataset.html),

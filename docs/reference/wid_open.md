@@ -41,6 +41,6 @@ The Work in Data
 ``` r
 if (FALSE) { # \dontrun{
 
-  wid_open("/gpfs/gibbs/pi/dissc/work-in-data/gender_growth_gap")
+  wid_open("/nfs/roberts/pi/dissc/work-in-data/gender_growth_gap")
 } # }
 ```

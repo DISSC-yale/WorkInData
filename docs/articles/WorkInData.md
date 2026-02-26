@@ -2,14 +2,14 @@
 
 ## Cluster setup
 
-The microdata are stored on Yale’s Grace HPC cluster.
+The microdata are stored on Yale’s Bouchet HPC cluster.
 
 Assuming you have a Yale identity, see the [YCRC
 guide](https://docs.ycrc.yale.edu/clusters-at-yale/) to get started on
 the cluster.
 
 The package requires Arrow, which is available on the cluster in modules
-(e.g., `Arrow/16`).
+(e.g., `Arrow/17`).
 
 ## Using the data
 
@@ -25,7 +25,7 @@ Then load the library and connect to the data:
 ``` r
 library(WorkInData)
 
-data <- wid_open("/gpfs/gibbs/pi/dissc/work-in-data/gender_growth_gap")
+data <- wid_open("/nfs/roberts/pi/dissc/work-in-data/gender_growth_gap")
 ```
 
 Here, `data` is a regular [Arrow
@@ -43,7 +43,7 @@ data_small <- data |>
   dplyr::collect()
 
 data_small
-#> # A tibble: 215,948 × 3
+#> # A tibble: 183,116 × 3
 #>      age sex   work 
 #>    <int> <lgl> <lgl>
 #>  1    35 TRUE  TRUE 
@@ -56,7 +56,7 @@ data_small
 #>  8    41 TRUE  TRUE 
 #>  9    64 FALSE TRUE 
 #> 10    24 TRUE  TRUE 
-#> # ℹ 215,938 more rows
+#> # ℹ 183,106 more rows
 ```
 
 ``` r
@@ -69,13 +69,13 @@ with(data_small, table(
 #> 
 #>         
 #>          Female  Male
-#>   Older   19452 19928
-#>   Yonger  17766  7502
+#>   Older   16773 17459
+#>   Yonger  11098  5688
 #> 
 #> , , work = TRUE
 #> 
 #>         
 #>          Female  Male
-#>   Older   28590 34503
-#>   Yonger  45327 41153
+#>   Older   22331 26608
+#>   Yonger  45226 36459
 ```
