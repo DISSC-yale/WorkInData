@@ -44,7 +44,7 @@ export function DataMenu() {
           subset: {variable: 'main_activity', level: 'Agriculture', adjust: ''},
           summary: {variable: 'sex', level: 'Female', adjust: '-'},
         },
-        full.variableLevels
+        full.variableLevels,
       )
     } else if (basicView.y.subset.adjust || basicView.y.subset.level === 'Out of Workforce') {
       basicView.y = new Variable(
@@ -54,7 +54,7 @@ export function DataMenu() {
           subset: {variable: 'main_activity', level: 'Agriculture', adjust: ''},
           summary: {variable: 'sex', level: 'Female', adjust: '-'},
         },
-        full.variableLevels
+        full.variableLevels,
       )
     }
     if (basicView.x.base !== 'year' && !basicView.x.base.startsWith('gdp')) {
@@ -134,14 +134,16 @@ export function DataMenu() {
                 }
               />
             </Stack>
-            {view.advanced ? <AdvancedMenu /> : <BasicMenu />}
+            {view.advanced ?
+              <AdvancedMenu />
+            : <BasicMenu />}
             <Button onClick={() => viewAction({key: 'reset'})}>Reset Selection</Button>
           </Stack>
           <Typography variant="h6" sx={{pb: 1}}>
             Filter
           </Typography>
           <Stack spacing={2}>
-            {view.time_agg === 'specified' ? (
+            {view.time_agg === 'specified' ?
               <TextField
                 label="Year"
                 type="number"
@@ -151,8 +153,7 @@ export function DataMenu() {
                 slotProps={{htmlInput: {min: full.levels.baseYearRange[0], max: full.levels.baseYearRange[1], step: 1}}}
                 onChange={e => viewAction({key: 'select_year', value: e.target.value})}
               />
-            ) : (
-              <Stack direction="row" spacing={1}>
+            : <Stack direction="row" spacing={1}>
                 <TextField
                   label="Min Year"
                   type="number"
@@ -172,7 +173,7 @@ export function DataMenu() {
                   onChange={e => filterAction({key: 'max_year', value: e.target.value})}
                 />
               </Stack>
-            )}
+            }
             <FilterCountry backgroundColor={mode === 'dark' ? '#353535' : '#ffffff'} />
             <Expandable>
               <Stack spacing={1}>

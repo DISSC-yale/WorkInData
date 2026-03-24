@@ -47,7 +47,7 @@ export function BasicMenu({simple}: {simple?: boolean}) {
         In Labor Force
       </MenuItem>,
     ],
-    []
+    [],
   )
   const sexSummary = useMemo(
     () =>
@@ -56,7 +56,7 @@ export function BasicMenu({simple}: {simple?: boolean}) {
           {sexSummaries[id as 'Male'].label}
         </MenuItem>
       )),
-    []
+    [],
   )
   const demoSegments = useMemo(
     () =>
@@ -65,7 +65,7 @@ export function BasicMenu({simple}: {simple?: boolean}) {
           {option in variableInfo ? variableInfo[option].label : 'None'}
         </MenuItem>
       )),
-    [levels.demo_segments]
+    [levels.demo_segments],
   )
 
   return (
@@ -146,7 +146,12 @@ export function BasicMenu({simple}: {simple?: boolean}) {
             <Select
               labelId="basic_time_agg_select"
               label="Year Per Country"
-              value={view.as_plot ? view.time_agg : view.time_agg === 'all' ? 'mean' : view.time_agg}
+              value={
+                view.as_plot ? view.time_agg
+                : view.time_agg === 'all' ?
+                  'mean'
+                : view.time_agg
+              }
               onChange={e => {
                 editView({key: 'time_agg', value: e.target.value as 'last'})
               }}

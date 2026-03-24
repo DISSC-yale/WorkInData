@@ -25,7 +25,7 @@ function checkValues(expected: number[], data: ColumnTable, view: ViewDef) {
     data,
     view,
     {panelX: view.x_panels, panelY: view.y_panels, color: view.color, symbol: view.symbol},
-    {}
+    {},
   )
   expected.forEach((v, i) => {
     const d = series[i].data as number[][]
@@ -56,7 +56,7 @@ describe('tests aggregated results', () => {
         .derive({country_year: 'd.country + d.year'})
         .join(
           (await worldBank).derive({country_year: 'd.country + d.year'}).select(not('country', 'year')),
-          'country_year'
+          'country_year',
         )
         .select(not('country_year'))
         .derive({labor_force: 'd.main_activity !== "Out of Workforce"'})
@@ -87,32 +87,32 @@ describe('tests aggregated results', () => {
       checkValues(
         [(totals.FemaleWorkForce / totals.Female) * 100 - (totals.MaleWorkForce / totals.Male) * 100],
         dataTotal,
-        view
+        view,
       )
       view.x.summary.adjust = '/'
       checkValues(
         [((totals.FemaleWorkForce / totals.Female) * 100) / ((totals.MaleWorkForce / totals.Male) * 100 + 1e-6)],
         dataTotal,
-        view
+        view,
       )
       view.x.summary.overall = true
       checkValues(
         [((totals.FemaleWorkForce / totals.overall) * 100) / ((totals.MaleWorkForce / totals.overall) * 100 + 1e-6)],
         dataTotal,
-        view
+        view,
       )
       view.x.summary.adjust = '-'
       checkValues(
         [(totals.FemaleWorkForce / totals.overall) * 100 - (totals.MaleWorkForce / totals.overall) * 100],
         dataTotal,
-        view
+        view,
       )
       view.symbol = 'sex'
       view.x = LFPVariants[0].copy()
       checkValues(
         [(totals.MaleWorkForce / totals.overall) * 100, (totals.FemaleWorkForce / totals.overall) * 100],
         dataTotal,
-        view
+        view,
       )
       view.x.updateLevel('subset', {key: 'remove'})
       checkValues([(totals.Male / totals.overall) * 100, (totals.Female / totals.overall) * 100], dataTotal, view)

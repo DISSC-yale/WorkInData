@@ -20,7 +20,10 @@ import type {Variable} from '../data/variable'
 import {FilterActionContext, FilterContext, ViewDef} from '../data/view'
 
 function axisMin({min}: {min: number}, adj = 1) {
-  return +(min < 0 || min - adj > 0 ? min - adj : min > 0.1 ? min : 0).toFixed(2)
+  return +(
+    min < 0 || min - adj > 0 ? min - adj
+    : min > 0.1 ? min
+    : 0).toFixed(2)
 }
 function axisMax({max}: {max: number}, adj = 1) {
   return +(max + adj).toFixed(2)
@@ -45,17 +48,15 @@ function formatNumberAxis(x: number, variable: Variable) {
   if (variable.isGlobal && variable.log) return formatNumber(Math.round(Math.E ** x))
   const x_abs = Math.abs(x)
   const ndec = x_abs < 1 ? 3 : 2
-  return x_abs > 1e3
-    ? x_abs > 2e9
-      ? x.toExponential(1)
-      : x_abs > 1e9
-      ? (x / 1e9).toFixed(ndec) + 'B'
-      : x_abs < 1e6
-      ? (x / 1e3).toFixed(ndec) + 'K'
+  return (
+    x_abs > 1e3 ?
+      x_abs > 2e9 ? x.toExponential(1)
+      : x_abs > 1e9 ? (x / 1e9).toFixed(ndec) + 'B'
+      : x_abs < 1e6 ? (x / 1e3).toFixed(ndec) + 'K'
       : (x / 1e6).toFixed(ndec) + 'M'
-    : x_abs % 1 === 0
-    ? '' + x
+    : x_abs % 1 === 0 ? '' + x
     : x.toFixed(ndec)
+  )
 }
 const baseYAxisOptions: AxisOptions = {
   min: axisMin,
@@ -183,16 +184,16 @@ export default function Plot({
         (view.color ? marker + (info ? info.name + ' (' + info.ISO_A3 + ')' : seriesName) : '') +
         '<table>' +
         (info ? '<tr><td>World Bank Region</td><td><strong>' + info.region + '</strong></td></tr>' : '') +
-        ('year' in varIndices && view.x.base !== 'year' && view.y.base !== 'year'
-          ? '<tr><td>Year</td><td><strong>' + value[varIndices.year] + '</strong></td></tr>'
-          : '') +
-        (view.symbol
-          ? '<tr><td>' +
-            view.symbol +
-            '</td><td><strong>' +
-            value[varIndices[view.symbol in varIndices ? view.symbol : 'level']] +
-            '</strong></td></tr>'
-          : '') +
+        ('year' in varIndices && view.x.base !== 'year' && view.y.base !== 'year' ?
+          '<tr><td>Year</td><td><strong>' + value[varIndices.year] + '</strong></td></tr>'
+        : '') +
+        (view.symbol ?
+          '<tr><td>' +
+          view.symbol +
+          '</td><td><strong>' +
+          value[varIndices[view.symbol in varIndices ? view.symbol : 'level']] +
+          '</strong></td></tr>'
+        : '') +
         '<tr><td>' +
         view.x.name +
         (view.x.isGlobal ? '' : `<br><code class="variable-description">${view.x.description}</code>`) +
@@ -206,7 +207,7 @@ export default function Plot({
         '</strong></td></tr></table></div>'
       )
     },
-    [view, countryInfo, varIndices]
+    [view, countryInfo, varIndices],
   )
   useEffect(() => {
     if (container.current) {
@@ -215,7 +216,8 @@ export default function Plot({
         if (series.length) {
           assignRanges(range.x, baseXAxisOptions, view.lock_range)
           assignRanges(range.y, baseYAxisOptions, view.lock_range)
-          const colors = useMode === 'dark' ? {bg: '#121212', text: '#ffffff'} : {bg: '#ffffff', text: '#000000'}
+          const darkMode = useMode === 'dark'
+          const colors = darkMode ? {bg: '#121212', text: '#ffffff'} : {bg: '#ffffff', text: '#000000'}
           panelSpacing.legendWidth = 0
           if (view.color) {
             series.forEach(s => {
@@ -231,7 +233,7 @@ export default function Plot({
           const {title, grid} = resizePanels(frame, panels)
           chart.setOption(
             {
-              darkMode: useMode === 'dark',
+              darkMode,
               legend: {
                 top: '55',
                 align: 'right',
@@ -245,7 +247,7 @@ export default function Plot({
                 textStyle: {
                   color: colors.text,
                 },
-                backgroundColor: colors.bg + '60',
+                backgroundColor: colors.bg + (darkMode ? '60' : ''),
                 borderWidth: 0,
                 axisPointer: {
                   type: 'line',
@@ -305,9 +307,9 @@ export default function Plot({
                 return {
                   text: label,
                   subtext:
-                    (nCountries === 1 && data[varIndices.country] in countryInfo
-                      ? `Data from ${countryInfo[data[varIndices.country]].name}`
-                      : `Observations from ${nCountries} ${nCountries === 1 ? 'country' : 'countries'}`) +
+                    (nCountries === 1 && data[varIndices.country] in countryInfo ?
+                      `Data from ${countryInfo[data[varIndices.country]].name}`
+                    : `Observations from ${nCountries} ${nCountries === 1 ? 'country' : 'countries'}`) +
                     (filter && filter.sectors.length < 5 ? ', sector = ' + filter.sectors.join(', ') : '') +
                     (filter && filter.sexes.length === 1 ? ', sex = ' + filter.sexes[0] : ''),
                   top,
@@ -328,7 +330,7 @@ export default function Plot({
               },
             },
             true,
-            true
+            true,
           )
         } else {
           chart.clear()

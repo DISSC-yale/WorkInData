@@ -82,9 +82,9 @@ export default function Map({
               title: {
                 text: series[0].name,
                 subtext:
-                  (nCountries === 1 && data[varIndices.country] in countryInfo
-                    ? `Data from ${countryInfo[data[varIndices.country]].name}`
-                    : `Observations from ${nCountries} ${nCountries === 1 ? 'country' : 'countries'}`) +
+                  (nCountries === 1 && data[varIndices.country] in countryInfo ?
+                    `Data from ${countryInfo[data[varIndices.country]].name}`
+                  : `Observations from ${nCountries} ${nCountries === 1 ? 'country' : 'countries'}`) +
                   (filter && filter.sectors.length < 5 ? ', sector = ' + filter.sectors.join(', ') : '') +
                   (filter && filter.sexes.length === 1 ? ', sex = ' + filter.sexes[0] : ''),
                 textStyle: {fontSize: '1em', fontWeight: 'normal'},
@@ -95,7 +95,7 @@ export default function Map({
                 textStyle: {
                   color: colors.text,
                 },
-                backgroundColor: colors.bg,
+                backgroundColor: colors.bg + (useMode === 'dark' ? '80' : '95'),
                 borderWidth: 0,
                 formatter: ({marker, name, data}: {marker: string; name: string; data: {[index: string]: number}}) => {
                   return (
@@ -108,14 +108,14 @@ export default function Map({
                     (data.year ? '<tr><td>Year</td><td><strong>' + data.year + '</strong></td></tr>' : '') +
                     '<tr><td>' +
                     view.y.name +
-                    (data && 'value' in data
-                      ? ', ' +
-                        (view.time_agg === 'mean' || view.time_agg === 'all' ? 'average' : data.year) +
-                        (view.y.isGlobal ? '' : `<br><code class="variable-description">${view.y.description}</code>`) +
-                        '</td><td><strong>' +
-                        formatNumber(data.value, view.y) +
-                        '</strong>'
-                      : '</td><td><strong>unknown</strong>') +
+                    (data && 'value' in data ?
+                      ', ' +
+                      (view.time_agg === 'mean' || view.time_agg === 'all' ? 'average' : data.year) +
+                      (view.y.isGlobal ? '' : `<br><code class="variable-description">${view.y.description}</code>`) +
+                      '</td><td><strong>' +
+                      formatNumber(data.value, view.y) +
+                      '</strong>'
+                    : '</td><td><strong>unknown</strong>') +
                     '</td></tr></table></div>'
                   )
                 },
@@ -141,7 +141,7 @@ export default function Map({
               },
             },
             true,
-            true
+            true,
           )
         } else {
           chart.clear()

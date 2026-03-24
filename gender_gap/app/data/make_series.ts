@@ -28,7 +28,7 @@ export function makeSeries(
   filtered: ColumnTable,
   view: ViewDef,
   refs: {panelX: string; panelY: string; color: string; symbol: string},
-  countryInfo: Info
+  countryInfo: Info,
 ) {
   const {panelX, panelY, color, symbol} = refs
   const xPanelLevels = panelX ? unique(filtered, panelX) : ['']
@@ -54,8 +54,9 @@ export function makeSeries(
       })
     }
   }
-  const baseSeries: LineSeriesOption | MapSeriesOption = view.as_plot
-    ? {
+  const baseSeries: LineSeriesOption | MapSeriesOption =
+    view.as_plot ?
+      {
         type: 'line',
         symbolSize: 10,
         color: color ? '' : '#a5cdff',
@@ -120,7 +121,6 @@ export function makeSeries(
   const toVariantY: {y: string; y_off?: string} = {y: view.y.formula('y')}
   const toVariantX: {x?: string; x_off?: string} = {}
   if (view.as_plot && view.x.base) toVariantX.x = view.x.formula('x')
-
   const groupVars = view.as_plot ? [...lineVars] : ['country']
   const countryCenter = groupVars.includes('country') && view.country_center && view.as_plot && view.time_agg === 'all'
 
@@ -215,10 +215,10 @@ export function makeSeries(
       } else {
         d = d.rollup(fun)
         if (toVariantX.x) {
-          d = d.groupby([...baseGroups, view.x.summary.variable].filter(v => !!v)).derive(toVariantX)
+          d = d.groupby([...baseGroups, ...groupVars, view.x.summary.variable].filter(v => !!v)).derive(toVariantX)
         }
         if (toVariantY.y) {
-          d = d.groupby([...baseGroups, view.y.summary.variable].filter(v => !!v)).derive(toVariantY)
+          d = d.groupby([...baseGroups, ...groupVars, view.y.summary.variable].filter(v => !!v)).derive(toVariantY)
         }
       }
       if (countryCenter) {
@@ -338,7 +338,7 @@ export function makeSeries(
       }
     })
   })
-  return view.as_plot
-    ? ({series: data, fits: fitData, panels, range, varIndices} as PlotInput)
+  return view.as_plot ?
+      ({series: data, fits: fitData, panels, range, varIndices} as PlotInput)
     : ({series: data, range, varIndices} as MapInput)
 }

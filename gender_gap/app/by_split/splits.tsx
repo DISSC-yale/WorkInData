@@ -68,15 +68,15 @@ export default function Splits() {
     <Stack spacing={2} component="main" sx={{pr: 1}}>
       <Typography>
         The figure below shows the relationship between the {Variable.activityLabel(view.y.subset).toLowerCase()}{' '}
-        {view.y.summary.adjust === '-'
-          ? 'gender gap'
-          : view.y.summary.adjust === '/'
-          ? 'gender ratio'
-          : (view.y.summary.level as string).toLowerCase() + ' share'}{' '}
+        {view.y.summary.adjust === '-' ?
+          'gender gap'
+        : view.y.summary.adjust === '/' ?
+          'gender ratio'
+        : (view.y.summary.level as string).toLowerCase() + ' share'}{' '}
         and {view.x.base === 'year' ? 'year' : 'GDP per capita'}
-        {view.y_panels in splitDescriptions
-          ? ', comparing individuals ' + splitDescriptions[view.y_panels as 'rural']
-          : ''}
+        {view.y_panels in splitDescriptions ?
+          ', comparing individuals ' + splitDescriptions[view.y_panels as 'rural']
+        : ''}
         . The menu options allow you to change the labor market outcome shown, change the way GDP per capita is
         displayed, introduce a different color for each global region, change the set of countries which are shown, and
         change the set of years from which data are drawn (below the figure).

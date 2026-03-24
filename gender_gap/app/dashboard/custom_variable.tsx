@@ -96,9 +96,9 @@ export function CustomVariable({spec, update}: {spec?: Variable; update: () => v
                   ))}
                 </Select>
               </FormControl>
-              {spec.base === 'year' ? (
+              {spec.base === 'year' ?
                 <></>
-              ) : spec.isGlobal ? (
+              : spec.isGlobal ?
                 <>
                   <FormControlLabel
                     label="Log"
@@ -114,8 +114,7 @@ export function CustomVariable({spec, update}: {spec?: Variable; update: () => v
                     }
                   />
                 </>
-              ) : (
-                <Stack spacing={1}>
+              : <Stack spacing={1}>
                   <FormControlLabel
                     label="Percent"
                     labelPlacement="start"
@@ -159,17 +158,18 @@ export function CustomVariable({spec, update}: {spec?: Variable; update: () => v
                             labelId="subset_select"
                             label="Main Activity"
                             value={
-                              spec.subset
-                                ? Array.isArray(spec.subset.level)
-                                  ? spec.subset.level
-                                  : [spec.subset.level]
-                                : []
+                              spec.subset ?
+                                Array.isArray(spec.subset.level) ?
+                                  spec.subset.level
+                                : [spec.subset.level]
+                              : []
                             }
                             renderValue={selected => selected.join(', ')}
                             onChange={e => {
-                              const value = Array.isArray(e.target.value)
-                                ? e.target.value.length === 1
-                                  ? e.target.value[0]
+                              const value =
+                                Array.isArray(e.target.value) ?
+                                  e.target.value.length === 1 ?
+                                    e.target.value[0]
                                   : e.target.value.sort()
                                 : e.target.value
                               if (Array.isArray(value) && !value.length) return
@@ -187,9 +187,9 @@ export function CustomVariable({spec, update}: {spec?: Variable; update: () => v
                                 <MenuItem key={v} value={v}>
                                   <Checkbox
                                     checked={
-                                      Array.isArray(spec.subset.level)
-                                        ? spec.subset.level.includes(v)
-                                        : v === spec.subset.level
+                                      Array.isArray(spec.subset.level) ?
+                                        spec.subset.level.includes(v)
+                                      : v === spec.subset.level
                                     }
                                   />
                                   <ListItemText primary={v} />
@@ -307,7 +307,7 @@ export function CustomVariable({spec, update}: {spec?: Variable; update: () => v
                     )}
                   </Stack>
                 </Stack>
-              )}
+              }
             </Stack>
           </DialogContent>
         </Dialog>

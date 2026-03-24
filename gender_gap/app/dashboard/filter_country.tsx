@@ -15,21 +15,22 @@ export function FilterCountry({backgroundColor}: {backgroundColor: string}) {
     (country: string) => {
       if (!(country in countryOptions)) {
         const info = full.countryInfo[country]
-        countryOptions[country] = info
-          ? {key: country, searchString: JSON.stringify(info), name: info.name, region: info.region}
+        countryOptions[country] =
+          info ?
+            {key: country, searchString: JSON.stringify(info), name: info.name, region: info.region}
           : {key: country, searchString: country, name: country, region: 'unknown'}
       }
       return countryOptions[country]
     },
-    [full.countryInfo]
+    [full.countryInfo],
   )
   const allCountries: countryOption[] = useMemo(
     () => Object.keys(full.levels.countries).map(makeCountryOption),
-    [full.levels.countries, makeCountryOption]
+    [full.levels.countries, makeCountryOption],
   )
   const filteredCountries = useMemo(
     () => Object.keys(filter.countries).map(makeCountryOption),
-    [filter.countries, makeCountryOption]
+    [filter.countries, makeCountryOption],
   )
 
   const countryGroupSelected = useCallback(
@@ -43,7 +44,7 @@ export function FilterCountry({backgroundColor}: {backgroundColor: string}) {
       })
       return checked
     },
-    [filter.countries, allCountries]
+    [filter.countries, allCountries],
   )
   return (
     <Stack direction="row">

@@ -45,7 +45,7 @@ function InfoCard({variable, view, filter}: {variable: Variable; view: ViewDef; 
                 <Typography>{variable.description}</Typography>
               </TableCell>
             </TableRow>
-            {info.source ? (
+            {info.source ?
               <TableRow>
                 <TableCell>
                   <Typography>Source:</Typography>
@@ -58,7 +58,7 @@ function InfoCard({variable, view, filter}: {variable: Variable; view: ViewDef; 
                   </Typography>
                 </TableCell>
               </TableRow>
-            ) : variable.percent ? (
+            : variable.percent ?
               <TableRow>
                 <TableCell>
                   <Typography whiteSpace="nowrap">Percent Total:</Typography>
@@ -66,22 +66,18 @@ function InfoCard({variable, view, filter}: {variable: Variable; view: ViewDef; 
                 <TableCell>
                   <Typography>
                     {(view.within_split && variable.subset.variable ? 'Within split' : 'Across splits') +
-                      (variable.summary
-                        ? ', ' +
-                          (variable.summary.overall
-                            ? 'all participants'
-                            : `within ${
-                                variable.summary.variable === 'sex' ? 'gender' : variable.summary.variable
-                              } level`)
-                        : '') +
+                      (variable.summary ?
+                        ', ' +
+                        (variable.summary.overall ?
+                          'all participants'
+                        : `within ${variable.summary.variable === 'sex' ? 'gender' : variable.summary.variable} level`)
+                      : '') +
                       ', including these activities: ' +
                       filter.sectors.join(', ')}
                   </Typography>
                 </TableCell>
               </TableRow>
-            ) : (
-              <></>
-            )}
+            : <></>}
           </TableBody>
         </Table>
       </CardContent>

@@ -172,7 +172,7 @@ export function DataView({children}: Readonly<{children?: React.ReactNode}>) {
     ).map((s, i) => {
       s.index = i
       return new Variable(s, full.variableLevels)
-    })
+    }),
   )
 
   const urlParams = useMemo(() => {
@@ -306,7 +306,7 @@ export function DataView({children}: Readonly<{children?: React.ReactNode}>) {
         if (k in initial) initial[k as 'color'] = urlParams[k as 'color']
       })
       return initial
-    })()
+    })(),
   )
   const [filter, filterAction] = useReducer(editFilter, urlParamsToFilter(urlParams))
 
@@ -334,14 +334,14 @@ export function DataView({children}: Readonly<{children?: React.ReactNode}>) {
       .params({c: filter.countries, s: selectSexes, a: selectSectors})
       .filter('(d, p) => d.country in p.c && d.sex in p.s && d.main_activity in p.a')
       .filter(
-        view.time_agg === 'specified'
-          ? 'd.year === ' + (view.select_year || full.levels.baseYearRange[1])
-          : `d.year >= ${filter.min_year || full.levels.baseYearRange[0]} && d.year <= ${
-              filter.max_year || full.levels.baseYearRange[1]
-            }`
+        view.time_agg === 'specified' ?
+          'd.year === ' + (view.select_year || full.levels.baseYearRange[1])
+        : `d.year >= ${filter.min_year || full.levels.baseYearRange[0]} && d.year <= ${
+            filter.max_year || full.levels.baseYearRange[1]
+          }`,
       )
-    return view.time_agg in yearSelectors
-      ? filtered.groupby('country').filter(yearSelectors[view.time_agg as 'first'])
+    return view.time_agg in yearSelectors ?
+        filtered.groupby('country').filter(yearSelectors[view.time_agg as 'first'])
       : filtered
   }, [subset, filter, view.time_agg, view.select_year, full.levels.baseYearRange])
 

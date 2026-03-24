@@ -85,7 +85,9 @@ export default function Dashboard() {
               </IconButton>
             }
           />
-          {showAbout ? <About /> : <DataMenu />}
+          {showAbout ?
+            <About />
+          : <DataMenu />}
         </Card>
       </Drawer>
     </DataView>

@@ -8,7 +8,13 @@ import {Maps} from '../parts/maps'
 import {FilteredContext, ViewContext, type ViewDef} from './view'
 
 function getColRef(ref: string, segments: {[index: string]: boolean}) {
-  return ref ? (ref in segments ? 'level' : ref) : ''
+  return (
+    ref ?
+      ref in segments ?
+        'level'
+      : ref
+    : ''
+  )
 }
 
 export function DataDisplay({mode}: {mode?: 'dark' | 'light'}) {
@@ -26,30 +32,28 @@ export function DataDisplay({mode}: {mode?: 'dark' | 'light'}) {
           color: getColRef(view.color, full.levels.demo_segments),
           symbol: getColRef(view.symbol, full.levels.demo_segments),
         },
-        full.countryInfo
+        full.countryInfo,
       ),
-    [view, filtered, full.levels.demo_segments, full.countryInfo]
+    [view, filtered, full.levels.demo_segments, full.countryInfo],
   )
 
-  return view.as_plot ? (
-    <Plot input={series as PlotInput} view={view} countryInfo={full.countryInfo} modeOverride={mode} />
-  ) : (
-    <>
-      <Typography variant="h6" sx={{position: 'absolute', width: '100%', textAlign: 'center'}}>
-        {view.y.name}
-      </Typography>
-      <Box
-        sx={{
-          height: '100%',
-          display: 'flex',
-          flexWrap: 'wrap',
-          pt: 5,
-          minWidth: series.range.panel[0] * 500 + 'px',
-          minHeight: series.range.panel[1] * 300 + 'px',
-        }}
-      >
-        <Maps view={view} full={full} final={series as MapInput} modeOverride={mode} />
-      </Box>
-    </>
-  )
+  return view.as_plot ?
+      <Plot input={series as PlotInput} view={view} countryInfo={full.countryInfo} modeOverride={mode} />
+    : <>
+        <Typography variant="h6" sx={{position: 'absolute', width: '100%', textAlign: 'center'}}>
+          {view.y.name}
+        </Typography>
+        <Box
+          sx={{
+            height: '100%',
+            display: 'flex',
+            flexWrap: 'wrap',
+            pt: 5,
+            minWidth: series.range.panel[0] * 500 + 'px',
+            minHeight: series.range.panel[1] * 300 + 'px',
+          }}
+        >
+          <Maps view={view} full={full} final={series as MapInput} modeOverride={mode} />
+        </Box>
+      </>
 }

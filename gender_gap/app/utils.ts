@@ -8,7 +8,11 @@ export function formatNumber(x: number, variable?: Variable): string | number {
     if (variable.base === 'year') return x
     if (variable.isGlobal && variable.log) return `${formatNumber(Math.round(Math.E ** x))} (${formatNumber(x)})`
   }
-  return x % 1 === 0 ? formatter(x) : Math.abs(x) > 1e3 ? formatter(+x.toFixed(2)) : x.toFixed(2)
+  return (
+    x % 1 === 0 ? formatter(x)
+    : Math.abs(x) > 1e3 ? formatter(+x.toFixed(2))
+    : x.toFixed(2)
+  )
 }
 
 export function unique(d: ColumnTable, variable: string) {
@@ -20,7 +24,13 @@ export function tooltipPlacer(pos: number[], params: LineSeriesOption, dom: HTML
   const halfSize = tooltipRect.width / 2
   const setPosition = {
     top: pos[1] - (pos[1] < window.innerHeight / 2 ? -40 : tooltipRect.height + 40),
-    left: pos[0] - (pos[0] > halfSize ? (window.innerWidth - pos[0] > halfSize ? halfSize : halfSize * 2) : -30),
+    left:
+      pos[0] -
+      (pos[0] > halfSize ?
+        window.innerWidth - pos[0] > halfSize ?
+          halfSize
+        : halfSize * 2
+      : -30),
   }
   return setPosition
 }

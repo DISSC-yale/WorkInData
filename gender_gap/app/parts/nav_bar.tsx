@@ -16,7 +16,9 @@ export default function NavBar({children}: Readonly<{children?: React.ReactNode}
         <Stack direction="row" spacing={1} sx={{'& .MuiButtonBase-root': {ml: {md: 1, sm: 0, xs: 0}}}}>
           <InfoDisplay />
           <IconButton color="inherit" onClick={() => setMode(isDark ? 'light' : 'dark')} aria-label="toggle dark mode">
-            {isDark ? <LightMode /> : <DarkMode />}
+            {isDark ?
+              <LightMode />
+            : <DarkMode />}
           </IconButton>
           {children}
         </Stack>

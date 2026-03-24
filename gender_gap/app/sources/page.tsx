@@ -23,13 +23,11 @@ const cols = [
     renderCell: (params: GridRenderCellParams<MetadataRow>) => {
       const row = params.row
       const label = row.survey_name ? row.survey_name + ` (${row.survey})` : row.survey
-      return row.survey_link && row.survey_link.startsWith('http') ? (
-        <Link target="_blank" rel="noreferrer" href={row.survey_link}>
-          {label}
-        </Link>
-      ) : (
-        label
-      )
+      return row.survey_link && row.survey_link.startsWith('http') ?
+          <Link target="_blank" rel="noreferrer" href={row.survey_link}>
+            {label}
+          </Link>
+        : label
     },
   },
   {field: 'survey_name', headerName: 'Name'},

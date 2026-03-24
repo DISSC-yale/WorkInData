@@ -260,7 +260,12 @@ export function AdvancedMenu() {
           <Select
             labelId="time_agg_select"
             label="Time Handling"
-            value={view.as_plot ? view.time_agg : view.time_agg === 'all' ? 'mean' : view.time_agg}
+            value={
+              view.as_plot ? view.time_agg
+              : view.time_agg === 'all' ?
+                'mean'
+              : view.time_agg
+            }
             onChange={e => {
               editView({key: 'time_agg', value: e.target.value as 'last'})
             }}

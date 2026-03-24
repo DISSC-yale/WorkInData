@@ -47,13 +47,14 @@ export class Variable {
             this[k] = {...spec[k]} as LevelSpec
             if (levels) {
               const ls = levels[this[k].variable]
-              this[k].levelIndex = Array.isArray(this[k].level)
-                ? this[k].level.map(l => ls.indexOf(l)).filter(i => i != -1)
+              this[k].levelIndex =
+                Array.isArray(this[k].level) ?
+                  this[k].level.map(l => ls.indexOf(l)).filter(i => i != -1)
                 : ls.indexOf(this[k].level)
               if (
-                Array.isArray(this[k].levelIndex)
-                  ? !this[k].levelIndex.length || this[k].levelIndex[0] == -1
-                  : this[k].levelIndex === -1
+                Array.isArray(this[k].levelIndex) ?
+                  !this[k].levelIndex.length || this[k].levelIndex[0] == -1
+                : this[k].levelIndex === -1
               )
                 this[k] = {...defaultLevelSpec}
             }
@@ -83,7 +84,7 @@ export class Variable {
       | {key: 'remove'}
       | {key: 'variable' | 'level'; value: string | string[]; levels: string[]}
       | {key: 'adjust'; value: '' | '-' | '/'}
-      | {key: 'overall'; value: boolean}
+      | {key: 'overall'; value: boolean},
   ) {
     if (slot.key === 'remove') {
       this[which] = {...defaultLevelSpec}
@@ -95,9 +96,8 @@ export class Variable {
           spec.level = slot.levels[0]
           spec.levelIndex = 0
         } else {
-          spec.levelIndex = Array.isArray(spec.level)
-            ? spec.level.map(l => slot.levels.indexOf(l))
-            : slot.levels.indexOf(spec.level)
+          spec.levelIndex =
+            Array.isArray(spec.level) ? spec.level.map(l => slot.levels.indexOf(l)) : slot.levels.indexOf(spec.level)
         }
       }
     }
@@ -105,7 +105,10 @@ export class Variable {
   }
   parseLevel(part: string, allLevels: {[index: string]: string[]}) {
     const subsetParts = part.split('.')
-    const adjust = subsetParts[0][0] === '!' ? '-' : subsetParts[0][0] === '|' ? '/' : ''
+    const adjust =
+      subsetParts[0][0] === '!' ? '-'
+      : subsetParts[0][0] === '|' ? '/'
+      : ''
     const variable = adjust ? subsetParts[0].substring(1) : subsetParts[0]
     const levels = allLevels[variable]
     const levelIndex = subsetParts[1]
@@ -116,7 +119,12 @@ export class Variable {
     return {
       variable,
       levelIndex,
-      level: levelIndex.length ? (levelIndex.length == 1 ? levels[levelIndex[0]] : levelIndex.map(i => levels[i])) : '',
+      level:
+        levelIndex.length ?
+          levelIndex.length == 1 ?
+            levels[levelIndex[0]]
+          : levelIndex.map(i => levels[i])
+        : '',
       adjust,
       overall: subsetParts[1].endsWith('t'),
     } as LevelSpec
@@ -127,8 +135,8 @@ export class Variable {
   formula(baseRef: string) {
     if (this.base === 'year') return 'd.' + baseRef
     if (this.isGlobal) return this.log ? `log(d.${baseRef})` : 'd.' + baseRef
-    return this.percent
-      ? `d.${baseRef} / d.${baseRef}${this.summary.variable && !this.summary.overall ? '_summary' : ''}_sum * 100`
+    return this.percent ?
+        `d.${baseRef} / d.${baseRef}${this.summary.variable && !this.summary.overall ? '_summary' : ''}_sum * 100`
       : `sum(d.${baseRef})`
   }
   updateName() {
@@ -138,8 +146,11 @@ export class Variable {
     } else if (this.subset.variable || this.summary.variable) {
       if (this.subset.variable) name = Variable.activityLabel(this.subset)
       const valueType =
-        (this.percent ? (!this.summary.variable || !this.summary.overall ? '%' : ' overall %') : '') +
-        (this.base === 'weight' ? '' : (this.percent ? ' ' : '') + this.base)
+        (this.percent ?
+          !this.summary.variable || !this.summary.overall ?
+            '%'
+          : ' overall %'
+        : '') + (this.base === 'weight' ? '' : (this.percent ? ' ' : '') + this.base)
       if (this.summary.variable) {
         name +=
           ': ' +
@@ -158,55 +169,70 @@ export class Variable {
         (this.base === 'year' || !this.log ? '' : 'Log of ') +
         (variableInfo[this.base].label_long || variableInfo[this.base].label)
     } else {
-      const baseRef = this.base == 'weight' ? 'with weights' : this.base == 'count' ? 'raw count' : this.base
+      const baseRef =
+        this.base == 'weight' ? 'with weights'
+        : this.base == 'count' ? 'raw count'
+        : this.base
       const peopleRef = [
-        (this.summary.variable ? (this.summary.level === 'Male' ? 'men' : 'women') : 'people') + ` (${baseRef})`,
+        (this.summary.variable ?
+          this.summary.level === 'Male' ?
+            'men'
+          : 'women'
+        : 'people') + ` (${baseRef})`,
       ]
       if (this.summary.variable && this.summary.adjust !== '') {
         peopleRef.push((peopleRef[0].includes('women') ? 'men' : 'women') + ` (${baseRef})`)
       }
-      const subsetRef = this.subset.variable
-        ? this.subset.level === 'Unemployed'
-          ? this.subset.adjust === '-'
-            ? 'employed or not looking for work'
+      const subsetRef =
+        this.subset.variable ?
+          this.subset.level === 'Unemployed' ?
+            this.subset.adjust === '-' ?
+              'employed or not looking for work'
             : 'unemployed and looking for work'
-          : this.subset.level === 'Out of Workforce'
-          ? this.subset.adjust === '-'
-            ? 'employed or looking for work'
+          : this.subset.level === 'Out of Workforce' ?
+            this.subset.adjust === '-' ?
+              'employed or looking for work'
             : 'not employed or looking for work'
           : ` ${this.subset.adjust === '-' ? 'not ' : ''}employed in ` + this.subset.level
         : ''
       this.description =
         peopleRef
           .map(p =>
-            this.summary.overall
-              ? (this.percent ? `percent of people (${baseRef})` : '') +
-                (subsetRef ? ' ' + subsetRef.toLowerCase() : '') +
-                (this.percent ? ' and are ' : '') +
-                p
-              : (this.percent ? 'percent of ' : '') + p + (subsetRef ? ' ' + subsetRef.toLowerCase() : '')
+            this.summary.overall ?
+              (this.percent ? `percent of people (${baseRef})` : '') +
+              (subsetRef ? ' ' + subsetRef.toLowerCase() : '') +
+              (this.percent ? ' and are ' : '') +
+              p
+            : (this.percent ? 'percent of ' : '') + p + (subsetRef ? ' ' + subsetRef.toLowerCase() : ''),
           )
-          .join(this.summary.adjust === '-' ? ' minus ' : this.summary.adjust === '/' ? ' divided by ' : '')
+          .join(
+            this.summary.adjust === '-' ? ' minus '
+            : this.summary.adjust === '/' ? ' divided by '
+            : '',
+          )
           .replace(patternFirstLetter, l => l.toUpperCase()) + '.'
     }
   }
   levelToString(which: 'subset' | 'summary') {
     const spec = this[which]
-    return spec && spec.variable
-      ? `${spec.adjust ? (spec.adjust === '-' ? '!' : '|') : ''}${spec.variable}.${spec.levelIndex}${
-          spec.overall ? 't' : ''
-        }`
+    return spec && spec.variable ?
+        `${
+          spec.adjust ?
+            spec.adjust === '-' ?
+              '!'
+            : '|'
+          : ''
+        }${spec.variable}.${spec.levelIndex}${spec.overall ? 't' : ''}`
       : ''
   }
   toString() {
     return `${!this.isGlobal && this.percent ? '%' : ''}${this.base}${
-      this.base === 'year'
-        ? ''
-        : this.isGlobal
-        ? this.log
-          ? ':log'
-          : ''
-        : ':' + this.levelToString('subset') + ':' + this.levelToString('summary')
+      this.base === 'year' ? ''
+      : this.isGlobal ?
+        this.log ?
+          ':log'
+        : ''
+      : ':' + this.levelToString('subset') + ':' + this.levelToString('summary')
     }`
   }
   toFileName() {
@@ -218,16 +244,16 @@ export class Variable {
       .replaceAll('.', '')
   }
   subsetFormula() {
-    return Array.isArray(this.subset.level)
-      ? (this.subset.adjust === '-' ? '!' : '') +
+    return Array.isArray(this.subset.level) ?
+        (this.subset.adjust === '-' ? '!' : '') +
           '(' +
           this.subset.level.map(l => `(d.${this.subset.variable}==="${l}")`).join('||') +
           ')'
       : `(d.${this.subset.variable}${this.subset.adjust === '-' ? '!==' : '==='}"${this.subset.level}")`
   }
   summaryFormula(base: string) {
-    return this.summary.adjust === '-'
-      ? `d.${base} * ((d.${this.summary.variable}==="${this.summary.level}") + -1 * (d.${this.summary.variable}!=="${this.summary.level}"))`
+    return this.summary.adjust === '-' ?
+        `d.${base} * ((d.${this.summary.variable}==="${this.summary.level}") + -1 * (d.${this.summary.variable}!=="${this.summary.level}"))`
       : `d.${base} * (d.${this.summary.variable}==="${this.summary.level}")`
   }
   offLevelFormula(base: string) {
@@ -244,16 +270,18 @@ export class Variable {
       const levelId = spec.levelIndex.sort().join(',')
       return (
         (spec.adjust === '-' ? 'Not ' : '') +
-        (levelId in activityLabels
-          ? activityLabels[levelId as '0,1,3']
-          : spec.level.map(l => activityLabels[l as 'Industry']).join(', ')) +
+        (levelId in activityLabels ?
+          activityLabels[levelId as '0,1,3']
+        : spec.level.map(l => activityLabels[l as 'Industry']).join(', ')) +
         (spec.adjust === '/' ? ' Proportion' : '')
       )
     }
-    return spec.adjust === '-'
-      ? spec.level && spec.level === 'Out of Workforce'
-        ? 'Labor Force Participation'
+    return (
+      spec.adjust === '-' ?
+        spec.level && spec.level === 'Out of Workforce' ?
+          'Labor Force Participation'
         : 'Not ' + activityLabels[spec.level as 'Industry']
       : activityLabels[spec.level as 'Industry'] + (spec.adjust === '/' ? ' Proportion' : '')
+    )
   }
 }

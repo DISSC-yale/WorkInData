@@ -35,7 +35,7 @@ export function Export() {
       from(Object.values(full.countryInfo))
         .select('ISO_A3', 'name', 'region', 'income')
         .rename({ISO_A3: 'country', name: 'country_name'}),
-    [full.countryInfo]
+    [full.countryInfo],
   )
 
   const [open, setOpen] = useState(false)
@@ -58,9 +58,9 @@ export function Export() {
     return {
       partial,
       full: `wid_ggg_${full.meta.updated}${
-        view.time_agg === 'all'
-          ? ''
-          : '_' + (view.time_agg === 'specified' ? view.select_year : view.time_agg + '-time')
+        view.time_agg === 'all' ?
+          ''
+        : '_' + (view.time_agg === 'specified' ? view.select_year : view.time_agg + '-time')
       }`,
     }
   }, [filtered, view, allColumns, full.meta.updated])
