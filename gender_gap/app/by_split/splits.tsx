@@ -118,7 +118,7 @@ export default function Splits() {
         <DataDisplay mode="light" />
         <Stack spacing={1} sx={{minWidth: 280}}>
           <BasicMenu simple={true} />
-          <Typography fontWeight="bold">Filter</Typography>
+          <Typography sx={{fontWeight: 'bold'}}>Filter</Typography>
           <FilterCountry backgroundColor="#ffffff" />
           <Divider sx={{pt: 1.5}} />
           <Export />

@@ -1,4 +1,4 @@
-import {Close, InfoOutline} from '@mui/icons-material'
+import {Close, InfoOutlined} from '@mui/icons-material'
 import {
   Card,
   CardContent,
@@ -61,7 +61,7 @@ function InfoCard({variable, view, filter}: {variable: Variable; view: ViewDef; 
             : variable.percent ?
               <TableRow>
                 <TableCell>
-                  <Typography whiteSpace="nowrap">Percent Total:</Typography>
+                  <Typography sx={{whiteSpace: 'nowrap'}}>Percent Total:</Typography>
                 </TableCell>
                 <TableCell>
                   <Typography>
@@ -93,7 +93,7 @@ export function InfoDisplay() {
   return (
     <>
       <IconButton color="inherit" onClick={close} aria-label="more information about the current variables">
-        <InfoOutline />
+        <InfoOutlined />
       </IconButton>
       {open && (
         <Dialog open={open} onClose={close} hideBackdrop>

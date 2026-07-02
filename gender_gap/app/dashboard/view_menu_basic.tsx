@@ -70,7 +70,7 @@ export function BasicMenu({simple}: {simple?: boolean}) {
 
   return (
     <>
-      <Typography fontWeight="bold">1. Outcome (Y-Axis)</Typography>
+      <Typography sx={{fontWeight: 'bold'}}>1. Outcome (Y-Axis)</Typography>
       <FormControl variant="outlined" fullWidth size="small">
         <InputLabel id="basic_y_subset_select">Main Activity</InputLabel>
         <Select
@@ -107,7 +107,7 @@ export function BasicMenu({simple}: {simple?: boolean}) {
       </FormControl>
       {view.as_plot && (
         <>
-          <Typography fontWeight="bold">2. By (X-Axis)</Typography>
+          <Typography sx={{fontWeight: 'bold'}}>2. By (X-Axis)</Typography>
           <FormControl variant="outlined" fullWidth size="small">
             <InputLabel id="basic_x_select">External Variable</InputLabel>
             <Select
@@ -121,14 +121,14 @@ export function BasicMenu({simple}: {simple?: boolean}) {
               {xSelectItems}
             </Select>
           </FormControl>
-          <Typography fontWeight="bold">3. Styling</Typography>
+          <Typography sx={{fontWeight: 'bold'}}>3. Styling</Typography>
           <ColorBasis current={view.color_source} viewAction={editView} outlined={true} />
           <RegressionSelect current={view.regression} viewAction={editView} />
         </>
       )}
       {!simple && (
         <>
-          <Typography fontWeight="bold">{view.as_plot ? 4 : 2}. Split By</Typography>
+          <Typography sx={{fontWeight: 'bold'}}>{view.as_plot ? 4 : 2}. Split By</Typography>
           <FormControl variant="outlined" fullWidth size="small">
             <InputLabel id="basic_y_panel_select">Demographic Subset</InputLabel>
             <Select
@@ -140,7 +140,7 @@ export function BasicMenu({simple}: {simple?: boolean}) {
               {demoSegments}
             </Select>
           </FormControl>
-          <Typography fontWeight="bold">{view.as_plot ? 5 : 3}. Time Handling</Typography>
+          <Typography sx={{fontWeight: 'bold'}}>{view.as_plot ? 5 : 3}. Time Handling</Typography>
           <FormControl size="small" fullWidth>
             <InputLabel id="basic_time_agg_select">Year Per Country</InputLabel>
             <Select

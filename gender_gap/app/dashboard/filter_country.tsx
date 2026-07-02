@@ -82,7 +82,7 @@ export function FilterCountry({backgroundColor}: {backgroundColor: string}) {
                   }}
                   checked={countryGroupSelected(params.group)}
                 />
-                <Typography fontSize="small">{params.group}</Typography>
+                <Typography sx={{fontSize: 'small'}}>{params.group}</Typography>
               </Stack>
               {params.children}
             </Box>
@@ -93,7 +93,7 @@ export function FilterCountry({backgroundColor}: {backgroundColor: string}) {
           return (
             <li key={key} {...optionProps} style={{paddingTop: 0, paddingBottom: 0}}>
               <Checkbox checked={selected} size="small" />
-              <Typography fontSize="small">
+              <Typography sx={{fontSize: 'small'}}>
                 {option.name + (option.name === option.key ? '' : ' (' + option.key + ')')}
               </Typography>
             </li>

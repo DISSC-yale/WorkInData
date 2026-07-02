@@ -52,7 +52,7 @@ data_small
 
 ```{r, fig.height=5, fig.width=10}
 with(data_small, table(
-  c("Yonger", "Older")[(age > mean(age, na.rm = TRUE)) + 1L],
+  c("Younger", "Older")[(age > mean(age, na.rm = TRUE)) + 1L],
   c("Male", "Female")[sex + 1L],
   work
 ))

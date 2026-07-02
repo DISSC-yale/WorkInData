@@ -266,7 +266,7 @@ export function About() {
           return (
             <Box sx={{pb: 1}} key={i}>
               {title && (
-                <Typography variant="h6" fontWeight="bold">
+                <Typography variant="h6" sx={{fontWeight: 'bold'}}>
                   {title}
                 </Typography>
               )}
