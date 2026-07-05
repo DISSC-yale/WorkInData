@@ -32,7 +32,9 @@ wid_update_isic <- function(
             last_section <- ""
             is_section <- grepl("^[A-Z]$", raw$Code)
             for (i in seq_along(raw$Section)) {
-              if (is_section[[i]]) last_section <- raw$Code[[i]]
+              if (is_section[[i]]) {
+                last_section <- raw$Code[[i]]
+              }
               raw$Section[[i]] <- last_section
             }
             raw[, c("Revision", "Section", "Type", "Code", "Description")]

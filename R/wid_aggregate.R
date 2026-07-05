@@ -14,7 +14,7 @@
 #' or a matrix-like object consisting of 3 columns containing country, year, and survey IDs
 #' in that order.
 #' @param cores Number of CPU cores to use.
-#' @return An aggregated version of \code{db}.
+#' @return An aggregated version of the dataset in \code{data_dir}.
 #' @examples
 #' # aggregate a subset of the full dataset
 #' db_dir <- "../../../gender_growth_gap"

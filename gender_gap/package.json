@@ -5,11 +5,12 @@
   "scripts": {
     "dev": "sh utils/use_swc.sh && next dev --turbopack",
     "build": "sh utils/use_swc.sh && next build && touch dist/.nojekyll && rm -r ../docs/gender_gap && cp -r dist ../docs/gender_gap",
-    "start": "next start",
-    "lint": "next lint",
     "cypress:open": "cypress open",
     "test-serve": "sh utils/use_babel.sh && next dev",
     "test": "cypress run"
+  },
+  "nyc": {
+    "report-dir": "public/coverage"
   },
   "dependencies": {
     "@emotion/react": "latest",

@@ -1,7 +1,7 @@
 import type {LineSeriesOption, MapSeriesOption} from 'echarts/charts'
 import {ColumnTable} from 'arquero'
 import type {Info} from '../data/load'
-import {selectableVariables, variableInfo} from '../metadata'
+import {variableInfo} from '../metadata'
 import {regression} from 'echarts-stat'
 import {Panel, PlotInput} from '../parts/plot'
 import {MapInput} from '../parts/map'
@@ -101,22 +101,23 @@ export function makeSeries(
   const toXY: {y: string; x?: string} = {y: view.y.baseFormula()}
   const baseFun: {[index: string]: string} = {
     n_years: 'distinct(d.year)',
-    y: `${selectableVariables.includes(view.y.base) || view.y.isGlobal ? 'max' : 'sum'}(d.y)`,
+    y: `sum(d.y)`,
     y_sum: 'max(d.y_sum)',
     year: 'max(d.year)',
   }
   if (view.as_plot && view.x.base) {
-    baseFun.x = `${selectableVariables.includes(view.x.base) || view.x.isGlobal ? 'max' : 'sum'}(d.x)`
+    baseFun.x = `sum(d.x)`
     baseFun.x_sum = 'max(d.x_sum)'
     toXY.x = view.x.baseFormula()
   }
   const colorMap = view.color && view.color !== 'country' ? indexMap(filtered, view.color) : {}
 
+  const meanTime = view.time_agg === 'mean' || (view.time_agg === 'all' && !view.as_plot)
   const means: {[index: string]: string} = {
-    y: view.y.percent ? 'mean(d.y)' : 'mean(d.y / d.n_years)',
+    y: view.y.percent && !meanTime ? 'mean(d.y)' : 'mean(d.y / d.n_years)',
     year: 'max(d.year)',
   }
-  if (view.as_plot && view.x.base) means.x = view.x.percent ? 'mean(d.x)' : 'mean(d.x / d.n_years)'
+  if (view.as_plot && view.x.base) means.x = view.x.percent && !meanTime ? 'mean(d.x)' : 'mean(d.x / d.n_years)'
 
   const toVariantY: {y: string; y_off?: string} = {y: view.y.formula('y')}
   const toVariantX: {x?: string; x_off?: string} = {}
@@ -149,7 +150,6 @@ export function makeSeries(
       toVariantX.x_off = `d.x_off / d.x${view.x.summary.overall ? '' : '_summary'}_sum * 100`
   }
 
-  const meanTime = view.time_agg === 'mean' || (view.time_agg === 'all' && !view.as_plot)
   const baseGroups: string[] = []
   if (view.as_plot && view.time_agg === 'all') baseGroups.push('year')
   if (view.color === 'country' || view.symbol === 'country') baseGroups.push('country')
@@ -172,13 +172,12 @@ export function makeSeries(
   const baseData = prepedData.groupby(groupVars)
   xPanelLevels.forEach((x, xi) => {
     yPanelLevels.forEach((y, yi) => {
-      index++
       const label = (
         (x ? variableInfo[view.x_panels].label + ': ' + x + (y ? ', ' : '') : '') +
         (y ? variableInfo[view.y_panels].label + ': ' + y : '')
       )
-        .replace('_', ' ')
-        .replace(firstLetters, l => l.toUpperCase())
+      .replace('_', ' ')
+      .replace(firstLetters, l => l.toUpperCase())
       let d = baseData
       if (panelX) d = d.filter(`d.${panelX} == '${x}'`)
       if (panelY) d = d.filter(`d.${panelY} == '${y}'`)
@@ -225,6 +224,7 @@ export function makeSeries(
         const centers: {y: string; x?: string} = {y: 'd.y - mean(d.y)', x: 'd.x - mean(d.x)'}
         d = d.groupby('country').derive(centers)
       }
+      index++
       if (baseSeries.type === 'map') {
         if (meanTime) d = d.groupby(['country']).rollup(means)
         const series = {...baseSeries, geoIndex: index}

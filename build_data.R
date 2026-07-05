@@ -102,7 +102,7 @@ agg <- wid_aggregate(
 )
 vroom::vroom_write(agg, paste0(out_dir, "data.csv.gz"), ",")
 agg_file <- paste0(out_dir, "data.json.gz")
-jsonlite::write_json(agg, gzfile(agg_file), dataframe = "columns")
+jsonlite::write_json(agg, gzfile(agg_file), dataframe = "columns", digits = 6L)
 
 ### prepare test data
 jsonlite::write_json(

@@ -50,7 +50,7 @@ data_small <- data |>
 data_small
 ```
 
-```{r, fig.height=5, fig.width=10}
+```{r}
 with(data_small, table(
   c("Younger", "Older")[(age > mean(age, na.rm = TRUE)) + 1L],
   c("Male", "Female")[sex + 1L],

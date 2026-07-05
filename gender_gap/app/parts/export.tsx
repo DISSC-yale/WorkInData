@@ -165,7 +165,7 @@ export function Export() {
                 e.href = URL.createObjectURL(new Blob([data.toCSV({columns})], {type: 'text/csv; charset=utf-8'}))
                 setTimeout(function () {
                   e.dispatchEvent(new MouseEvent('click'))
-                  URL.revokeObjectURL.bind(null, e.href)
+                  URL.revokeObjectURL(e.href)
                   document.body.removeChild(e)
                 }, 0)
               }}

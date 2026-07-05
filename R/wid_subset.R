@@ -35,8 +35,12 @@ wid_subset <- function(
       negate <- TRUE
       rule <- rule[-1]
     }
-    if (length(rule) == 1) rule <- as.list(rule[[1]])
-    if (length(rule) == 1) rule <- list("(", rule[[1]])
+    if (length(rule) == 1) {
+      rule <- as.list(rule[[1]])
+    }
+    if (length(rule) == 1) {
+      rule <- list("(", rule[[1]])
+    }
     variable <- as.character(rule[[2]])
     conditions[[variable]] <- c(
       list(
@@ -60,7 +64,9 @@ wid_subset <- function(
   ) {
     return(db)
   }
-  if (length(conditions)) variables <- unique(c(variables, names(conditions)))
+  if (length(conditions)) {
+    variables <- unique(c(variables, names(conditions)))
+  }
   summary <- wid_summaries
   all_surveys <- unique(unlist(lapply(summary, function(s) names(s$by_survey))))
   all_years <- unique(unlist(lapply(
@@ -69,12 +75,13 @@ wid_subset <- function(
   )))
   if (!is.null(variables)) {
     su <- !(variables %in% names(summary))
-    if (any(su))
+    if (any(su)) {
       stop(
         "variables not found: ",
         paste(variables[su], collapse = ", "),
         call. = FALSE
       )
+    }
     years <- NULL
     for (s in summary[variables]) {
       surveys <- unique(c(surveys, names(s$by_survey)))
@@ -95,8 +102,9 @@ wid_subset <- function(
   }
   if (!is.null(surveys)) {
     su <- all_surveys %in% surveys
-    if (!any(all_surveys %in% surveys))
+    if (!any(all_surveys %in% surveys)) {
       stop("all surveys are excluded by `surveys`")
+    }
   }
   variable_specs <- jsonlite::read_json(
     system.file("variables.json", package = "WorkInData"),
@@ -108,8 +116,11 @@ wid_subset <- function(
     for (variable in names(conditions)) {
       rule <- conditions[[variable]]
       check <- function(v) {
-        pass <- if (rule$convert) rule$fun(v) == rule$value else
+        pass <- if (rule$convert) {
+          rule$fun(v) == rule$value
+        } else {
           rule$fun(v, rule$value)
+        }
         if (rule$negate) !pass else pass
       }
       check_condition <- switch(
@@ -205,8 +216,9 @@ wid_subset <- function(
       }
     }
   }
-  if (!length(summary))
+  if (!length(summary)) {
     stop("no variables pass the set criteria", call. = FALSE)
+  }
   res <- list(
     variables = sort(names(summary)),
     surveys = sort(unique(unlist(lapply(
@@ -222,11 +234,15 @@ wid_subset <- function(
     if (!all(names(wid_summaries) %in% res$variables)) {
       db <- dplyr::select(db, dplyr::all_of(res$variables))
     }
-    if (!all(all_surveys %in% res$surveys))
+    if (!all(all_surveys %in% res$surveys)) {
       db <- dplyr::filter(db, survey %in% res$surveys)
-    if (!all(all_years %in% res$years))
+    }
+    if (!all(all_years %in% res$years)) {
       db <- dplyr::filter(db, year %in% res$years)
-    if (length(conditions)) db <- dplyr::filter(db, ...)
+    }
+    if (length(conditions)) {
+      db <- dplyr::filter(db, ...)
+    }
     if (!is.null(selection)) {
       if (NCOL(selection) != 1L) {
         selection <- do.call(

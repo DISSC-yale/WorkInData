@@ -16,6 +16,7 @@ The package requires Arrow, which is available on the cluster in modules
 Start by installing the package if needed:
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("dissc-yale/WorkInData")
 ```
@@ -23,6 +24,7 @@ remotes::install_github("dissc-yale/WorkInData")
 Then load the library and connect to the data:
 
 ``` r
+
 library(WorkInData)
 
 data <- wid_open("/nfs/roberts/pi/dissc/work-in-data/gender_growth_gap")
@@ -37,13 +39,14 @@ For instance, we might look at working status among those with a
 graduate degree in 2018 by age and sex:
 
 ``` r
+
 data_small <- data |>
   wid_subset(year == 2018, education == "Graduate") |>
   dplyr::select(age, sex, work) |>
   dplyr::collect()
 
 data_small
-#> # A tibble: 183,116 × 3
+#> # A tibble: 215,948 × 3
 #>      age sex   work 
 #>    <int> <lgl> <lgl>
 #>  1    35 TRUE  TRUE 
@@ -56,26 +59,27 @@ data_small
 #>  8    41 TRUE  TRUE 
 #>  9    64 FALSE TRUE 
 #> 10    24 TRUE  TRUE 
-#> # ℹ 183,106 more rows
+#> # ℹ 215,938 more rows
 ```
 
 ``` r
+
 with(data_small, table(
-  c("Yonger", "Older")[(age > mean(age, na.rm = TRUE)) + 1L],
+  c("Younger", "Older")[(age > mean(age, na.rm = TRUE)) + 1L],
   c("Male", "Female")[sex + 1L],
   work
 ))
 #> , , work = FALSE
 #> 
-#>         
-#>          Female  Male
-#>   Older   16773 17459
-#>   Yonger  11098  5688
+#>          
+#>           Female  Male
+#>   Older    19158 19993
+#>   Younger  16289  6709
 #> 
 #> , , work = TRUE
 #> 
-#>         
-#>          Female  Male
-#>   Older   22331 26608
-#>   Yonger  45226 36459
+#>          
+#>           Female  Male
+#>   Older    29322 35119
+#>   Younger  46804 41946
 ```

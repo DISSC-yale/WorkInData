@@ -12,6 +12,7 @@ Aggregated data are available in
 You can load this into R directly:
 
 ``` r
+
 data <- vroom::vroom("https://dissc-yale.github.io/WorkInData/gender_gap/data.csv.gz")
 ```
 
@@ -26,6 +27,7 @@ Microdata are not currently accessible externally.
 Install the package from an R console:
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("dissc-yale/WorkInData")
 ```
@@ -33,6 +35,7 @@ remotes::install_github("dissc-yale/WorkInData")
 Then load the package:
 
 ``` r
+
 library(WorkInData)
 ```
 

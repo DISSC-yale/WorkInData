@@ -102,7 +102,7 @@ export default function Map({
                     '<div class="tooltip-table">' +
                     marker +
                     (name in countryInfo ? countryInfo[name].name + ' (' + name + ')' : '') +
-                    '<table><tr><td>Word Bank Region</td><td><strong>' +
+                    '<table><tr><td>Wolrd Bank Region</td><td><strong>' +
                     countryInfo[name].region +
                     '</strong></td></tr>' +
                     (data.year ? '<tr><td>Year</td><td><strong>' + data.year + '</strong></td></tr>' : '') +

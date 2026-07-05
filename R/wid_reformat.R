@@ -71,8 +71,9 @@ wid_reformat <- function(
               )
             })
             failed <- vapply(d, is.null, TRUE)
-            if (any(failed))
+            if (any(failed)) {
               stop("invalid file(s): ", paste0(fs[failed], collapse = ", "))
+            }
             rows <- vapply(d, nrow, 0)
             if (length(unique(rows)) != 1) {
               warning(

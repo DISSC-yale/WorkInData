@@ -19,7 +19,7 @@ export default function Dashboard() {
   const resize = () => {
     setRightPos(rightPos ? 0 : DRAWER_WIDTH)
     setShowAbout(false)
-    resizeAnimationFrame = setInterval(() => window.dispatchEvent(new Event('resize')))
+    resizeAnimationFrame = setInterval(() => window.dispatchEvent(new Event('resize')), 100)
     setTimeout(() => clearInterval(resizeAnimationFrame), 500)
   }
   setTimeout(() => window.dispatchEvent(new Event('resize')), 100)

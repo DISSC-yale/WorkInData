@@ -50,7 +50,7 @@ export function Data({children}: Readonly<{children?: React.ReactNode}>) {
     map.features.forEach(f => (countryInfo[f.properties.ISO_A3] = f.properties))
     const baseData = genderGrowthGap
       .derive({country_year: 'd.country + d.year'})
-      .join(worldBank.derive({country_year: 'd.country + d.year'}).select(not('country', 'year')), 'country_year')
+      .join_left(worldBank.derive({country_year: 'd.country + d.year'}).select(not('country', 'year')), 'country_year')
     const data = baseData.select(not('country_year'))
     const variableLevels: {[index: string]: string[]} = {none: [], '': []}
     data.columnNames().forEach(v => {

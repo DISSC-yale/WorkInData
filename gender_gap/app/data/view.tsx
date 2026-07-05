@@ -41,7 +41,7 @@ export type ViewAction =
       value: string
     }
   | {key: 'time_agg'; value: TimeAgg}
-  | {key: 'color_source'; value: 'gdp' | 'region' | 'level'}
+  | {key: 'color_source'; value: 'gdp' | 'region' | 'income'}
   | {key: 'as_plot' | 'lock_range' | 'country_center' | 'advanced' | 'within_split'; value: boolean}
   | {key: 'regression'; value: 'none' | 'linear' | 'exponential' | 'logarithmic' | 'polynomial'}
 export type FilterAction =
@@ -288,13 +288,13 @@ export function DataView({children}: Readonly<{children?: React.ReactNode}>) {
     }
     if (action.key === 'countries') {
       urlParams.countries = Object.keys(action.value).length < 10 ? Object.keys(action.value).join(',') : ''
-      updateUrlParams({...view, countries: urlParams.countries})
+      updateUrlParams({...view, countries: urlParams.countries, ...urlParams})
     } else if (action.key === 'sectors' || action.key === 'sexes') {
       urlParams[action.key] = action.value.sort().join(',')
-      updateUrlParams({...view, [action.key]: urlParams[action.key]})
+      updateUrlParams({...view, ...urlParams})
     } else {
       urlParams[action.key as 'color'] = action.value as string
-      updateUrlParams({...view, [action.key]: urlParams[action.key]})
+      updateUrlParams({...view, ...urlParams})
     }
     return {...state, [action.key]: action.value} as FilterDef
   }

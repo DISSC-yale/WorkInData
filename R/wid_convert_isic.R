@@ -35,8 +35,9 @@
 #' @export
 
 wid_convert_isic <- function(codes, level = 4L, full_label = FALSE) {
-  if (!(level %in% 1:5))
+  if (!(level %in% 1:5)) {
     stop("`level` must be between 1 through 5", call. = FALSE)
+  }
   recode <- isic_to_section[as.character(codes)]
   if (full_label || level > 1L) {
     recode <- list(

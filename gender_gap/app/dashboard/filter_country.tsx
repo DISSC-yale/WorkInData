@@ -122,6 +122,7 @@ export function FilterCountry({backgroundColor}: {backgroundColor: string}) {
         size="small"
         variant="contained"
         onClick={() => filterAction({key: 'countries', value: full.levels.countries})}
+        aria-label='select all countries'
       >
         All
       </Button>

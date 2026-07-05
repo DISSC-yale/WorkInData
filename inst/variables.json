@@ -648,7 +648,7 @@
     "note": "Created from `sec_we_wage` and `sec_se_earnings`.",
     "type": "float",
     "conversion": {
-      "reference": "main_job_pay_freq",
+      "reference": "sec_job_pay_freq",
       "factors": [1, 0.125, 0.025, 0.0125, 0.0057692307692307696, 0.0004807692307692308]
     },
     "summary_type": "continuous",
@@ -706,7 +706,7 @@
   },
   "sec_we_inkind": {
     "name": "In-Kind Payment (Secondary)",
-    "description": "Hourly in-kind payment received from main job, in local currency.",
+    "description": "Hourly in-kind payment received from second job, in local currency.",
     "type": "float",
     "conversion": {
       "reference": "sec_we_inkind_freq",

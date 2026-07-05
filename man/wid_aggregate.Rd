@@ -27,7 +27,7 @@ in that order.}
 \item{cores}{Number of CPU cores to use.}
 }
 \value{
-An aggregated version of \code{db}.
+An aggregated version of the dataset in \code{data_dir}.
 }
 \description{
 Create aggregates from the dataset.
