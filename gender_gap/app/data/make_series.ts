@@ -1,7 +1,7 @@
 import type {LineSeriesOption, MapSeriesOption} from 'echarts/charts'
 import {ColumnTable} from 'arquero'
 import type {Info} from '../data/load'
-import {variableInfo} from '../metadata'
+import {selectableVariables, variableInfo} from '../metadata'
 import {regression} from 'echarts-stat'
 import {Panel, PlotInput} from '../parts/plot'
 import {MapInput} from '../parts/map'
@@ -41,6 +41,7 @@ export function makeSeries(
   const symbolMap: {[index: string]: {symbol: string; opacity: number}} = {}
   const colorSource = view.color_source === 'gdp' ? 'color' : view.color_source + '_color'
   const lineVars: string[] = []
+  const meanTime = view.time_agg === 'mean' || (view.time_agg === 'all' && !view.as_plot)
   if (view.time_agg == 'all') lineVars.push('year')
   if (view.as_plot) {
     if (color) lineVars.push(color)
@@ -101,18 +102,16 @@ export function makeSeries(
   const toXY: {y: string; x?: string} = {y: view.y.baseFormula()}
   const baseFun: {[index: string]: string} = {
     n_years: 'distinct(d.year)',
-    y: `sum(d.y)`,
+    y: `${selectableVariables.includes(view.y.base) || view.y.isGlobal ? 'max' : 'sum'}(d.y)`,
     y_sum: 'max(d.y_sum)',
     year: 'max(d.year)',
   }
   if (view.as_plot && view.x.base) {
-    baseFun.x = `sum(d.x)`
+    baseFun.x = `${selectableVariables.includes(view.x.base) || view.x.isGlobal ? 'max' : 'sum'}(d.x)`
     baseFun.x_sum = 'max(d.x_sum)'
     toXY.x = view.x.baseFormula()
   }
   const colorMap = view.color && view.color !== 'country' ? indexMap(filtered, view.color) : {}
-
-  const meanTime = view.time_agg === 'mean' || (view.time_agg === 'all' && !view.as_plot)
   const means: {[index: string]: string} = {
     y: view.y.percent && !meanTime ? 'mean(d.y)' : 'mean(d.y / d.n_years)',
     year: 'max(d.year)',
@@ -176,8 +175,8 @@ export function makeSeries(
         (x ? variableInfo[view.x_panels].label + ': ' + x + (y ? ', ' : '') : '') +
         (y ? variableInfo[view.y_panels].label + ': ' + y : '')
       )
-      .replace('_', ' ')
-      .replace(firstLetters, l => l.toUpperCase())
+        .replace('_', ' ')
+        .replace(firstLetters, l => l.toUpperCase())
       let d = baseData
       if (panelX) d = d.filter(`d.${panelX} == '${x}'`)
       if (panelY) d = d.filter(`d.${panelY} == '${y}'`)
@@ -208,6 +207,7 @@ export function makeSeries(
         if (toVariantY.y) {
           d = d.groupby([...baseGroups, view.y.summary.variable].filter(v => !!v)).derive(toVariantY)
         }
+        fun.n_years = 'max(d.n_years)'
         d = d.groupby(groupVars).rollup(fun)
         if (summaryDiv.y) d = d.derive({y: 'd.y_off ? d.y / d.y_off : 0'})
         if (summaryDiv.x) d = d.derive({x: 'd.x_off ? d.x / d.x_off : 0'})
@@ -245,7 +245,6 @@ export function makeSeries(
         if (meanTime) {
           delete means.year
           d = d.groupby(lineVars.filter(l => l !== 'year')).rollup(means)
-          if (hasYear) lineVars.splice(lineVars.indexOf('year'), 1)
         }
         d = d
           .groupby(lineVars.filter((l, i) => !!i || l !== 'year'))

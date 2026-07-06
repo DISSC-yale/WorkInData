@@ -273,6 +273,7 @@ export function DataView({children}: Readonly<{children?: React.ReactNode}>) {
   }
   const editFilter = (state: FilterDef, action: FilterAction) => {
     if (action.key === 'reset') {
+      updateUrlParams({...view})
       return {
         demo_seg: 'total',
         min_year: full.levels.baseYearRange[0],
