@@ -2,4 +2,4 @@
 2:I[39756,["/WorkInData/gender_gap/_next/static/chunks/1lmqoy52aygo9.js","/WorkInData/gender_gap/_next/static/chunks/3at3bcgpsilg5.js","/WorkInData/gender_gap/_next/static/chunks/0r_wh--lksffg.js"],"default"]
 3:I[37457,["/WorkInData/gender_gap/_next/static/chunks/1lmqoy52aygo9.js","/WorkInData/gender_gap/_next/static/chunks/3at3bcgpsilg5.js","/WorkInData/gender_gap/_next/static/chunks/0r_wh--lksffg.js"],"default"]
 4:[]
-0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"bOi2uRMEdwbJhersEEW54"}
+0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"vEboR6AaaqvP-QPUq_ly1"}

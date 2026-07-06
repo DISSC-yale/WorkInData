@@ -162,7 +162,7 @@ export function BasicMenu({simple}: {simple?: boolean}) {
               <MenuItem value="first">Earliest Year</MenuItem>
               <MenuItem value="specified">Specified Year</MenuItem>
               <MenuItem value="last">Latest Year</MenuItem>
-              <MenuItem value="mean">Average Across Years</MenuItem>
+              {/* <MenuItem value="mean">Average Across Years</MenuItem> */}
             </Select>
           </FormControl>
         </>

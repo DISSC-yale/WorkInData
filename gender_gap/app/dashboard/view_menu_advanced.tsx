@@ -263,7 +263,7 @@ export function AdvancedMenu() {
             value={
               view.as_plot ? view.time_agg
               : view.time_agg === 'all' ?
-                'mean'
+                'last'
               : view.time_agg
             }
             onChange={e => {
@@ -276,7 +276,7 @@ export function AdvancedMenu() {
             <MenuItem value="first">Earliest Year</MenuItem>
             <MenuItem value="specified">Specified Year</MenuItem>
             <MenuItem value="last">Latest Year</MenuItem>
-            <MenuItem value="mean">Average Across Years</MenuItem>
+            {/* <MenuItem value="mean">Average Across Years</MenuItem> */}
           </Select>
         </FormControl>
       </Tooltip>
